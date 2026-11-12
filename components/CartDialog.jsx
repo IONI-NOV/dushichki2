@@ -155,10 +155,10 @@ function Account({ user, onLogout }) {
   const [failed, setFailed] = useState(false);
   useEffect(() => {
     if (supabaseEnabled) {
-      myOrders().then((o) => setOrders(o.map((x) => ({ public_id: x.id.slice(0, 8).toUpperCase(), created_at: Date.parse(x.created_at) / 1000, status: x.status, total_cents: x.total_cents })))).catch(() => setFailed(true));
+      myOrders().then((o) => setOrders(o.map((x) => ({ public_id: x.id.slice(0, 8).toUpperCase(), created_at: Date.parse(x.Дата) / 1000, status: x.Статус, total_cents: x.Сума_евроцента })))).catch(() => setFailed(true));
     } else api('orders').then((r) => setOrders(r.orders)).catch(() => setFailed(true));
   }, []);
-  const S = { new: 'приета', paid: 'платена', shipped: 'изпратена', canceled: 'отказана' };
+  const S = { 'Нова': 'приета', 'Платена': 'платена', 'Изпратена': 'изпратена', 'Отказана': 'отказана' };
   return (
     <>
       <h2>Здравей, {user.name}</h2>

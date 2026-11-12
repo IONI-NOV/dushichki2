@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_orders_bulgarian_columns": orders columns and values (Куриер, Доставка, Статус) are in Bulgarian; items JSON keys translated too.
