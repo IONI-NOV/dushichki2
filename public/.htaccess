@@ -3,6 +3,10 @@ DirectoryIndex index.html
 # Нужно за защитата на admin.php (Authorization хедър)
 <IfModule mod_rewrite.c>
 RewriteEngine On
+# /poruchki -> poruchki.html (Next.js static export)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^./]+)$ $1.html [L]
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
 <FilesMatch "\.(sqlite|db|md|log)$">

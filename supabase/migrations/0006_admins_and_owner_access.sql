@@ -1,0 +1,2 @@
+-- Applied as migration "dushichki_admins_and_owner_access": table `admins` (user ids) + RLS so admins can read/update all orders.
+-- Make someone admin: insert into public.admins (user_id) select id from auth.users where email = '...';
