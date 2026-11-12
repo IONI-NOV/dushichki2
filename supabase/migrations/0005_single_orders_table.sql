@@ -1,0 +1,2 @@
+-- Applied as migration "dushichki_single_orders_table": order_items table and order_overview view removed;
+-- `orders` now holds everything (customer, courier, delivery_address, items jsonb with photo links, photo_url).
