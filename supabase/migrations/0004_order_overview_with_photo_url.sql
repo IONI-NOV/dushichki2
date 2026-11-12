@@ -1,0 +1,2 @@
+-- Applied as migration "dushichki_order_overview_with_photo_url": bucket `photos` made public (random file names, no listing)
+-- and view `order_overview` rebuilt: product, design, color, size, text, story, notes, photo_url, courier, address.
