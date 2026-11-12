@@ -1,0 +1,16 @@
+{
+  "name": "dushichki",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "node scripts/post-build.mjs",
+    "serve": "php -S localhost:8000 -t out"
+  },
+  "dependencies": {
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env*
+
+# Данни от бекенда (база, качени снимки) – никога в git
+public/data/
+*.sqlite
+.DS_Store
+
+# Secrets and runtime data – never commit
+public/config.php
+public/data/
+.env*
+.DS_Store
