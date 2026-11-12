@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_orders_column_order": orders recreated with columns in the owner's reading order (name, phone, courier, address, product, size, photo, text, notes, story, ...). Data and RLS policies preserved.
