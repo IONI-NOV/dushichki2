@@ -12,3 +12,7 @@ public/config.php
 public/data/
 .env*
 .DS_Store
+
+# Static site secrets
+/config.php
+/data/

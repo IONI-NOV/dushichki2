@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Душички</title>
+<meta name="description" content="Персонализирани унисекс тениски и худита с бродерия по твоя снимка.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#DC0A1E;--cream:#FFF9E8;--ph:#F3EAD6;--ink:#2b2323;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--red:#DC0A1E;--cream:#FFF9E8}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--red:#DC0A1E;--cream:#FFF9E8}}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*,*:before,*:after{box-sizing:inherit}
+*{font-family:'Manrope',system-ui,sans-serif}
+body{margin:0;min-height:100%;background:var(--cream);color:var(--red);font-weight:300;line-height:1.4;overflow-x:clip}
+h1,h2,h3,p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{position:relative;overflow-x:clip}
+.deco{position:absolute;pointer-events:none;z-index:0}
+.deco svg{width:100%;height:auto;display:block}
+header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:44px clamp(20px,7vw,110px) 0}
+.logo{width:clamp(84px,9vw,128px);height:auto;display:block}
+.hr{display:flex;align-items:center;gap:clamp(14px,2vw,28px)}
+.login{background:var(--red);color:var(--cream);border:2px solid var(--red);border-radius:10px;padding:9px 20px;font-weight:600;font-size:clamp(1rem,1.5vw,1.3rem);line-height:1.2;transition:background .25s,color .25s,transform .2s}
+.login:hover,.login:focus-visible{background:var(--cream);color:var(--red);transform:translateY(-2px)}
+.cartb{position:relative;background:none;border:0;padding:6px;color:var(--red);display:flex;transition:transform .2s}
+.cartb:hover,.cartb:focus-visible{transform:scale(1.1)}
+.cartb svg{width:clamp(28px,2.6vw,36px);height:auto}
+.bd{position:absolute;top:-4px;right:-6px;min-width:20px;height:20px;border-radius:99px;background:var(--red);color:var(--cream);font-size:.75rem;font-weight:800;display:grid;place-items:center;padding:0 5px}
+.hero{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px;padding:50px clamp(20px,5vw,78px) 0 clamp(20px,6.8vw,105px);max-width:1540px;margin:0 auto}
+.hero h1{font-size:clamp(1.8rem,3.1vw,3rem);font-weight:300;line-height:1.15;max-width:11em}
+.hero h1 b{font-weight:800}
+.hero p{font-size:clamp(1rem,1.65vw,1.65rem);margin:36px 0 32px;max-width:16em;color:var(--ink);font-weight:300}
+.btn{display:inline-block;background:var(--red);color:var(--cream);border:4px solid var(--red);border-radius:20px;padding:12px 26px;font-weight:800;font-size:clamp(1.3rem,2.2vw,2.3rem);transition:background .25s,color .25s,transform .2s}
+.btn:hover,.btn:focus-visible{background:var(--cream);color:var(--red);transform:scale(1.03)}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.55;cursor:default;transform:none}
+.btn.o{background:var(--cream);color:var(--red)}
+.btn.o:hover,.btn.o:focus-visible{background:var(--red);color:var(--cream)}
+.hero img{width:90%;height:auto;display:block;margin:0 auto}
+.lk{background:none;border:0;padding:0;color:var(--red);font-weight:400;font-size:clamp(1rem,1.6vw,1.5rem);letter-spacing:.03em;text-decoration:none;transition:transform .25s}
+.lk:hover,.lk:focus-visible{transform:scale(1.07)}
+.tabsec{position:relative;z-index:1;padding:150px 20px 0;text-align:center}
+.tabs{position:relative;display:inline-flex;align-items:center;gap:26px;font-size:clamp(1.05rem,1.7vw,1.6rem);letter-spacing:.09em}
+.tabs button{background:transparent;border:4px solid var(--red);border-radius:22px;padding:8px 26px;color:var(--red);font-weight:300;position:relative;z-index:1;transition:background .25s,color .25s,font-weight .2s,transform .2s}
+.tabs button[aria-selected=true]{background:var(--red);color:var(--cream);font-weight:500}
+.tabs button:hover{transform:scale(1.04)}
+.tabs i,.tabs .pill{display:none}
+.tabs .pill{position:absolute;left:0;top:50%;height:calc(100% + 2px);border:4px solid var(--red);border-radius:22px;transform:translate(0,-50%);transition:transform .35s cubic-bezier(.5,0,.2,1),width .35s cubic-bezier(.5,0,.2,1);pointer-events:none}
+.grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,1.3vw,20px);max-width:1000px;margin:80px auto 0;padding:0 20px 150px}
+.card{background:none;border:0;padding:0;text-align:left;color:var(--red);font-weight:400;display:block}
+.im{aspect-ratio:1188/1324;width:100%;position:relative;overflow:hidden;background:var(--ph);border:3px solid var(--red);box-sizing:border-box}
+.im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s,transform .4s}
+.card .im img.b{opacity:0}
+.card:hover .im img.b,.card:focus-visible .im img.b{opacity:1}
+.card:hover .im img,.card:focus-visible .im img{transform:scale(1.04)}
+.card h3{font-weight:400;font-size:clamp(.95rem,1.4vw,1.35rem);margin:14px 4px 6px;line-height:1.25}
+.card .pr{margin:0 4px;font-size:clamp(1rem,1.4vw,1.3rem);font-weight:800}
+footer{position:relative;z-index:1;background:var(--red);color:#fff;min-height:210px;display:flex;align-items:center;justify-content:center;gap:clamp(24px,6vw,90px);flex-wrap:wrap;padding:30px 20px;font-size:.95rem;font-weight:400}
+footer .lk{color:#fff;font-size:clamp(.8rem,1vw,.95rem)}
+dialog{border:0;border-radius:20px;background:var(--cream);color:var(--ink);padding:0;width:min(1040px,96vw);max-height:94vh;overflow:auto}
+dialog::backdrop{background:rgba(40,10,10,.5)}
+dialog.sm{width:min(520px,96vw)}
+dialog.md{width:min(720px,96vw)}
+.cl{position:absolute;right:14px;top:10px;z-index:3;background:none;border:0;font-size:2.2rem;line-height:1;color:var(--ink)}
+.in{padding:30px;font-weight:400}
+.in h2{font-size:1.8rem;font-weight:800;color:var(--red);margin-bottom:14px}
+.in h3{font-size:1.1rem;font-weight:800;color:var(--red);margin:22px 0 10px}
+.pm{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:28px;font-weight:400}
+.pm .im{align-self:start}
+.pm h2{font-size:clamp(1.6rem,2.8vw,2.5rem);font-weight:400;line-height:1.25;margin:0 30px 14px 0;color:var(--ink)}
+.pr2{color:var(--red);font-size:1.5rem;font-weight:800;margin-bottom:6px}
+.uni{font-size:.95rem;color:#555;margin-bottom:16px}
+.uni b{color:var(--red);font-weight:800}
+.fld{margin-bottom:16px}
+.fld>label,.lb{display:block;font-size:.95rem;margin-bottom:6px;color:#555}
+select,input[type=text],input[type=email],input[type=tel],input[type=password],textarea{width:100%;background:#fff;border:1px solid #777;border-radius:0;padding:13px;font-size:.95rem;color:var(--ink)}
+textarea{resize:vertical;min-height:84px}
+.sz{display:block;text-align:right;font-weight:600;font-size:.95rem;color:var(--ink);background:none;border:0;text-decoration:underline;margin:-4px 0 14px auto}
+.drop{border:2px dashed #888;border-radius:18px;padding:22px 14px;text-align:center;font-size:.95rem;color:#666;transition:background .2s,border-color .2s}
+.drop.on{background:rgba(220,10,30,.07);border-color:var(--red)}
+.drop label{display:inline-block;background:rgba(220,10,30,.1);color:var(--red);font-weight:800;padding:6px 14px;border-radius:6px;cursor:pointer;margin-bottom:6px}
+.drop label:hover{background:rgba(220,10,30,.18)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.drop:focus-within{outline:3px solid var(--red);outline-offset:3px}
+.drop img{display:block;margin:0 auto 8px;max-height:90px;border-radius:8px}
+.fn{color:var(--red);font-weight:600;word-break:break-all}
+.ck{display:flex;gap:10px;align-items:flex-start;margin:16px 0 6px;font-weight:600;font-size:.95rem;color:var(--ink)}
+.ck input{width:18px;height:18px;accent-color:var(--red);flex:none;margin-top:2px}
+#txt{display:none;margin-bottom:16px}
+.st{font-weight:600;color:var(--ink);margin:14px 0 6px;font-size:.95rem}
+.add{width:100%;border-radius:99px;padding:14px;font-size:1.1rem;margin-top:14px}
+.er{color:var(--red);font-size:.9rem;min-height:1.2em;margin-top:8px;font-weight:600}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ci{display:flex;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(220,10,30,.25)}
+.ci img{width:64px;height:64px;object-fit:cover;border-radius:10px;border:2px solid var(--red);flex:none}
+.ci .t{flex:1;font-size:.92rem;line-height:1.35}.ci .t b{display:block;font-size:1rem}
+.ci button{background:none;border:0;color:var(--red);text-decoration:underline;font-weight:600}
+.sum{display:flex;justify-content:space-between;margin:10px 0;font-size:1rem}
+.tot{font-weight:800;font-size:1.3rem;color:var(--red)}
+.link{background:none;border:0;color:var(--red);text-decoration:underline;font-weight:600;padding:0}
+.tab2{display:flex;gap:8px;margin-bottom:18px}
+.tab2 button,.seg button{flex:1;padding:10px;border:2px solid var(--red);background:none;border-radius:99px;color:var(--red);font-weight:600;transition:background .2s,color .2s}
+.tab2 button[aria-selected=true],.seg button[aria-pressed=true]{background:var(--red);color:var(--cream)}
+.seg{display:flex;gap:8px;margin-bottom:12px}
+.gate{display:grid;gap:12px;margin-top:8px}
+.gate p{color:#555;font-size:.95rem}
+/* форма за доставка – като в примера */
+.f2{position:relative;margin-bottom:6px}
+.f2 input,.f2 select{height:52px;border:1px solid #d8d8d8;border-radius:12px;background:#fff;padding:0 16px;font-size:.95rem;text-transform:none}
+.f2 input::placeholder,.f2 textarea::placeholder{text-transform:uppercase;color:#333;opacity:.85}
+.f2 select{appearance:none;-webkit-appearance:none;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='%23666'%3E%3Cpath d='M0 0l6 8 6-8z'/%3E%3C/svg%3E") no-repeat right 16px center;padding-right:40px;text-transform:uppercase}
+.f2 input:focus,.f2 select:focus{border-color:var(--red);outline:none;box-shadow:0 0 0 3px rgba(220,10,30,.15)}
+.f2.bad input,.f2.bad select{border-color:var(--red)}
+.fe{color:var(--red);font-weight:800;font-size:.95rem;margin:2px 0 10px;min-height:0}
+.fe:empty{display:none}
+.hint{font-size:.85rem;color:#666;margin:2px 0 12px}
+.seg.big button{padding:15px 10px;font-size:1.05rem;font-weight:700}
+.rad{display:flex;gap:44px;margin:4px 6px 16px;flex-wrap:wrap}
+.rad label{display:flex;align-items:center;gap:10px;font-size:1.2rem;cursor:pointer;color:var(--ink);transition:transform .15s}
+.rad label:hover{transform:scale(1.03)}
+.rad input{appearance:none;-webkit-appearance:none;width:22px;height:22px;border:3px solid var(--red);border-radius:50%;margin:0;cursor:pointer;background:transparent;flex:none}
+.rad input:checked{background:radial-gradient(circle,var(--red) 0 42%,transparent 46%)}
+.rad input:focus-visible{outline:3px solid rgba(220,10,30,.35);outline-offset:2px}
+.ol{max-height:290px;overflow:auto;border:1px solid #d8d8d8;border-radius:12px;background:#fff;margin-bottom:6px}
+.of{display:block;cursor:pointer;border-bottom:1px solid #eee;transition:background .15s}
+.of:last-child{border-bottom:0}
+.of:hover{background:rgba(220,10,30,.05)}
+.of input{position:absolute;opacity:0;pointer-events:none}
+.of span{display:block;padding:11px 14px 11px 44px;position:relative;font-size:.92rem;line-height:1.35}
+.of span::before{content:"";position:absolute;left:14px;top:14px;width:16px;height:16px;border:3px solid var(--red);border-radius:50%}
+.of b{font-weight:700;text-transform:uppercase}
+.of i{font-style:normal;font-size:.72rem;font-weight:800;background:var(--red);color:#fff;border-radius:99px;padding:1px 8px;margin-left:8px;vertical-align:1px}
+.of small{display:block;color:#666;font-size:.85rem}
+.of:has(input:checked){background:rgba(220,10,30,.08)}
+.of input:checked+span::before{background:radial-gradient(circle,var(--red) 0 40%,transparent 45%)}
+.of input:focus-visible+span{outline:3px solid rgba(220,10,30,.35);outline-offset:-3px}
+.ht{display:flex;gap:12px;margin:4px 0 8px}
+.hb{width:84px;height:84px;border:2px solid #ddd;border-radius:18px;background:#fff;padding:8px;transition:border-color .2s,transform .15s}
+.hb:hover{transform:scale(1.05)}
+.hb[aria-checked=true]{border-color:var(--red)}
+.hb svg{width:100%;height:100%;display:block}
+.hc{text-align:center;font-weight:800}
+.ht{justify-content:center}
+#hw{border-radius:18px;padding:13px 16px;text-align:center}
+.cnt{text-align:right;font-size:.85rem;color:#777;margin:4px 4px 8px}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid rgba(220,10,30,.35);padding:8px 10px;text-align:center}
+th{background:rgba(220,10,30,.08);color:var(--red)}
+.leg{padding:34px 30px;font-size:.95rem;line-height:1.6}
+.leg h2{font-size:2rem;color:var(--red);font-weight:800;margin:0 0 6px}
+.leg h3{font-size:1rem;color:var(--red);margin:24px 0 8px;font-weight:800}
+.leg p{margin:0 0 8px}.leg ul{margin:0 0 8px;padding-left:22px}
+.leg a{color:var(--red)}
+.ok{text-align:center;padding:36px 30px}.ok svg{width:80px}.ok h2{margin:10px 0}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--red);color:#fff;font-weight:600;padding:12px 24px;border-radius:99px;opacity:0;pointer-events:none;transition:.3s;z-index:2000;max-width:92vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){
+.hero{grid-template-columns:1fr;padding-top:30px}
+.tabsec{padding-top:90px}
+.grid{grid-template-columns:1fr 1fr;margin-top:50px}
+.pm{grid-template-columns:1fr;padding:18px}
+header{padding-top:30px}
+}
+@media(max-width:600px){
+.hero img{width:100%}
+.hero p{margin:26px 0 24px}
+.tabsec{padding-top:64px}
+.tabs{gap:14px}.tabs button{padding:8px 20px;border-width:3px;border-radius:18px}
+.grid{grid-template-columns:1fr 1fr;gap:14px 12px;margin-top:34px;padding:0 14px;align-items:start}
+.card h3{font-size:.82rem;margin:8px 2px 4px}.card .pr{font-size:.95rem;margin:0 2px}
+.im{border-width:2px}
+dialog{width:100vw;max-width:100vw;max-height:94dvh;margin:auto 0 0;border-radius:22px 22px 0 0}
+dialog.sm,dialog.md{width:100vw}
+.cl{width:44px;height:44px;right:6px;top:6px;border-radius:50%;background:rgba(255,249,232,.92);font-size:2rem;display:grid;place-items:center;box-shadow:0 1px 6px rgba(0,0,0,.15)}
+.in{padding:22px 16px calc(22px + env(safe-area-inset-bottom,0px))}
+.in h2{font-size:1.5rem;margin-right:40px}
+.pm{padding:14px 16px calc(18px + env(safe-area-inset-bottom,0px));gap:6px}
+.pm .im{width:72%;margin:6px auto 12px}
+.pm h2{font-size:1.3rem;margin:6px 0 8px}
+select,input[type=text],input[type=email],input[type=tel],input[type=password],textarea,.f2 input,.f2 select{font-size:16px}
+.rad{gap:28px}.rad label{font-size:1.1rem}
+.pm .add,#ck #pay{position:sticky;bottom:8px;box-shadow:0 8px 20px rgba(220,10,30,.3);z-index:2}
+.ol{max-height:240px}
+.ci img{width:56px;height:56px}
+.leg{padding:24px 16px}.leg h2{font-size:1.5rem}
+footer{min-height:0;padding:28px 16px;gap:10px 28px;flex-direction:column;text-align:center}
+}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="hr" viewBox="0 0 200 190"><path d="M100 178 C14 118 -12 62 36 30 C68 10 94 28 100 52 C106 28 132 10 164 30 C212 62 186 118 100 178Z" fill="none" stroke="#DC0A1E" stroke-width="20" stroke-linejoin="round"/><path d="M100 178 C14 118 -12 62 36 30 C68 10 94 28 100 52 C106 28 132 10 164 30 C212 62 186 118 100 178Z" fill="none" stroke="#FFF9E8" stroke-width="8" stroke-linejoin="round"/></symbol></svg>
+
+<div class="wrap">
+<div class="deco" style="left:-150px;top:1450px;width:290px;transform:rotate(-12deg)" aria-hidden="true"><svg viewBox="0 0 200 190"><use href="#hr"/></svg></div>
+<div class="deco" style="right:-160px;top:1330px;width:290px;transform:rotate(14deg)" aria-hidden="true"><svg viewBox="0 0 200 190"><use href="#hr"/></svg></div>
+
+<header>
+<img class="logo" src="img/logo.png" alt="Душички">
+<div class="hr">
+<button class="login" id="acc">Вход</button>
+<button class="cartb" id="cartb" aria-label="Количка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 4h2.5l2.2 11h10.6l2-8H6.4"/><circle cx="9.5" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg><span class="bd" id="cnt" style="display:none">0</span></button>
+</div>
+</header>
+
+<main>
+<section class="hero">
+<div>
+<h1>Подарък за <b>твоята душичка</b>, който ще го топли <b>с години.</b></h1>
+<p>Дай живот на снимка, разтапяща сърцето ти.</p>
+<button class="btn" id="go">И аз искам!</button>
+</div>
+<img src="img/hero.jpg" alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена">
+</section>
+
+<section class="tabsec" id="shop">
+<div class="tabs" role="tablist">
+<span class="pill" id="pill"></span>
+<button role="tab" id="t-hoodie" aria-selected="true">Худита</button>
+<i aria-hidden="true"></i>
+<button role="tab" id="t-tee" aria-selected="false">Тениски</button>
+</div>
+</section>
+<section class="grid" id="grid" aria-live="polite"></section>
+</main>
+
+<footer>
+<button class="lk" data-legal="terms">Общи условия</button>
+<button class="lk" data-legal="priv">Политика за поверителност</button>
+<a class="lk" href="mailto:dushichki@gmail.com">dushichki@gmail.com</a>
+</footer>
+</div>
+
+<dialog id="pm" aria-label="Продукт"><button class="cl" aria-label="Затвори">×</button><div class="pm" id="pmb"></div></dialog>
+<dialog id="cd" class="md" aria-label="Количка"><button class="cl" aria-label="Затвори">×</button><div class="in" id="cdb"></div></dialog>
+<dialog id="sc" class="sm" aria-label="Таблица с размери"><button class="cl" aria-label="Затвори">×</button><div class="in" id="scb"></div></dialog>
+<dialog id="lg" class="md" aria-label="Правила"><button class="cl" aria-label="Затвори">×</button><div class="leg" id="lgb"></div></dialog>
+<div id="toast" role="status"></div>
+
+<template id="l-terms">
+<h2>ОБЩИ УСЛОВИЯ</h2>
+<p><b>Последна актуализация: 07.10.2026 г.</b></p>
+<p>Настоящите Общи условия уреждат използването на онлайн магазина <b>„Душички“</b> и извършването на поръчки чрез него.</p>
+<p>С използването на сайта и/или извършването на поръчка Потребителят приема настоящите Общи условия.</p>
+<p>За въпроси относно поръчки можете да се свържете с нас на <b><a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></b>.</p>
+<h3>I. ПРОДУКТИ И ПЕРСОНАЛИЗАЦИЯ</h3>
+<p>1. „Душички“ предлага персонализирани тениски, худита и други артикули с машинна бродерия.</p>
+<p>2. При поръчка Потребителят качва снимка, която желае да бъде използвана за персонализацията.</p>
+<p>3. По предоставената снимка създаваме „line art“ дизайн, който адаптираме за машинна бродерия.</p>
+<p>4. Крайният дизайн може леко да се различава от оригиналната снимка. Някои детайли, линии, цветове или пропорции могат да бъдат опростени или променени, за да бъдат подходящи за бродиране.</p>
+<p>5. Тези малки разлики са нормална част от процеса и не се считат за дефект.</p>
+<h3>II. ПРЕДОСТАВЕНИ СНИМКИ</h3>
+<p>1. Потребителят трябва да предостави снимка с достатъчно добро качество за изработването на дизайна.</p>
+<p>2. С качването на снимката Потребителят потвърждава, че има право да я използва за съответната поръчка.</p>
+<p>3. Потребителят носи отговорност за предоставени снимки, изображения, лога, дизайни или друго съдържание, което може да принадлежи на трети лица.</p>
+<p>4. „Душички“ може да откаже поръчка, ако предоставеното съдържание е незаконно, порнографско, съдържа или насърчава насилие или омраза, нарушава чужди права или по друга основателна причина е неподходящо за изработка.</p>
+<p>5. Ако откажем вече платена поръчка поради предоставеното съдържание, заплатената сума се възстановява.</p>
+<h3>III. ПРЕГЛЕД НА ДИЗАЙНА И КОРЕКЦИИ</h3>
+<p>1. По подразбиране не изпращаме предварителен преглед на „line art“ дизайна.</p>
+<p>2. Ако Потребителят желае да види дизайна преди бродиране, трябва да го посочи в полето <b>„Бележки“</b> при извършване на поръчката.</p>
+<p>3. Ако е поискан предварителен преглед, Потребителят може да поиска разумни корекции преди започване на бродерията.</p>
+<p>4. След одобрение на дизайна и започване на изработката допълнителни промени може да не бъдат възможни.</p>
+<p>5. Ако не е поискан предварителен преглед, дизайнът се изработва от нас според предоставената снимка и избраните от Потребителя характеристики.</p>
+<h3>IV. ЦЕНИ И ПЛАЩАНЕ</h3>
+<p>1. Актуалната цена на всеки продукт е посочена на сайта.</p>
+<p>2. Плащането се извършва онлайн чрез:</p>
+<ul>
+<li>банкова карта;</li>
+<li>PayPal;</li>
+<li>друг метод, ако такъв е наличен на сайта.</li>
+</ul>
+<p>3. Поръчката се счита за приета след успешно плащане и предоставяне на необходимата информация за персонализация.</p>
+<p>4. Данните за банковите карти не се съхраняват от „Душички“.</p>
+<h3>V. ОБРАБОТКА И ИЗРАБОТКА</h3>
+<p>1. Срокът за обработка и изработка на поръчката е <b>до 7 календарни дни</b>.</p>
+<p>2. Ако предоставената снимка или информация не са достатъчни, можем да се свържем с Потребителя за уточнение.</p>
+<p>3. В такъв случай срокът може да бъде удължен с времето, необходимо за получаване на нужната информация.</p>
+<p>4. Възможни са забавяния при голям брой поръчки или други обстоятелства извън нашия контрол.</p>
+<h3>VI. ДОСТАВКА</h3>
+<p>1. След завършване на продукта поръчката се предава на куриер.</p>
+<p>2. Срокът за доставка е отделен и се добавя към срока за изработка от до 7 календарни дни.</p>
+<p>3. Доставки не се извършват в неделя.</p>
+<p>4. Цената на доставката се показва при извършване на поръчката.</p>
+<p>5. Възможни са забавяния от страна на куриера или поради други обстоятелства извън нашия контрол.</p>
+<h3>VII. ОТКАЗ И АНУЛИРАНЕ НА ПОРЪЧКА</h3>
+<p>1. Продуктите на „Душички“ се изработват индивидуално за всеки Потребител по предоставена от него снимка и избрани характеристики.</p>
+<p>2. Поради персонализирания характер на продуктите, след започване на изработката поръчката не може да бъде отменена или променена.</p>
+<p>3. За персонализирани продукти не се прилага стандартното 14-дневно право на отказ, когато са налице предвидените в закона условия за стоки, изработени по поръчка или според индивидуалните изисквания на Потребителя.</p>
+<p>4. Това не ограничава правата на Потребителя, ако продуктът е дефектен, сгрешен или не отговаря на направената поръчка.</p>
+<h3>VIII. РЕКЛАМАЦИИ</h3>
+<p>1. Ако полученият продукт е дефектен, повреден, сгрешен или не отговаря на направената поръчка, Потребителят може да направи рекламация.</p>
+<p>2. За рекламация Потребителят трябва да се свърже с нас на <b><a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></b>.</p>
+<p>3. При подаване на рекламация може да поискаме номер на поръчката, кратко описание на проблема и снимки, на които проблемът се вижда ясно.</p>
+<p>4. След преглед на рекламацията и според конкретния случай можем да предложим:</p>
+<ul>
+<li>поправка на продукта;</li>
+<li>изработка и изпращане на нов продукт;</li>
+<li>възстановяване на заплатената сума.</li>
+</ul>
+<p>5. Ако грешката или дефектът са от наша страна, Потребителят не заплаща разходите, които по закон трябва да бъдат поети от нас.</p>
+<p>6. Малки разлики, които са нормална част от превръщането на снимката в „line art“ дизайн и машинна бродерия, не се считат сами по себе си за дефект.</p>
+<h3>IX. ВРЪЩАНЕ НА ПЕРСОНАЛИЗИРАНИ ПРОДУКТИ</h3>
+<p>1. Персонализиран продукт не може да бъде върнат само защото Потребителят е променил решението си.</p>
+<p>2. Не се приема връщане при грешно избран от Потребителя размер, цвят, снимка или друга характеристика, когато продуктът е изработен правилно според направената поръчка.</p>
+<p>3. Ако проблемът е по вина на „Душички“, се прилагат условията за рекламация по-горе.</p>
+<h3>X. ПОВРЕДЕНИ И ИЗГУБЕНИ ПРАТКИ</h3>
+<p>1. Ако пратката бъде изгубена по време на доставката или пристигне повредена, Потребителят трябва да се свърже с нас възможно най-скоро.</p>
+<p>2. След установяване на проблема ще предложим повторно изработване и изпращане на продукта или възстановяване на заплатената сума.</p>
+<p>3. Потребителят не носи отговорност за загуба или повреда на пратката по време на доставката до него.</p>
+<h3>XI. ВЪЗСТАНОВЯВАНЕ НА СУМИ</h3>
+<p>1. Когато е одобрено възстановяване на сума, тя се връща според начина на първоначалното плащане и правилата на съответния платежен оператор.</p>
+<p>2. Срокът, в който сумата ще се появи по сметката на Потребителя, може да зависи от неговата банка или платежна система.</p>
+<h3>XII. ЦВЕТОВЕ И ВИЗУАЛНИ РАЗЛИКИ</h3>
+<p>1. Полагаме усилия снимките и примерите на сайта да показват продуктите възможно най-точно.</p>
+<p>2. Възможни са малки разлики в цветовете заради различните екрани, материи, конци и особеностите на машинната бродерия.</p>
+<p>3. „Line art“ дизайнът е интерпретация на предоставената снимка, а не нейно напълно идентично копие.</p>
+<h3>XIII. ПРАВА ВЪРХУ СЪДЪРЖАНИЕТО</h3>
+<p>1. С предоставянето на снимка Потребителят потвърждава, че има право да я използва за изработването на поръчания продукт.</p>
+<p>2. „Душички“ може да откаже поръчка, ако има основателна причина да смята, че нейното изпълнение нарушава закон или права на други лица.</p>
+<p>3. Качването на снимка за поръчка не дава автоматично право на „Душички“ да използва снимката за реклама, социални мрежи или други маркетингови цели.</p>
+<h3>XIV. ЗАКЛЮЧИТЕЛНИ УСЛОВИЯ</h3>
+<p>1. За настоящите Общи условия се прилага българското законодателство.</p>
+<p>2. Настоящите условия не ограничават правата, които Потребителят има по закон.</p>
+<p>3. „Душички“ може периодично да актуализира настоящите Общи условия.</p>
+<p>4. За дадена поръчка важат Общите условия, които са били в сила към момента на извършването ѝ.</p>
+<p>5. Настоящите Общи условия влизат в сила от публикуването им на сайта.</p>
+<h3>XV. КОНТАКТИ</h3>
+<p><b>„Душички“</b><br><b>Имейл:</b> <a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></p>
+</template>
+
+<template id="l-priv">
+<h2>ПОЛИТИКА ЗА ПОВЕРИТЕЛНОСТ</h2>
+<p><b>Последна актуализация: 07.10.2026 г.</b></p>
+<p>Настоящата Политика за поверителност обяснява как <b>„Душички“</b> събира, използва и съхранява личните данни на Потребителите на сайта.</p>
+<p>За въпроси относно личните Ви данни можете да се свържете с нас на <b><a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></b>.</p>
+<h3>I. КАКВИ ДАННИ СЪБИРАМЕ</h3>
+<p>Когато използвате сайта или направите поръчка, можем да получим следните данни:</p>
+<ul>
+<li>име и фамилия;</li>
+<li>имейл адрес;</li>
+<li>телефонен номер;</li>
+<li>адрес за доставка;</li>
+<li>информация за поръчката;</li>
+<li>снимка, качена за персонализация;</li>
+<li>комуникация с нас относно поръчки или рекламации;</li>
+<li>техническа информация, необходима за работата и сигурността на сайта.</li>
+</ul>
+<h3>II. ЗА КАКВО ИЗПОЛЗВАМЕ ДАННИТЕ</h3>
+<p>Използваме личните данни, когато това е необходимо за:</p>
+<ul>
+<li>приемане и обработване на поръчки;</li>
+<li>изработване на персонализирани продукти;</li>
+<li>създаване на „line art“ дизайн;</li>
+<li>доставка на поръчките;</li>
+<li>комуникация с Потребителя;</li>
+<li>обработване на рекламации;</li>
+<li>възстановяване на суми;</li>
+<li>изпълнение на законови и счетоводни задължения;</li>
+<li>нормалната работа и сигурността на сайта.</li>
+</ul>
+<h3>III. КАЧЕНИ СНИМКИ</h3>
+<p>1. При поръчка на персонализиран продукт Потребителят качва снимка, по която създаваме „line art“ дизайн за бродерия.</p>
+<p>2. Качената снимка се използва за създаването на дизайна и изпълнението на конкретната поръчка.</p>
+<p>3. Снимката може да съдържа изображение на Потребителя или на други лица и поради това може да представлява лични данни.</p>
+<p>4. <b>Оригиналната снимка, качена от Потребителя, се изтрива от „Душички“ до 3 дни след изпращането на готовата поръчка.</b></p>
+<p>5. След изтриването снимката не се съхранява от нас за използване при бъдещи поръчки.</p>
+<p>6. Не използваме качените снимки за реклама, публикации в социални мрежи или други маркетингови цели без изрично разрешение от Потребителя.</p>
+<h3>IV. ПЛАЩАНИЯ</h3>
+<p>1. При плащане с банкова карта данните на картата се обработват от съответния платежен оператор.</p>
+<p>2. „Душички“ не съхранява пълните данни на банковата карта.</p>
+<p>3. При плащане чрез PayPal необходимите данни за плащането се обработват чрез системата на PayPal.</p>
+<h3>V. ЗАЩО ОБРАБОТВАМЕ ДАННИТЕ</h3>
+<p>Обработваме лични данни, когато това е необходимо:</p>
+<p>1. за приемане и изпълнение на поръчката;</p>
+<p>2. за изпълнение на законови задължения;</p>
+<p>3. за защита на наши законни интереси, когато това е допустимо;</p>
+<p>4. въз основа на съгласие на Потребителя, когато такова е необходимо.</p>
+<p>Когато обработването се основава на съгласие, Потребителят може да го оттегли.</p>
+<h3>VI. НА КОГО МОЖЕМ ДА ПРЕДОСТАВЯМЕ ДАННИ</h3>
+<p>Когато това е необходимо за изпълнение на поръчката или работата на сайта, определени данни могат да бъдат предоставяни на:</p>
+<ul>
+<li>куриерски компании;</li>
+<li>платежни оператори;</li>
+<li>доставчици, свързани с работата и поддръжката на сайта;</li>
+<li>счетоводни услуги;</li>
+<li>държавни органи, когато това се изисква по закон.</li>
+</ul>
+<p>Предоставяме само данните, които са необходими за съответната цел.</p>
+<h3>VII. КОЛКО ВРЕМЕ СЪХРАНЯВАМЕ ДАННИТЕ</h3>
+<p>Личните данни се съхраняват само толкова дълго, колкото е необходимо за целта, за която са събрани, или за срока, който сме длъжни да спазваме по закон.</p>
+<p>Данни, свързани с поръчки, плащания и счетоводни документи, могат да бъдат съхранявани за по-дълъг срок, когато това се изисква от закона.</p>
+<p><b>Снимката, качена от Потребителя за персонализация, се изтрива до 3 дни след изпращането на готовата поръчка.</b></p>
+<h3>VIII. БИСКВИТКИ</h3>
+<p>1. Сайтът може да използва „бисквитки“, необходими за правилната му работа.</p>
+<p>2. Може да се използват и други видове „бисквитки“ според настройките на сайта и избора на Потребителя.</p>
+<p>3. Потребителят може да управлява „бисквитките“ чрез предоставените на сайта настройки и/или настройките на своя браузър.</p>
+<h3>IX. ПРАВА НА ПОТРЕБИТЕЛЯ</h3>
+<p>Потребителят има право да:</p>
+<ul>
+<li>поиска информация дали обработваме негови лични данни;</li>
+<li>получи достъп до личните си данни;</li>
+<li>поиска поправка на грешни или непълни данни;</li>
+<li>поиска изтриване на данните, когато това е приложимо;</li>
+<li>поиска ограничаване на обработването;</li>
+<li>възрази срещу определено обработване;</li>
+<li>поиска преносимост на данните, когато това право е приложимо;</li>
+<li>оттегли дадено съгласие;</li>
+<li>подаде жалба до Комисията за защита на личните данни.</li>
+</ul>
+<p>За упражняване на тези права Потребителят може да се свърже с нас на <b><a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></b>.</p>
+<p>При необходимост може да поискаме допълнителна информация, за да потвърдим самоличността на лицето, което прави искането.</p>
+<h3>X. ИЗТРИВАНЕ НА ДАННИ</h3>
+<p>Потребителят може да поиска изтриване на личните си данни чрез <b><a href="mailto:dushichki@gmail.com">dushichki@gmail.com</a></b>.</p>
+<p>Определени данни не могат да бъдат изтрити веднага, ако сме длъжни да ги съхраняваме по закон или ако са необходими за защита на законни права.</p>
+<p>Ако има активна поръчка, данните, необходими за нейното изпълнение, се обработват до приключването ѝ.</p>
+<p>Снимката, качена за персонализация, се изтрива до 3 дни след изпращането на готовата поръчка.</p>
+<h3>XI. СИГУРНОСТ НА ДАННИТЕ</h3>
+<p>Полагаме разумни мерки за защита на личните данни от загуба, неправомерен достъп, промяна или разкриване.</p>
+<p>При проблем със сигурността на личните данни ще предприемем необходимите действия съгласно приложимото законодателство.</p>
+<h3>XII. КОМИСИЯ ЗА ЗАЩИТА НА ЛИЧНИТЕ ДАННИ</h3>
+<p>Ако Потребителят смята, че правата му относно личните данни са нарушени, може да подаде жалба до <b>Комисията за защита на личните данни (КЗЛД)</b>.</p>
+<h3>XIII. ПРОМЕНИ В ПОЛИТИКАТА</h3>
+<p>„Душички“ може периодично да актуализира настоящата Политика за поверителност.</p>
+<p>Актуалната версия се публикува на сайта.</p>
+</template>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const eur=c=>'€'+(c/100).toFixed(c%100?2:0);
+const DESIGNS=[{k:'photo',n:'Персонализирана бродерия по снимка'},{k:'pet',n:'Персонализирана бродерия на домашен любимец'},{k:'memory',n:'Персонализирана бродерия на починал близък'}];
+const KIND={
+ hoodie:{one:'Худи',price:4500,prefix:'h',
+  colors:[['Черно худи + бял конец','b'],['Бяло худи + черен конец','w']],
+  sizes:['S','M','L','XL','3XL'],
+  chart:{cols:['Размер','Ширина (см)','Дължина (см)','Ръкав (см)'],rows:[['S',53.34,72.39,90.17],['M',58.42,74.93,92.71],['L',62.23,77.47,95.25],['XL',67.31,80.01,97.79],['3XL',72.39,85.09,102.87]]}},
+ tee:{one:'Тениска',price:3500,prefix:'t',
+  colors:[['Черна тениска + бял конец','b'],['Бяла тениска + черен конец','w']],
+  sizes:['S','M','L','XL','3XL'],
+  chart:{cols:['Размер','Ширина (см)','Дължина (см)'],rows:[['S',51,72],['M',54,74],['L',57,76],['XL',60,78],['3XL',66,82]]}}
+};
+const HW='fill="none" stroke="#c9a94e" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"';
+const WING='<path d="M46 46C38 30 20 28 8 34c8 2 10 8 15 11-5 0-9 1-13 3 7 2 11 6 14 11-3 0-6 1-9 3 8 3 15 3 22-3 4-3 7-9 9-12z"/>';
+const HALO=[
+ {k:'halo',n:'Ореол',svg:`<svg viewBox="0 0 100 100" ${HW}><ellipse cx="50" cy="50" rx="32" ry="6"/></svg>`},
+ {k:'wings',n:'Крила',svg:`<svg viewBox="0 0 100 100" ${HW}><g>${WING}</g><g transform="translate(100 0) scale(-1 1)">${WING}</g></svg>`},
+ {k:'both',n:'Ореол и крила',svg:`<svg viewBox="0 0 100 100" ${HW}><g transform="translate(0 8)"><g>${WING}</g><g transform="translate(100 0) scale(-1 1)">${WING}</g></g><ellipse cx="50" cy="20" rx="20" ry="4"/></svg>`}];
+const COURIER={speedy:'Спиди',econt:'Еконт'};
+const TEXT_ADD=100;
+const img=(kind,v,di)=>'img/'+KIND[kind].prefix+'-'+v+'-'+DESIGNS[di].k+'.jpg';
+let kind='hoodie',API=false,CFG={ship_office:0,ship_address:0},user=null,guestOK=false;
+function loadCart(){try{return JSON.parse(localStorage.getItem('dsh_cart')||'[]')}catch(e){return[]}}
+let cart=loadCart();
+function saveCart(){try{localStorage.setItem('dsh_cart',JSON.stringify(cart))}catch(e){}
+ const c=$('#cnt');c.textContent=cart.length;c.style.display=cart.length?'':'none'}
+
+async function api(a,body,extra){
+ const o={method:body?'POST':'GET',headers:{'X-Requested-With':'fetch'},credentials:'same-origin'};
+ if(body instanceof FormData)o.body=body;
+ else if(body){o.body=JSON.stringify(body);o.headers['Content-Type']='application/json'}
+ const r=await fetch('api.php?a='+a+(extra||''),o);
+ let j;try{j=await r.json()}catch(e){throw new Error('Сървърът не отговори правилно.')}
+ if(!r.ok||j.error)throw new Error(j.error||'Грешка');
+ return j}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2800)}
+
+/* tabs + grid */
+function pill(){const b=$('#t-'+kind),p=$('#pill');p.style.width=b.offsetWidth+'px';p.style.transform='translate('+b.offsetLeft+'px,-50%)'}
+function renderGrid(){
+ $('#grid').innerHTML=DESIGNS.map((d,i)=>`<button class="card" data-i="${i}"><div class="im"><img class="a" src="${img(kind,'b',i)}" alt="${esc(d.n)}" loading="lazy"><img class="b" src="${img(kind,'w',i)}" alt="" loading="lazy"></div><h3>${d.n}</h3><p class="pr">${eur(KIND[kind].price)}</p></button>`).join('')}
+function setKind(k){kind=k;['hoodie','tee'].forEach(x=>$('#t-'+x).setAttribute('aria-selected',x===k));pill();renderGrid()}
+$('#t-hoodie').onclick=()=>setKind('hoodie');
+$('#t-tee').onclick=()=>setKind('tee');
+$('#go').onclick=()=>$('#shop').scrollIntoView({behavior:'smooth',block:'start'});
+$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(c)openProduct(+c.dataset.i)});
+window.addEventListener('resize',pill);
+document.fonts&&document.fonts.ready.then(pill);
+
+/* product dialog */
+function thumb(f){return new Promise(res=>{const u=URL.createObjectURL(f),im=new Image();
+ im.onload=()=>{const c=document.createElement('canvas');c.width=c.height=128;const x=c.getContext('2d'),s=Math.min(im.width,im.height);
+  x.drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,128,128);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.7))};
+ im.onerror=()=>{URL.revokeObjectURL(u);res('')};im.src=u})}
+function openProduct(i){
+ const K=KIND[kind],k=kind,dlg=$('#pm');
+ $('#pmb').innerHTML=`
+ <div>
+  <div class="im"><img id="pi" src="${img(k,K.colors[0][1],i)}" alt="${esc(DESIGNS[i].n)}"></div>
+  <div class="st">Сподели историята си ❤️</div>
+  <input type="text" id="sy" maxlength="300" placeholder="Ще се радваме да знаем защо тази поръчка е специална за теб" aria-label="Историята ти">
+ </div>
+ <div>
+  <h2>${DESIGNS[i].n} – ${K.one}</h2>
+  <div class="pr2"><span id="pp">${eur(K.price)}</span></div>
+  <div class="fld"><label for="co">Цвят</label><select id="co">${K.colors.map((c,x)=>`<option value="${x}">${c[0]}</option>`).join('')}</select></div>
+  <div class="fld"><label for="sz">Размер</label><select id="sz">${K.sizes.map(s=>`<option>${s}</option>`).join('')}</select></div>
+  <button class="sz" id="szb" type="button">Размери</button>
+  <div class="st">Качи своята снимка <span style="color:var(--red)">*</span></div>
+  <div class="drop" id="dz"><div id="pv"></div><label for="fi">Избери файл</label><input type="file" id="fi" accept="image/*"><div id="fn">или пусни файла тук</div></div>
+  ${i===2?`<div class="st hc">Добави към дизайна <span style="color:var(--red)">*</span></div>
+  <div class="ht" role="radiogroup" aria-label="Ореол или крила">${HALO.map((h,x)=>`<button type="button" class="hb" role="radio" aria-checked="${x===0}" data-h="${h.k}" title="${h.n}" aria-label="${h.n}">${h.svg}</button>`).join('')}</div>
+  <div class="st hc">Кой да получи ореола/крилата? <span style="color:var(--red)">*</span></div>
+  <input type="text" id="hw" maxlength="20" placeholder="Напиши кой да получи ореола/крилата" aria-label="Кой да получи ореола/крилата">
+  <div class="cnt" id="hwc">0/20 символа</div>`:''}
+  <label class="ck"><input type="checkbox" id="tc"> Добави текст под дизайна (+ €1)</label>
+  <div id="txt"><input type="text" id="tv" maxlength="40" placeholder="Какъв текст да бродираме?" aria-label="Текст под дизайна"></div>
+  <div class="st">Бележки</div>
+  <textarea id="nt" maxlength="600" placeholder="Ако искаш да видиш дизайна преди бродерията или имаш уточнения, напиши ги тук" aria-label="Бележки"></textarea>
+  <div class="er" id="er" role="alert"></div>
+  <button class="btn add" id="ad" type="button">Добави в количката</button>
+ </div>`;
+ const fi=$('#fi'),dz=$('#dz'),er=m=>$('#er').textContent=m;
+ $('#co').onchange=e=>{$('#pi').src=img(k,K.colors[+e.target.value][1],i)};
+ const upd=async()=>{const f=fi.files[0];$('#fn').innerHTML=f?'<span class="fn">'+esc(f.name)+'</span>':'или пусни файла тук';
+  $('#pv').innerHTML='';if(f){er('');const t=await thumb(f);if(t)$('#pv').innerHTML='<img alt="Преглед на снимката" src="'+t+'">'}};
+ fi.onchange=upd;
+ ['dragenter','dragover'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add('on')}));
+ ['dragleave','drop'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove('on')}));
+ dz.addEventListener('drop',e=>{if(e.dataTransfer.files.length){fi.files=e.dataTransfer.files;upd()}});
+ $('#szb').onclick=()=>showSizes(k);
+ let halo='halo';
+ document.querySelectorAll('.hb').forEach(b=>b.onclick=()=>{halo=b.dataset.h;document.querySelectorAll('.hb').forEach(x=>x.setAttribute('aria-checked',x===b))});
+ if(i===2)$('#hw').oninput=e=>{$('#hwc').textContent=e.target.value.length+'/20 символа'};
+ const price=()=>{$('#pp').textContent=eur(K.price+($('#tc').checked&&$('#tv').value.trim()?TEXT_ADD:0))};
+ $('#tc').onchange=e=>{$('#txt').style.display=e.target.checked?'block':'none';price()};
+ $('#tv').oninput=price;
+ $('#ad').onclick=async()=>{
+  const f=fi.files[0],b=$('#ad');
+  if(!f){er('Качи снимка, за да добавиш продукта.');return}
+  if(!/^image\//.test(f.type)){er('Качи снимка във формат JPG, PNG или WEBP.');return}
+  if(f.size>12*1024*1024){er('Снимката е твърде голяма (до 12 MB).');return}
+  if(i===2&&!$('#hw').value.trim()){er('Напиши кой да получи ореола/крилата.');$('#hw').focus();return}
+  if($('#tc').checked&&!$('#tv').value.trim()){er('Напиши текста, който да бродираме, или махни отметката.');return}
+  b.disabled=true;b.textContent='Добавяне...';
+  let token=null;
+  if(API){try{const fd=new FormData();fd.append('photo',f);token=(await api('upload',fd)).token}catch(e){er(e.message);b.disabled=false;b.textContent='Добави в количката';return}}
+  const withText=$('#tc').checked&&$('#tv').value.trim();
+  cart.push({id:Date.now().toString(36),type:k,design:i,color:K.colors[+$('#co').value][0],size:$('#sz').value,text:withText?$('#tv').value.trim():'',story:$('#sy').value.trim(),notes:$('#nt').value.trim(),unit:K.price+(withText?TEXT_ADD:0),thumb:await thumb(f),photo:token,halo:i===2?halo:'',halo_who:i===2?$('#hw').value.trim():''});
+  saveCart();dlg.close();toast('Добавено в количката ✓');
+ };
+ dlg.showModal();
+}
+function showSizes(k){const c=KIND[k].chart;
+ $('#scb').innerHTML='<h2>Размери – '+KIND[k].one+'</h2><p class="uni"><b>Унисекс</b> – '+(k==='hoodie'?'худитата':'тениските')+' са един и същ модел за жени и мъже.</p><div style="overflow-x:auto"><table><tr>'+c.cols.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+c.rows.map(r=>'<tr>'+r.map((x,j)=>'<td>'+(j?String(x).replace('.',','):'<b>'+x+'</b>')+'</td>').join('')+'</tr>').join('')+'</table></div><p style="margin-top:12px;font-size:.85rem;color:#666">Размерите са в сантиметри.</p>';
+ $('#sc').showModal()}
+
+/* cart */
+const subtotal=()=>cart.reduce((a,i)=>a+i.unit,0);
+function openCart(){$('#cd').showModal();renderCart()}
+function renderCart(){
+ const b=$('#cdb');
+ if(!cart.length){b.innerHTML='<h2>Количка</h2><p>Количката е празна. Избери худи или тениска.</p><p style="margin-top:16px"><button class="btn add" style="font-size:1.1rem" onclick="$(\'#cd\').close();$(\'#shop\').scrollIntoView({behavior:\'smooth\'})">Към продуктите</button></p>';return}
+ b.innerHTML='<h2>Количка</h2>'+cart.map((i,x)=>`<div class="ci"><img src="${i.thumb||''}" alt=""><div class="t"><b>${KIND[i.type].one} – ${esc(DESIGNS[i.design].n)}</b>${esc(i.color)} · размер ${esc(i.size)}${i.halo?'<br>'+esc(HALO.find(h=>h.k===i.halo).n)+' – за: '+esc(i.halo_who):''}${i.text?'<br>Текст: '+esc(i.text):''}${i.notes?'<br>Бележки: '+esc(i.notes):''}</div><div><b>${eur(i.unit)}</b><br><button onclick="rmItem(${x})">Махни</button></div></div>`).join('')+
+ `<div class="sum" style="margin-top:16px"><span>Артикули</span><span>${eur(subtotal())}</span></div><div class="sum" style="color:#666;font-size:.9rem"><span>Доставката се избира на следващата стъпка</span></div>
+ <button class="btn add" style="font-size:1.1rem" onclick="startCheckout()">Към плащане</button>`}
+function rmItem(x){cart.splice(x,1);saveCart();renderCart()}
+$('#cartb').onclick=openCart;
+
+/* вход / гост */
+function startCheckout(){ if(user||guestOK) renderCheckout(); else renderGate() }
+function renderGate(){
+ $('#cdb').innerHTML=`<h2>Как искаш да продължиш?</h2>
+ <div class="gate">
+  <button class="btn add" style="font-size:1.1rem;margin:0" id="g1">Поръчай като гост</button>
+  <p style="margin:-4px 0 6px;text-align:center">Без регистрация – нужни са ни само данни за доставка.</p>
+  <button class="btn o add" style="font-size:1.1rem;margin:0" id="g2">Вход</button>
+  <button class="btn o add" style="font-size:1.1rem;margin:0" id="g3">Създай акаунт</button>
+ </div>
+ <p style="margin-top:16px"><button type="button" class="link" onclick="renderCart()">← Обратно към количката</button></p>`;
+ $('#g1').onclick=()=>{guestOK=true;renderCheckout()};
+ $('#g2').onclick=()=>renderLogin('login',true);
+ $('#g3').onclick=()=>renderLogin('register',true)}
+
+/* доставка + плащане */
+const OFF={};   // кеш на офисите по куриер
+async function getOffices(c){
+ if(OFF[c])return OFF[c];
+ if(!API)return OFF[c]={manual:true,offices:[]};
+ try{const r=await api('offices',null,'&courier='+c);return OFF[c]=r}catch(e){return OFF[c]={manual:true,offices:[]}}}
+const cities=l=>[...new Set(l.map(o=>o.c).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'bg'));
+let D={courier:'speedy',type:'office'};
+function shipCents(){return API?(D.type==='office'?CFG.ship_office:CFG.ship_address):0}
+function renderCheckout(){
+ const u=user||{};
+ $('#cdb').innerHTML=`<h2>Поръчка</h2>
+ <form id="ck" novalidate>
+  <h3 style="margin-top:4px">Кой получава</h3>
+  <div class="f2"><input id="c1" type="text" autocomplete="name" placeholder="Име и фамилия *" aria-label="Име и фамилия" value="${esc(u.name||'')}"></div><div class="fe" id="e-c1"></div>
+  <div class="row"><div><div class="f2"><input id="c2" type="email" autocomplete="email" placeholder="Имейл *" aria-label="Имейл" value="${esc(u.email||'')}"></div><div class="fe" id="e-c2"></div></div>
+  <div><div class="f2"><input id="c3" type="tel" autocomplete="tel" placeholder="Телефон *" aria-label="Телефон" ></div><div class="fe" id="e-c3"></div></div></div>
+  <h3>Доставка</h3>
+  <div class="seg big" role="group" aria-label="Куриер"><button type="button" data-cr="speedy">Спиди</button><button type="button" data-cr="econt">Еконт</button></div>
+  <div class="rad" role="radiogroup" aria-label="Начин на доставка"><label><input type="radio" name="ty" value="office">До офис</label><label><input type="radio" name="ty" value="address">До адрес</label></div>
+  <div id="dl"></div>
+  <div class="sum" style="margin-top:14px"><span>Артикули</span><span>${eur(subtotal())}</span></div>
+  <div class="sum"><span>Доставка</span><span id="shp"></span></div>
+  <div class="sum tot"><span>Общо за плащане</span><span id="grand"></span></div>
+  <label class="ck"><input type="checkbox" id="c7"><span>Прочетох и приемам <button type="button" class="link" data-legal="terms">Общите условия</button> и <button type="button" class="link" data-legal="priv">Политиката за поверителност</button>.</span></label>
+  <p class="hint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
+  <div class="er" id="cer" role="alert"></div>
+  <button class="btn add" id="pay" style="font-size:1.1rem" type="submit">Плати</button>
+  <p style="text-align:center;margin-top:10px"><button type="button" class="link" onclick="renderCart()">← Обратно към количката</button></p>
+ </form>`;
+ document.querySelectorAll('[data-cr]').forEach(b=>b.onclick=()=>{D.courier=b.dataset.cr;paintDelivery()});
+ document.querySelectorAll('[name=ty]').forEach(r=>r.onchange=()=>{D.type=r.value;paintDelivery()});
+ $('#ck').onsubmit=pay;
+ paintDelivery()}
+function totals(){const s=shipCents();$('#shp').textContent=s?eur(s):'Безплатна';$('#grand').textContent=eur(subtotal()+s);$('#pay').textContent='Плати '+eur(subtotal()+s)}
+const fld=(id,ph,extra)=>`<div class="f2" id="f-${id}"><input id="${id}" type="text" placeholder="${ph}" aria-label="${ph.replace(' *','')}" ${extra||''}></div><div class="fe" id="e-${id}"></div>`;
+async function paintDelivery(){
+ document.querySelectorAll('[data-cr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cr===D.courier));
+ document.querySelectorAll('[name=ty]').forEach(r=>r.checked=r.value===D.type);
+ totals();
+ const box=$('#dl'),cr=COURIER[D.courier],my=D.courier+D.type;
+ box.innerHTML='<p class="hint">Зареждаме офисите на '+cr+'...</p>';
+ const R=await getOffices(D.courier);
+ if(my!==D.courier+D.type)return;
+ const list=R.offices,cl=cities(list);
+ const dlist=`<datalist id="cl">${cl.map(c=>`<option value="${esc(c)}">`).join('')}</datalist>`;
+ if(D.type==='office'){
+  if(R.manual){
+   box.innerHTML=fld('d-city','Град *','autocomplete="address-level2"')+fld('d-office','Офис на '+cr+' – име или адрес *')+
+    `<p class="hint">Списъкът с офисите на ${cr} не е достъпен в момента. Напиши офиса, в който искаш да получиш пратката.</p>`;
+  }else{
+   box.innerHTML=dlist+`<div class="f2" id="f-d-city"><input id="d-city" type="text" list="cl" placeholder="Започни да пишеш град *" aria-label="Град" autocomplete="off"></div><div class="fe" id="e-d-city"></div>
+    <input type="hidden" id="d-office"><div id="ol"></div><div class="fe" id="e-d-office"></div><div class="hint" id="oinfo"></div>`;
+   const ci=$('#d-city');
+   let last=null;
+   const pick=id=>{$('#d-office').value=id;$('#e-d-office').textContent=''};
+   const paintList=(m,q)=>{const t=(q||'').toLowerCase();
+    const shown=m.filter(o=>!t||(o.n+' '+o.a).toLowerCase().includes(t));
+    $('#ol').querySelector('.ol').innerHTML=shown.map(o=>`<label class="of"><input type="radio" name="of" value="${esc(o.id)}"${$('#d-office').value===o.id?' checked':''}><span><b>${esc(o.n)}</b>${o.p?'<i>Автомат</i>':''}<small>${esc(o.a)}</small></span></label>`).join('')||'<p class="hint" style="padding:12px">Няма офис с такова име или адрес.</p>';
+    $('#ol').querySelectorAll('input[name=of]').forEach(r=>r.onchange=()=>pick(r.value))};
+   const fill=()=>{const v=ci.value.trim().toLowerCase();if(v===last)return;last=v;pick('');
+    const m=list.filter(o=>o.c.toLowerCase()===v).sort((a,b)=>(a.p-b.p)||a.n.localeCompare(b.n,'bg'));
+    if(!m.length){$('#ol').innerHTML='';$('#oinfo').textContent=v?'Няма намерен град. Избери от списъка с предложения.':'';return}
+    $('#ol').innerHTML=(m.length>6?'<div class="f2"><input type="text" id="of-q" placeholder="Търси по име или адрес на офис" aria-label="Търси офис"></div>':'')+'<div class="ol" role="radiogroup" aria-label="Офиси на '+cr+'"></div>';
+    paintList(m,'');
+    if(m.length>6)$('#of-q').oninput=e=>paintList(m,e.target.value);
+    if(m.length===1){pick(m[0].id);paintList(m,'')}
+    $('#oinfo').textContent=m.length+(m.length===1?' офис':' офиса')+' в '+m[0].c+'. Избери най-удобния за теб.'};
+   ci.oninput=fill;ci.onchange=fill}
+ }else{
+  box.innerHTML=dlist+`<div class="f2" id="f-d-city"><input id="d-city" type="text" ${R.manual?'':'list="cl"'} placeholder="Град *" aria-label="Град" autocomplete="address-level2"></div><div class="fe" id="e-d-city"></div>`+
+   fld('d-street','Улица / квартал *','autocomplete="address-line1"')+
+   `<div class="row"><div>${fld('d-no','Номер на улица *')}</div><div>${fld('d-apt','Апартамент')}</div></div>`+
+   fld('d-block','Блок, вход, етаж')+
+   fld('d-zip','Пощенски код *','inputmode="numeric" autocomplete="postal-code"')+
+   fld('d-note','Добавете офис на '+cr+' при нужда')+
+   `<p class="hint">Ако куриерът не стига до адреса, пратката ще бъде оставена в посочения офис.</p>`;
+  const ci=$('#d-city');
+  ci.onchange=()=>{const m=list.find(o=>o.c.toLowerCase()===ci.value.trim().toLowerCase());if(m&&m.z&&!$('#d-zip').value)$('#d-zip').value=m.z}
+ }}
+document.addEventListener('input',ev=>{const f=ev.target.closest&&ev.target.closest('.f2.bad');if(f){f.classList.remove('bad');const e=f.nextElementSibling;if(e&&e.classList.contains('fe'))e.textContent='';else{const x=f.querySelector('.fe');if(x)x.textContent=''}const id=ev.target.id;const e2=id&&document.getElementById('e-'+id);if(e2)e2.textContent=''}});
+document.addEventListener('change',ev=>{const id=ev.target.id;const e2=id&&document.getElementById('e-'+id);if(e2&&ev.target.value){e2.textContent='';const f=ev.target.closest('.f2');if(f)f.classList.remove('bad')}});
+function bad(id,msg){const f=$('#f-'+id)||$('#'+id)?.closest('.f2'),e=$('#e-'+id);if(f)f.classList.add('bad');if(e)e.textContent=msg;return false}
+async function pay(e){
+ e.preventDefault();
+ document.querySelectorAll('.f2.bad').forEach(x=>x.classList.remove('bad'));document.querySelectorAll('.fe').forEach(x=>x.textContent='');$('#cer').textContent='';
+ const v=id=>($('#'+id)?$('#'+id).value.trim():'');let ok=true;
+ if(v('c1').length<2)ok=bad('c1','Въведи име и фамилия.');
+ if(!/^\S+@\S+\.\S+$/.test(v('c2')))ok=bad('c2','Невалиден имейл.');
+ if(v('c3').length<5)ok=bad('c3','Въведи телефон за куриера.');
+ const R=OFF[D.courier]||{manual:true,offices:[]};
+ let delivery={courier:D.courier,type:D.type};
+ if(D.type==='office'){
+  if(R.manual){
+   if(v('d-city').length<2)ok=bad('d-city','Въведи град.');
+   if(v('d-office').length<3)ok=bad('d-office','Напиши офиса.');
+   delivery.city=v('d-city');delivery.office_text=v('d-office');
+  }else{
+   if(!R.offices.some(o=>o.c.toLowerCase()===v('d-city').toLowerCase()))ok=bad('d-city','Избери град от списъка.');
+   else if(!v('d-office'))ok=bad('d-office','Избери офис.');
+   delivery.office=v('d-office')}
+ }else{
+  if(v('d-city').length<2)ok=bad('d-city','Въведи град.');
+  if(v('d-street').length<2)ok=bad('d-street','Въведи улица или квартал.');
+  if(!v('d-no'))ok=bad('d-no','Въведи номер.');
+  if(v('d-zip').length<3)ok=bad('d-zip','Въведи пощенски код.');
+  Object.assign(delivery,{city:v('d-city'),street:v('d-street'),street_no:v('d-no'),apt:v('d-apt'),block:v('d-block'),zip:v('d-zip'),office_text:v('d-note')})
+ }
+ if(!ok){$('#cer').textContent='Провери маркираните полета.';return}
+ if(!$('#c7').checked){$('#cer').textContent='Трябва да приемеш Общите условия и Политиката за поверителност.';return}
+ if(!API){$('#cer').textContent='Плащането работи на качения сайт със сървъра (api.php). В този преглед то не е свързано.';return}
+ if(cart.some(i=>!i.photo)){$('#cer').textContent='Някоя снимка не е качена. Махни артикула и го добави отново.';return}
+ const b=$('#pay');b.disabled=true;b.textContent='Пренасочваме към Stripe...';
+ try{
+  const r=await api('checkout',{customer:{name:v('c1'),email:v('c2'),phone:v('c3')},delivery,
+   items:cart.map(i=>({type:i.type,design:i.design,color:i.color,size:i.size,text:i.text,story:i.story,notes:i.notes,photo:i.photo,halo:i.halo,halo_who:i.halo_who}))});
+  location.href=r.url;
+ }catch(err){$('#cer').textContent=err.message;b.disabled=false;totals()}}
+
+/* legal */
+function openLegal(id){$('#lgb').innerHTML='';$('#lgb').appendChild($('#l-'+id).content.cloneNode(true));$('#lg').showModal();$('#lg').scrollTop=0}
+document.addEventListener('click',e=>{const l=e.target.closest('[data-legal]');if(l){e.preventDefault();openLegal(l.dataset.legal)}});
+
+/* account */
+function setAcc(){$('#acc').textContent=user?'Здравей, '+user.name.split(' ')[0]:'Вход'}
+$('#acc').onclick=()=>{$('#cd').showModal();user?renderAccount():renderLogin('login',false)};
+function renderLogin(mode,toCheckout){
+ const reg=mode==='register';
+ $('#cdb').innerHTML=`<h2>${reg?'Регистрация':'Вход'}</h2>
+ <div class="tab2" role="tablist"><button type="button" role="tab" aria-selected="${!reg}" data-m="login">Вход</button><button type="button" role="tab" aria-selected="${reg}" data-m="register">Регистрация</button></div>
+ <form id="af" novalidate>
+  ${reg?'<div class="fld"><label for="a1">Име</label><input id="a1" type="text" autocomplete="name"></div>':''}
+  <div class="fld"><label for="a2">Имейл</label><input id="a2" type="email" autocomplete="email"></div>
+  <div class="fld"><label for="a3">Парола${reg?' (поне 8 символа)':''}</label><input id="a3" type="password" autocomplete="${reg?'new-password':'current-password'}"></div>
+  <div class="er" id="aer" role="alert"></div>
+  <button class="btn add" id="ab" style="font-size:1.1rem" type="submit">${reg?'Създай акаунт':'Вход'}</button>
+  <p style="text-align:center;margin-top:12px;font-size:.95rem">${reg?'Вече имаш акаунт?':'Нямаш акаунт?'} <button type="button" class="link" data-m="${reg?'login':'register'}">${reg?'Влез':'Регистрирай се'}</button></p>
+  ${toCheckout?'<p style="text-align:center;margin-top:6px"><button type="button" class="link" id="bk">← Продължи като гост</button></p>':''}
+ </form>`;
+ $('#cdb').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>renderLogin(b.dataset.m,toCheckout));
+ if(toCheckout)$('#bk').onclick=renderGate;
+ $('#af').onsubmit=async e=>{e.preventDefault();const er=m=>$('#aer').textContent=m;
+  if(!API){er('Акаунтите работят на качения сайт със сървъра (api.php). В този преглед не са свързани.');return}
+  const em=$('#a2').value.trim(),pw=$('#a3').value;
+  if(reg&&$('#a1').value.trim().length<2){er('Въведи име.');return}
+  if(!/^\S+@\S+\.\S+$/.test(em)){er('Невалиден имейл.');return}
+  if(pw.length<(reg?8:1)){er(reg?'Паролата трябва да е поне 8 символа.':'Въведи парола.');return}
+  const b=$('#ab');b.disabled=true;
+  try{const r=await api(reg?'register':'login',{name:reg?$('#a1').value.trim():undefined,email:em,password:pw});user=r.user;setAcc();toast('Здравей, '+user.name.split(' ')[0]+' ❤️');toCheckout?renderCheckout():renderAccount()}
+  catch(err){er(err.message);b.disabled=false}}}
+async function renderAccount(){
+ $('#cdb').innerHTML=`<h2>Здравей, ${esc(user.name)}</h2><p>${esc(user.email)}</p><h3 style="margin:22px 0 8px;color:var(--red)">Моите поръчки</h3><div id="ol">Зареждане...</div><p style="margin-top:20px"><button class="btn add" id="lo" style="font-size:1.1rem">Изход</button></p>`;
+ $('#lo').onclick=async()=>{try{await api('logout',{})}catch(e){}user=null;guestOK=false;setAcc();$('#cd').close();toast('Излезе от акаунта.')};
+ try{const r=await api('orders');const S={paid:'платена',shipped:'изпратена'};
+  $('#ol').innerHTML=r.orders.length?r.orders.map(o=>`<div class="sum"><span><b>${esc(o.public_id)}</b> · ${new Date(o.created_at*1000).toLocaleDateString('bg-BG')} · ${S[o.status]||esc(o.status)}</span><span>${eur(o.total_cents)}</span></div>`).join(''):'Още нямаш поръчки.'}
+ catch(e){$('#ol').textContent='Не успяхме да заредим поръчките.'}}
+
+/* dialogs */
+document.querySelectorAll('dialog').forEach(d=>{
+ d.querySelector('.cl').onclick=()=>d.close();
+ d.addEventListener('click',e=>{if(e.target===d)d.close()})});
+
+/* return from Stripe */
+async function afterPay(){
+ const p=new URLSearchParams(location.search);
+ if(p.get('canceled')){history.replaceState(null,'',location.pathname);toast('Плащането е отказано. Количката ти е запазена.');return}
+ if(p.get('paid')&&p.get('session_id')){
+  const id=p.get('paid'),sid=p.get('session_id');history.replaceState(null,'',location.pathname);
+  $('#cd').showModal();$('#cdb').innerHTML='<div class="ok"><p>Потвърждаваме плащането...</p></div>';
+  try{const r=await api('confirm',null,'&order='+encodeURIComponent(id)+'&session_id='+encodeURIComponent(sid));
+   if(r.paid){cart=[];saveCart();$('#cdb').innerHTML=`<div class="ok"><svg viewBox="0 0 100 90"><path d="M50 84 C8 52 20 14 50 34 C80 14 92 52 50 84Z" fill="#DC0A1E"/></svg><h2>Благодарим ти!</h2><p>Поръчка <b>${esc(r.order)}</b> е приета и платена. Ще получиш имейл с потвърждение.</p><p style="margin-top:8px">Изработката отнема до 7 календарни дни, след което пратката тръгва с куриер.</p><p style="margin-top:18px"><button class="btn add" style="font-size:1.1rem;width:auto;padding:12px 28px" onclick="$('#cd').close()">Обратно към сайта</button></p></div>`;return}
+   $('#cdb').innerHTML='<div class="ok"><p>Плащането още не е потвърдено. Ако е минало, ще получиш имейл. При въпрос пиши на dushichki@gmail.com.</p></div>'}
+  catch(e){$('#cdb').innerHTML='<div class="ok"><p>Не успяхме да потвърдим плащането автоматично. Ако е минало, поръчката ти е записана. Пиши ни на dushichki@gmail.com.</p></div>'}}}
+
+/* init */
+saveCart();setKind('hoodie');
+api('ping').then(j=>{API=true;CFG=j;user=j.user||null;setAcc();afterPay()}).catch(()=>{});
+</script>
+</body>
+</html>
