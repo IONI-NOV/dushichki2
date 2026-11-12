@@ -1,5 +1,5 @@
 'use client';
-import { supabaseEnabled } from '../lib/supabase';
+import { supabaseEnabled, signUp, signIn, signOut, myOrders } from '../lib/supabase';
 import { useEffect, useState } from 'react';
 import Dialog from './Dialog';
 import Checkout from './Checkout';
@@ -10,7 +10,7 @@ import { api } from '../lib/api';
 // Всички стъпки на количката в един прозорец: количка → (гост/вход) → поръчка → плащане
 export default function CartDialog({ open, onClose, view, setView, cart, removeItem, user, setUser, guestOK, setGuestOK, apiOk, cfg, openLegal, toast, goShop, clearCart }) {
   const subtotal = cart.reduce((a, i) => a + i.unit, 0);
-  const startCheckout = () => (user || guestOK || supabaseEnabled ? setView({ name: 'checkout' }) : setView({ name: 'gate' }));
+  const startCheckout = () => (user || guestOK ? setView({ name: 'checkout' }) : setView({ name: 'gate' }));
 
   return (
     <Dialog open={open} onClose={onClose} className="md" label="Количка">
@@ -26,7 +26,7 @@ export default function CartDialog({ open, onClose, view, setView, cart, removeI
             onDone={(u) => { setUser(u); toast('Здравей, ' + u.name.split(' ')[0] + ' ❤️'); setView(view.toCheckout ? { name: 'checkout' } : { name: 'account' }); }} />
         )}
         {view.name === 'account' && user && (
-          <Account user={user} onLogout={async () => { try { await api('logout', {}); } catch (e) {} setUser(null); setGuestOK(false); onClose(); toast('Излезе от акаунта.'); }} />
+          <Account user={user} onLogout={async () => { try { if (supabaseEnabled) await signOut(); else await api('logout', {}); } catch (e) {} setUser(null); setGuestOK(false); onClose(); toast('Излезе от акаунта.'); }} />
         )}
         {view.name === 'confirming' && <div className="ok"><p>Потвърждаваме плащането...</p></div>}
         {view.name === 'thanks' && (
@@ -109,15 +109,21 @@ function Auth({ mode, toCheckout, apiOk, setView, onDone }) {
 
   async function submit(e) {
     e.preventDefault();
-    if (!apiOk) return setErr('Акаунтите работят на качения сайт със сървъра (api.php). В този преглед не са свързани.');
+    if (!apiOk && !supabaseEnabled) return setErr('Акаунтите работят на качения сайт със сървъра (api.php). В този преглед не са свързани.');
     const em = email.trim();
     if (reg && name.trim().length < 2) return setErr('Въведи име.');
     if (!/^\S+@\S+\.\S+$/.test(em)) return setErr('Невалиден имейл.');
     if (pw.length < (reg ? 8 : 1)) return setErr(reg ? 'Паролата трябва да е поне 8 символа.' : 'Въведи парола.');
     setBusy(true);
     try {
-      const r = await api(reg ? 'register' : 'login', { name: reg ? name.trim() : undefined, email: em, password: pw });
-      onDone(r.user);
+      if (supabaseEnabled) {
+        const r = reg ? await signUp(name.trim(), em, pw) : await signIn(em, pw);
+        if (r.needsConfirm) { setErr(''); setView({ name: 'msg', text: 'Изпратихме ти имейл за потвърждение на регистрацията. Отвори линка в него и после влез.' }); return; }
+        onDone(r.user);
+      } else {
+        const r = await api(reg ? 'register' : 'login', { name: reg ? name.trim() : undefined, email: em, password: pw });
+        onDone(r.user);
+      }
     } catch (er) { setErr(er.message); setBusy(false); }
   }
 
@@ -148,9 +154,11 @@ function Account({ user, onLogout }) {
   const [orders, setOrders] = useState(null);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
-    api('orders').then((r) => setOrders(r.orders)).catch(() => setFailed(true));
+    if (supabaseEnabled) {
+      myOrders().then((o) => setOrders(o.map((x) => ({ public_id: x.id.slice(0, 8).toUpperCase(), created_at: Date.parse(x.created_at) / 1000, status: x.status, total_cents: x.total_cents })))).catch(() => setFailed(true));
+    } else api('orders').then((r) => setOrders(r.orders)).catch(() => setFailed(true));
   }, []);
-  const S = { paid: 'платена', shipped: 'изпратена' };
+  const S = { new: 'приета', paid: 'платена', shipped: 'изпратена', canceled: 'отказана' };
   return (
     <>
       <h2>Здравей, {user.name}</h2>

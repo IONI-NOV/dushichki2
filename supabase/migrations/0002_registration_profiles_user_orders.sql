@@ -1,0 +1,2 @@
+-- Applied as migration "dushichki_registration_profiles_user_orders":
+-- profiles table (+ trigger on auth.users), orders.user_id, RLS so customers read only their own orders.

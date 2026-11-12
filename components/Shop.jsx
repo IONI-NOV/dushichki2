@@ -1,4 +1,5 @@
 'use client';
+import { supabaseEnabled, currentUser, onUserChange } from '../lib/supabase';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Deco, HeartSymbol, CartIcon } from './Icons';
 import ProductDialog from './ProductDialog';
@@ -41,8 +42,16 @@ export default function Shop() {
     try { localStorage.setItem('dsh_cart', JSON.stringify(cart)); } catch (e) {}
   }, [cart, cartReady]);
 
+  // Supabase сесия (регистриран потребител)
+  useEffect(() => {
+    if (!supabaseEnabled) return;
+    currentUser().then(setUser).catch(() => {});
+    return onUserChange(setUser);
+  }, []);
+
   // връзка с PHP бекенда + връщане от Stripe
   useEffect(() => {
+    if (supabaseEnabled) { afterPay(); return; }
     api('ping').then((j) => {
       setApiOk(true); setCfg(j); setUser(j.user || null);
       afterPay();
