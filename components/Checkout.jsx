@@ -88,6 +88,8 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
         if (!list.some((o) => o.c.toLowerCase() === v('d-city').toLowerCase())) er['d-city'] = 'Избери град от списъка.';
         else if (!sel) er['d-office'] = 'Избери офис.';
         delivery.office = sel;
+        const so = list.find((o) => String(o.id) === String(sel));
+        if (so) { delivery.office_text = [so.n, so.a].filter(Boolean).join(', '); delivery.city = so.c; }
       }
     } else {
       if (v('d-city').length < 2) er['d-city'] = 'Въведи град.';

@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_order_overview_view": owner-only view `order_overview` (readable address + photo path).
