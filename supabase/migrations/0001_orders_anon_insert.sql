@@ -1,0 +1,3 @@
+-- Applied to project gyxfywpyhvhmusjrsylh as migration "dushichki_orders_anon_insert".
+-- Tables: orders, order_items (RLS on, anon/authenticated INSERT only), private storage bucket `photos` (anon upload only).
+-- See the migration history in the Supabase dashboard for the full SQL.

@@ -1,4 +1,5 @@
 'use client';
+import { supabaseEnabled, uploadPhoto } from '../lib/supabase';
 import { useState } from 'react';
 import Dialog from './Dialog';
 import { HALO } from './Icons';
@@ -47,7 +48,9 @@ function ProductForm({ kind: k, i, apiOk, onClose, onAdd, onSizes }) {
     if (textOn && !text.trim()) return setErr('Напиши текста, който да бродираме, или махни отметката.');
     setBusy(true);
     let token = null;
-    if (apiOk) {
+    if (supabaseEnabled) {
+      try { token = await uploadPhoto(file); } catch (e) { setErr(e.message); setBusy(false); return; }
+    } else if (apiOk) {
       try {
         const fd = new FormData();
         fd.append('photo', file);

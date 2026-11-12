@@ -16,3 +16,5 @@ public/data/
 # Static site secrets
 /config.php
 /data/
+
+!.env.example

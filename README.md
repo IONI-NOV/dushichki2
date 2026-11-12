@@ -26,3 +26,14 @@
 - `components/` – Shop, ProductDialog, CartDialog, Checkout, SizeDialog, LegalDialog
 - `lib/` – продукти/цени (`data.js`), връзка с бекенда (`api.js`), Общи условия и Политика (`legal.js`)
 - `public/` – снимки, `api.php`, `admin.php`, `config.php`, `.htaccess`
+
+## Supabase (динамичен режим, без автентикация)
+
+1. `npm install` (инсталира `@supabase/supabase-js` и `@supabase/ssr`).
+2. Копирай `.env.example` в `.env` и попълни `NEXT_PUBLIC_SUPABASE_URL` и `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (само publishable ключ – никога secret/service_role).
+3. `npm run dev`.
+
+Когато променливите са зададени, снимките се качват в частния bucket `photos`, а поръчките се записват в таблиците `orders` / `order_items`
+(`lib/supabase.js`). Всеки посетител (роля `anon`) може само да ИЗПРАЩА данни (RLS политики за INSERT); четене няма през публичния API –
+поръчките се гледат от Supabase Dashboard. Схемата е в `supabase/migrations/`. Плащането със Stripe в този режим още не е свързано
+(изисква сървърна функция със secret ключ).

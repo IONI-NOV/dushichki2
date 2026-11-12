@@ -1,4 +1,5 @@
 'use client';
+import { supabaseEnabled } from '../lib/supabase';
 import { useEffect, useState } from 'react';
 import Dialog from './Dialog';
 import Checkout from './Checkout';
@@ -7,9 +8,9 @@ import { DESIGNS, KIND, eur } from '../lib/data';
 import { api } from '../lib/api';
 
 // Всички стъпки на количката в един прозорец: количка → (гост/вход) → поръчка → плащане
-export default function CartDialog({ open, onClose, view, setView, cart, removeItem, user, setUser, guestOK, setGuestOK, apiOk, cfg, openLegal, toast, goShop }) {
+export default function CartDialog({ open, onClose, view, setView, cart, removeItem, user, setUser, guestOK, setGuestOK, apiOk, cfg, openLegal, toast, goShop, clearCart }) {
   const subtotal = cart.reduce((a, i) => a + i.unit, 0);
-  const startCheckout = () => (user || guestOK ? setView({ name: 'checkout' }) : setView({ name: 'gate' }));
+  const startCheckout = () => (user || guestOK || supabaseEnabled ? setView({ name: 'checkout' }) : setView({ name: 'gate' }));
 
   return (
     <Dialog open={open} onClose={onClose} className="md" label="Количка">
@@ -17,7 +18,8 @@ export default function CartDialog({ open, onClose, view, setView, cart, removeI
         {view.name === 'cart' && <CartView cart={cart} subtotal={subtotal} removeItem={removeItem} startCheckout={startCheckout} goShop={goShop} />}
         {view.name === 'gate' && <Gate setView={setView} setGuestOK={setGuestOK} />}
         {view.name === 'checkout' && (
-          <Checkout cart={cart} subtotal={subtotal} user={user} apiOk={apiOk} cfg={cfg} openLegal={openLegal} onBack={() => setView({ name: 'cart' })} />
+          <Checkout cart={cart} subtotal={subtotal} user={user} apiOk={apiOk} cfg={cfg} openLegal={openLegal} onBack={() => setView({ name: 'cart' })}
+            onSaved={(order) => { clearCart(); setView({ name: 'thanks', order, saved: true }); }} />
         )}
         {view.name === 'login' && (
           <Auth mode={view.mode} toCheckout={view.toCheckout} apiOk={apiOk} setView={setView}
@@ -31,7 +33,9 @@ export default function CartDialog({ open, onClose, view, setView, cart, removeI
           <div className="ok">
             <Heart />
             <h2>Благодарим ти!</h2>
-            <p>Поръчка <b>{view.order}</b> е приета и платена. Ще получиш имейл с потвърждение.</p>
+            {view.saved
+              ? <p>Поръчка <b>{String(view.order).slice(0, 8).toUpperCase()}</b> е приета. Ще се свържем с теб за плащането и потвърждение.</p>
+              : <p>Поръчка <b>{view.order}</b> е приета и платена. Ще получиш имейл с потвърждение.</p>}
             <p style={{ marginTop: 8 }}>Изработката отнема до 7 календарни дни, след което пратката тръгва с куриер.</p>
             <p style={{ marginTop: 18 }}>
               <button className="btn add" style={{ fontSize: '1.1rem', width: 'auto', padding: '12px 28px' }} onClick={onClose}>Обратно към сайта</button>

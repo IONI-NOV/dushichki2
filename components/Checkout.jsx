@@ -1,4 +1,5 @@
 'use client';
+import { supabaseEnabled, submitOrder } from '../lib/supabase';
 import { useEffect, useMemo, useState } from 'react';
 import { COURIER, eur } from '../lib/data';
 import { api } from '../lib/api';
@@ -17,7 +18,7 @@ function Field({ id, ph, value, onChange, err, type = 'text', ...rest }) {
 
 const EMPTY = { c1: '', c2: '', c3: '', 'd-city': '', office: '', oq: '', 'd-street': '', 'd-no': '', 'd-apt': '', 'd-block': '', 'd-zip': '', 'd-note': '', 'd-office': '' };
 
-export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, onBack }) {
+export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, onBack, onSaved }) {
   const [f, setF] = useState({ ...EMPTY, c1: user?.name || '', c2: user?.email || '' });
   const [courier, setCourier] = useState('speedy');
   const [type, setType] = useState('office');
@@ -98,9 +99,19 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     setErrs(er); setCer('');
     if (Object.keys(er).length) return setCer('Провери маркираните полета.');
     if (!accepted) return setCer('Трябва да приемеш Общите условия и Политиката за поверителност.');
-    if (!apiOk) return setCer('Плащането работи на качения сайт със сървъра (api.php). В този преглед то не е свързано.');
+    if (!apiOk && !supabaseEnabled) return setCer('Плащането работи на качения сайт със сървъра (api.php). В този преглед то не е свързано.');
     if (cart.some((i) => !i.photo)) return setCer('Някоя снимка не е качена. Махни артикула и го добави отново.');
     setBusy(true);
+    if (supabaseEnabled) {
+      try {
+        const id = await submitOrder({
+          customer: { name: v('c1'), email: v('c2'), phone: v('c3') }, delivery, courier,
+          items: cart.map((i) => ({ type: i.type, design: i.design, color: i.color, size: i.size, text: i.text, story: i.story, notes: i.notes, photo: i.photo, halo: i.halo, halo_who: i.halo_who, unit: i.unit })),
+        });
+        onSaved(id);
+      } catch (err) { setCer(err.message); setBusy(false); }
+      return;
+    }
     try {
       const r = await api('checkout', {
         customer: { name: v('c1'), email: v('c2'), phone: v('c3') }, delivery,
