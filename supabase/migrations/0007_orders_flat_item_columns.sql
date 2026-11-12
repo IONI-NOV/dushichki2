@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_orders_flat_item_columns": orders gets product, design, color, size, text_under_design, halo, story, notes columns.
