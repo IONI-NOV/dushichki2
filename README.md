@@ -2,6 +2,9 @@
 
 Фронтендът е на Next.js (App Router, React), а бекендът (поръчки, регистрация, Stripe, офиси на Спиди/Еконт, база SQLite) е PHP в `public/` и работи на GoDaddy cPanel.
 
+## Готов сайт (без Node)
+В папка `out/` има вече построена версия с `index.html`. За да я ползваш: качи съдържанието ѝ в `public_html`, преименувай `config.example.php` на `config.php` и го попълни. Тя е изградена с esbuild от същите компоненти; `npm run build` създава еквивалентна папка `out/` с Next.js.
+
 ## Нужно за компютъра (само за да „построиш“ сайта)
 - Node.js 20 или по-нов (nodejs.org, „LTS“)
 
