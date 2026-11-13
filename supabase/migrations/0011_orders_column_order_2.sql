@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_orders_column_order_2": orders recreated; order is now Име, Телефон, Куриер, Адрес, Дреха, Модел, Размер, Цвят, Снимка, Текст, Бележки, История, Ореол, ... Data and RLS preserved.
