@@ -1,7 +1,8 @@
 'use client';
 import { supabaseEnabled, submitOrder, loadOffices } from '../lib/supabase';
 import { useEffect, useMemo, useState } from 'react';
-import { COURIER, SHIP, eur } from '../lib/data';
+import { COURIER, SHIP, KIND, DESIGNS, img, eur } from '../lib/data';
+import { HALO } from './Icons';
 import { api } from '../lib/api';
 
 // Поле с рамка и червено съобщение за грешка (извън Checkout, за да не губи фокус при писане)
@@ -225,6 +226,30 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
           )}
         </div>
 
+        <div className="os">
+          <h3>Твоята поръчка</h3>
+          {cart.map((i) => {
+            const code = (KIND[i.type].colors.find((c) => c[0] === i.color) || [0, 'b'])[1];
+            const halo = i.halo ? HALO.find((h) => h.k === i.halo) : null;
+            return (
+              <div className="oi" key={i.id}>
+                <div className="oim">
+                  <img src={img(i.type, code, i.design)} alt="" />
+                  {i.thumb ? <img className="own" src={i.thumb} alt="Твоята снимка" /> : null}
+                </div>
+                <div className="ot">
+                  <small>{KIND[i.type].one}</small>
+                  <b>{DESIGNS[i.design].n}</b>
+                  <span>{i.color} / размер {i.size} / 1 бр.</span>
+                  {halo ? <span>{halo.n} – за: {i.halo_who}</span> : null}
+                  {i.text ? <span>Добавен текст: {i.text}</span> : null}
+                  {i.notes ? <span>Бележки: {i.notes}</span> : null}
+                  <strong>{eur(i.unit)}</strong>
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <div className="sum" style={{ marginTop: 14 }}><span>Артикули</span><span>{eur(subtotal)}</span></div>
         <div className="sum"><span>Доставка</span><span id="shp">{shipCents ? eur(shipCents) : 'Безплатна'}</span></div>
         <div className="sum tot"><span>Общо за плащане</span><span id="grand">{eur(total)}</span></div>
