@@ -210,3 +210,7 @@ dialog[open]::backdrop{animation:bdIn .22s ease-out}
 dialog[open].out{animation:dlgOut .18s ease-in forwards}
 dialog[open].out::backdrop{animation:bdOut .18s ease-in forwards}
 @media(max-width:600px){dialog[open].out{animation-name:dlgOutMobile}}
+
+/* Без "скачане" на страницата при отваряне/затваряне на прозорец (скролбарът не изчезва/появява) и по-плавна анимация */
+html{scrollbar-gutter:stable}
+dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
