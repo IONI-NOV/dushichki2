@@ -1,5 +1,5 @@
 'use client';
-import { supabaseEnabled, submitOrder } from '../lib/supabase';
+import { supabaseEnabled, submitOrder, loadOffices } from '../lib/supabase';
 import { useEffect, useMemo, useState } from 'react';
 import { COURIER, eur } from '../lib/data';
 import { api } from '../lib/api';
@@ -38,7 +38,8 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     let dead = false;
     (async () => {
       let r;
-      if (!apiOk) r = { manual: true, offices: [] };
+      if (supabaseEnabled) r = await loadOffices(courier);
+      else if (!apiOk) r = { manual: true, offices: [] };
       else { try { r = await api('offices', null, '&courier=' + courier); } catch (e) { r = { manual: true, offices: [] }; } }
       if (!dead) setOffs((o) => ({ ...o, [courier]: r }));
     })();
