@@ -203,14 +203,10 @@ dialog[open]{animation:dlgIn .22s ease-out}
 dialog[open]::backdrop{animation:bdIn .22s ease-out}
 @media(max-width:600px){dialog[open]{animation-name:dlgInMobile}}
 
-/* Лека анимация при затваряне */
-@keyframes dlgOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(8px) scale(.98)}}
-@keyframes dlgOutMobile{from{opacity:1;transform:none}to{opacity:0;transform:translateY(22px)}}
-@keyframes bdOut{from{opacity:1}to{opacity:0}}
-dialog[open].out{animation:dlgOut .18s ease-in forwards}
-dialog[open].out::backdrop{animation:bdOut .18s ease-in forwards}
-@media(max-width:600px){dialog[open].out{animation-name:dlgOutMobile}}
-
 /* Без "скачане" на страницата при отваряне/затваряне на прозорец (скролбарът не изчезва/появява) и по-плавна анимация */
 html{scrollbar-gutter:stable}
 dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
+
+/* Артикулите се появяват с лека fade-up анимация, когато влязат в екрана */
+.card.fu{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i,0) * 70ms)}
+.card.fu.in{opacity:1;transform:none}

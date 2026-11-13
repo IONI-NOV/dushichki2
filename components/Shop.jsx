@@ -43,6 +43,17 @@ export default function Shop() {
     try { localStorage.setItem('dsh_cart', JSON.stringify(cart)); } catch (e) {}
   }, [cart, cartReady]);
 
+  // fade-up на артикулите, когато влязат в екрана
+  useEffect(() => {
+    const els = document.querySelectorAll('#grid .card');
+    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { threshold: 0.12 });
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, [kind]);
+
   // Supabase сесия (регистриран потребител)
   useEffect(() => {
     if (!supabaseEnabled) return;
@@ -122,7 +133,7 @@ export default function Shop() {
 
           <section className="grid" id="grid" aria-live="polite">
             {DESIGNS.map((d, i) => (
-              <button className="card" key={kind + d.k} onClick={() => setProduct(i)}>
+              <button className="card fu" style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
                 <div className="im">
                   <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
                   <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
