@@ -3,7 +3,7 @@ import './globals.css';
 export const metadata = {
   title: 'Душички',
   description: 'Персонализирани унисекс тениски и худита с бродерия по твоя снимка.',
-  icons: { icon: '/img/logo.png' },
+  icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/img/icon-48.png', sizes: '48x48', type: 'image/png' }, { url: '/img/icon-192.png', sizes: '192x192', type: 'image/png' }], apple: '/img/apple-touch-icon.png' },
 };
 
 export const viewport = {
