@@ -14,6 +14,7 @@ export default function Shop() {
   const [cart, setCart] = useState([]);
   const [cartReady, setCartReady] = useState(false);
   const [apiOk, setApiOk] = useState(false);
+  const [pulse, setPulse] = useState(false);
   const [cfg, setCfg] = useState({ ship_office: 0, ship_address: 0 });
   const [user, setUser] = useState(null);
   const [guestOK, setGuestOK] = useState(false);
@@ -95,7 +96,7 @@ export default function Shop() {
           <img className="logo" src="/img/logo.png" alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount}>{user ? 'Здравей, ' + user.name.split(' ')[0] : 'Вход'}</button>
-            <button className="cartb" id="cartb" aria-label="Количка" onClick={openCart}>
+            <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
               <CartIcon />
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
@@ -144,7 +145,12 @@ export default function Shop() {
         kind={kind} design={product} apiOk={apiOk}
         onClose={() => setProduct(null)}
         onSizes={setSizesFor}
-        onAdd={(item) => { setCart((c) => [...c, item]); setProduct(null); toast('Добавено в количката ✓'); }}
+        onAdd={(item) => {
+          setCart((c) => [...c, item]); setProduct(null); toast('Добавено в количката ✓');
+          // връщаме човека най-горе, където е количката, и я подчертаваме
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setPulse(true); setTimeout(() => setPulse(false), 1800);
+        }}
       />
       <CartDialog
         open={cartOpen} onClose={() => setCartOpen(false)} view={view} setView={setView}

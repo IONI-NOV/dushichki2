@@ -74,7 +74,7 @@ export default function Orders() {
               {Object.entries(STATUS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
             </select>
           </div>
-          <p style={{ margin: '8px 0' }}><b>{o.Име}</b> · {o.Телефон} · {o.Имейл}</p>
+          <p style={{ margin: '8px 0' }}><b>{o.Име} {o.Фамилия}</b> · {o.Телефон} · {o.Имейл}</p>
           <p style={{ margin: '8px 0' }}><b>{o.Куриер}</b> ({o.Доставка}): {o.Адрес}</p>
           {(o.items || []).map((it, n) => (
             <div key={n} style={{ display: 'flex', gap: 14, borderTop: '1px solid #eadfc8', paddingTop: 12, marginTop: 12, flexWrap: 'wrap' }}>

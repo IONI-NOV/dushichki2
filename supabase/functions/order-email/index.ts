@@ -33,6 +33,7 @@ Deno.serve(async (req) => {
   if (!rows || !rows.length) return json({ ok: true, skipped: true });
   const o = rows[0];
 
+  const full = `${o["Име"]} ${o["Фамилия"] || ""}`.trim();
   const num = String(o.id).slice(0, 8).toUpperCase();
   const items = (o.items || []).map((it: Record<string, unknown>) => `
     <li style="margin-bottom:10px"><b>${esc(it["Дреха"])}</b> – ${esc(it["Модел"])}<br>
@@ -48,7 +49,7 @@ Deno.serve(async (req) => {
     <p>Поръчка <b>${num}</b></p>
     <ul style="padding-left:18px">${items}</ul>
     <p><b>Доставка:</b> ${esc(o["Куриер"])} (${esc(o["Доставка"])}): ${esc(o["Адрес"])}</p>
-    <p><b>Получател:</b> ${esc(o["Име"])}, ${esc(o["Телефон"])}</p>
+    <p><b>Получател:</b> ${esc(full)}, ${esc(o["Телефон"])}</p>
     <p><b>Общо за артикулите: €${total}</b></p>
     ${o["Снимка"] ? `<p>Снимка: <a href="${esc(o["Снимка"])}">отвори</a></p>` : ""}</div>`;
 
@@ -71,7 +72,7 @@ Deno.serve(async (req) => {
     });
     await smtp.send({
       from: `Душички <${user}>`, to: Deno.env.get("OWNER_EMAIL") || user,
-      subject: `Нова поръчка ${num} – ${o["Име"]}`,
+      subject: `Нова поръчка ${num} – ${full}`,
       html: body("Нова поръчка") + `<p>Клиент: ${esc(o["Имейл"])}</p>`,
     });
     await smtp.close();

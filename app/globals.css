@@ -190,3 +190,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 button,a,select,summary,label{touch-action:manipulation}
 body:has(dialog[open]){overflow:hidden}
 dialog{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+
+/* подчертаване на количката след добавяне */
+.cartb.pulse{animation:cartpulse .6s ease 3}
+@keyframes cartpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}

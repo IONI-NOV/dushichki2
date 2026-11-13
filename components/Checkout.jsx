@@ -16,10 +16,10 @@ function Field({ id, ph, value, onChange, err, type = 'text', ...rest }) {
   );
 }
 
-const EMPTY = { c1: '', c2: '', c3: '', 'd-city': '', office: '', oq: '', 'd-street': '', 'd-no': '', 'd-apt': '', 'd-block': '', 'd-zip': '', 'd-note': '', 'd-office': '' };
+const EMPTY = { c1: '', c1b: '', c2: '', c3: '', 'd-city': '', office: '', oq: '', 'd-street': '', 'd-no': '', 'd-apt': '', 'd-block': '', 'd-zip': '', 'd-note': '', 'd-office': '' };
 
 export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, onBack, onSaved }) {
-  const [f, setF] = useState({ ...EMPTY, c1: user?.name || '', c2: user?.email || '' });
+  const [f, setF] = useState({ ...EMPTY, c1: (user?.name || '').split(' ')[0], c1b: (user?.name || '').split(' ').slice(1).join(' '), c2: user?.email || '' });
   const [courier, setCourier] = useState('speedy');
   const [type, setType] = useState('office');
   const [offs, setOffs] = useState({});
@@ -75,7 +75,8 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     e.preventDefault();
     const er = {};
     const v = (id) => (f[id] || '').trim();
-    if (v('c1').length < 2) er.c1 = 'Въведи име и фамилия.';
+    if (v('c1').length < 2) er.c1 = 'Въведи име.';
+    if (v('c1b').length < 2) er.c1b = 'Въведи фамилия.';
     if (!/^\S+@\S+\.\S+$/.test(v('c2'))) er.c2 = 'Невалиден имейл.';
     if (v('c3').length < 5) er.c3 = 'Въведи телефон за куриера.';
     const delivery = { courier, type };
@@ -107,7 +108,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     if (supabaseEnabled) {
       try {
         const id = await submitOrder({
-          customer: { name: v('c1'), email: v('c2'), phone: v('c3') }, delivery, courier,
+          customer: { first: v('c1'), last: v('c1b'), email: v('c2'), phone: v('c3') }, delivery, courier,
           items: cart.map((i) => ({ type: i.type, design: i.design, color: i.color, size: i.size, text: i.text, story: i.story, notes: i.notes, photo: i.photo, halo: i.halo, halo_who: i.halo_who, unit: i.unit })),
         });
         onSaved(id);
@@ -116,7 +117,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     }
     try {
       const r = await api('checkout', {
-        customer: { name: v('c1'), email: v('c2'), phone: v('c3') }, delivery,
+        customer: { name: v('c1') + ' ' + v('c1b'), email: v('c2'), phone: v('c3') }, delivery,
         items: cart.map((i) => ({ type: i.type, design: i.design, color: i.color, size: i.size, text: i.text, story: i.story, notes: i.notes, photo: i.photo, halo: i.halo, halo_who: i.halo_who })),
       });
       location.href = r.url;
@@ -129,7 +130,10 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
       <h2>Поръчка</h2>
       <form id="ck" noValidate onSubmit={pay}>
         <h3 style={{ marginTop: 4 }}>Кой получава</h3>
-        <Field id="c1" ph="Име и фамилия *" value={f.c1} onChange={set('c1')} err={errs.c1} autoComplete="name" />
+        <div className="row">
+          <div><Field id="c1" ph="Първо име *" value={f.c1} onChange={set('c1')} err={errs.c1} autoComplete="given-name" /></div>
+          <div><Field id="c1b" ph="Фамилия *" value={f.c1b} onChange={set('c1b')} err={errs.c1b} autoComplete="family-name" /></div>
+        </div>
         <div className="row">
           <div><Field id="c2" type="email" ph="Имейл *" value={f.c2} onChange={set('c2')} err={errs.c2} autoComplete="email" /></div>
           <div><Field id="c3" type="tel" ph="Телефон *" value={f.c3} onChange={set('c3')} err={errs.c3} autoComplete="tel" /></div>
