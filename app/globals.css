@@ -211,5 +211,5 @@ dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
 
 /* Таблети: фоновите сърца не трябва да се наслагват върху текста; 3 артикула в един ред */
 @media(max-width:1100px){.deco{opacity:.2}}
-@media(min-width:1101px){.grid{max-width:none;gap:3.2vw;margin-top:56px;padding:0 11vw 150px}}
+@media(min-width:1101px){.grid{max-width:none;gap:3.2vw;margin-top:56px;padding:0 11.8vw 150px}}
 @media(min-width:700px) and (max-width:820px){.grid{grid-template-columns:repeat(3,1fr);gap:16px;padding:0 20px 90px}}
