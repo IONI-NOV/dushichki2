@@ -159,8 +159,12 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
           {R && type === 'office' && manual && (
             <>
               <Field id="d-city" ph="Град *" value={f['d-city']} onChange={set('d-city')} err={errs['d-city']} autoComplete="address-level2" />
-              <Field id="d-office" ph="Кой е офисът? *" value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
-              <p className="hint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
+              {f['d-city'].trim().length >= 2 && (
+                <>
+                  <Field id="d-office" ph="Кой е офисът? *" value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
+                  <p className="hint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
+                </>
+              )}
             </>
           )}
           {R && type === 'office' && !manual && (
