@@ -134,7 +134,7 @@ textarea{resize:vertical;min-height:84px}
 .hb svg{width:100%;height:100%;display:block}
 .hc{text-align:center;font-weight:800}
 .ht{justify-content:center}
-#hw{border-radius:18px;padding:13px 16px;text-align:center}
+#hw{border-radius:0;padding:13px 16px;text-align:center}
 .cnt{text-align:right;font-size:.85rem;color:#777;margin:4px 4px 8px}
 
 table{border-collapse:collapse;width:100%;font-size:.95rem}
