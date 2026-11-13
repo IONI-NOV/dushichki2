@@ -46,9 +46,9 @@ export default function Shop() {
   // fade-up на артикулите, когато влязат в екрана
   useEffect(() => {
     const els = document.querySelectorAll('#grid .card');
-    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('in')); return; }
+    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('vis')); return; }
     const io = new IntersectionObserver((es) => es.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
     }), { threshold: 0.12 });
     els.forEach((e) => io.observe(e));
     return () => io.disconnect();

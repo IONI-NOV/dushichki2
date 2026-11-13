@@ -40,7 +40,7 @@ header{position:relative;z-index:2;display:flex;align-items:center;justify-conte
 .tabs button[aria-selected=true]{background:var(--red);color:var(--cream);font-weight:500}
 .tabs button:hover{transform:scale(1.04)}
 .grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1.2vw,16px);max-width:1120px;margin:56px auto 0;padding:0 20px 150px}
-.card{width:100%;background:none;border:0;padding:0;text-align:left;color:var(--red);font-weight:400;display:block}
+.card{width:100%;background:none;border:0;padding:0;text-align:left;color:var(--red);font-weight:400;display:flex;flex-direction:column;align-items:stretch}
 .im{aspect-ratio:1188/1324;width:100%;position:relative;overflow:hidden;background:var(--ph);border:3px solid var(--red);box-sizing:border-box}
 .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .35s,transform .4s}
 .card .im img.b{opacity:0}
@@ -207,7 +207,7 @@ dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
 
 /* Артикулите се появяват с лека fade-up анимация, когато влязат в екрана */
 .card.fu{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i,0) * 70ms)}
-.card.fu.in{opacity:1;transform:none}
+.card.fu.vis{opacity:1;transform:none}
 
 /* Таблети: фоновите сърца не трябва да се наслагват върху текста; 3 артикула в един ред */
 @media(max-width:1100px){.deco{opacity:.2}}
