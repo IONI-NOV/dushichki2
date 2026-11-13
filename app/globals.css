@@ -10,7 +10,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .wrap{position:relative;overflow-x:clip}
-.deco{position:absolute;pointer-events:none;z-index:0;opacity:.13}
+.deco{position:absolute;pointer-events:none;z-index:0}
 .deco svg{width:100%;height:auto;display:block}
 header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:44px clamp(20px,7vw,110px) 0}
 .logo{width:clamp(84px,9vw,128px);height:auto;display:block}
@@ -210,5 +210,6 @@ dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
 .card.fu.in{opacity:1;transform:none}
 
 /* Таблети: фоновите сърца не трябва да се наслагват върху текста; 3 артикула в един ред */
-@media(max-width:600px){.deco{opacity:.18}}
+@media(max-width:1100px){.deco{opacity:.2}}
+@media(min-width:1101px){.grid{max-width:none;gap:3.2vw;margin-top:56px;padding:0 11vw 150px}}
 @media(min-width:700px) and (max-width:820px){.grid{grid-template-columns:repeat(3,1fr);gap:16px;padding:0 20px 90px}}
