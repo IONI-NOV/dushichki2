@@ -27,6 +27,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
   const [cer, setCer] = useState('');
   const [accepted, setAccepted] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [listOpen, setListOpen] = useState(false); // списъкът с офиси е прибран, след като офис е избран
 
   const cr = COURIER[courier];
   const R = offs[courier];
@@ -54,6 +55,8 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
   );
   const sel = f.office || (matches.length === 1 ? matches[0].id : '');
   const q = f.oq.toLowerCase();
+  const selOffice = sel ? list.find((o) => String(o.id) === String(sel)) : null;
+  const showList = !selOffice || listOpen;
   const shown = matches.filter((o) => !q || (o.n + ' ' + o.a).toLowerCase().includes(q));
 
   const set = (k) => (v) => { setF((s) => ({ ...s, [k]: v })); setErrs((e) => (e[k] ? { ...e, [k]: '' } : e)); setCer(''); };
@@ -169,14 +172,20 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
               </div>
               <div className="fe" id="e-d-city">{errs['d-city'] || ''}</div>
               <input type="hidden" id="d-office" value={sel} readOnly />
-              {matches.length > 6 && (
+              {selOffice && !showList && (
+                <div className="f2" id="f-d-office">
+                  <input type="text" id="of-sel" readOnly aria-label="Избран офис (натисни за промяна)" style={{ cursor: 'pointer', textOverflow: 'ellipsis' }}
+                    value={selOffice.n + ' – ' + selOffice.a} onClick={() => setListOpen(true)} onFocus={() => setListOpen(true)} />
+                </div>
+              )}
+              {showList && matches.length > 6 && (
                 <div className="f2"><input type="text" id="of-q" placeholder="Търси по име или адрес на офис" aria-label="Търси офис" value={f.oq} onChange={(e) => set('oq')(e.target.value)} /></div>
               )}
-              {matches.length > 0 && (
+              {showList && matches.length > 0 && (
                 <div className="ol" role="radiogroup" aria-label={'Офиси на ' + cr}>
                   {shown.map((o) => (
                     <label className="of" key={o.id}>
-                      <input type="radio" name="of" value={o.id} checked={sel === o.id} onChange={() => set('office')(o.id)} />
+                      <input type="radio" name="of" value={o.id} checked={sel === o.id} onChange={() => { set('office')(o.id); setListOpen(false); }} onClick={() => setListOpen(false)} />
                       <span><b>{o.n}</b>{o.p ? <i>Автомат</i> : null}<small>{o.a}</small></span>
                     </label>
                   ))}
@@ -185,7 +194,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
               )}
               <div className="fe" id="e-d-office">{errs['d-office'] || ''}</div>
               <div className="hint" id="oinfo">
-                {matches.length
+                {selOffice && !showList ? 'Натисни избрания офис, ако искаш да го смениш.' : matches.length
                   ? matches.length + (matches.length === 1 ? ' офис' : ' офиса') + ' в ' + matches[0].c + '. Избери най-удобния за теб.'
                   : city ? 'Няма намерен град. Избери от списъка с предложения.' : ''}
               </div>
