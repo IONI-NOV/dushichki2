@@ -20,7 +20,7 @@ const EMPTY = { c1: '', c1b: '', c2: '', c3: '', 'd-city': '', office: '', oq: '
 
 export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, onBack, onSaved }) {
   const [f, setF] = useState({ ...EMPTY, c1: (user?.name || '').split(' ')[0], c1b: (user?.name || '').split(' ').slice(1).join(' '), c2: user?.email || '' });
-  const [courier, setCourier] = useState('speedy');
+  const [courier, setCourier] = useState('econt');
   const [type, setType] = useState('office');
   const [offs, setOffs] = useState({});
   const [errs, setErrs] = useState({});
@@ -159,15 +159,15 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
           {R && type === 'office' && manual && (
             <>
               <Field id="d-city" ph="Град *" value={f['d-city']} onChange={set('d-city')} err={errs['d-city']} autoComplete="address-level2" />
-              <Field id="d-office" ph={'Офис на ' + cr + ' – име или адрес *'} value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
-              <p className="hint">Списъкът с офисите на {cr} не е достъпен в момента. Напиши офиса, в който искаш да получиш пратката.</p>
+              <Field id="d-office" ph="Кой е офисът? *" value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
+              <p className="hint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
             </>
           )}
           {R && type === 'office' && !manual && (
             <>
               <datalist id="cl">{cities.map((c) => <option key={c} value={c} />)}</datalist>
               <div className={'f2' + (errs['d-city'] ? ' bad' : '')} id="f-d-city">
-                <input id="d-city" type="text" list="cl" placeholder="Започни да пишеш град *" aria-label="Град" autoComplete="off"
+                <input id="d-city" type="text" list="cl" placeholder="Град *" aria-label="Град" autoComplete="off"
                   value={f['d-city']} onChange={(e) => setCity(e.target.value)} />
               </div>
               <div className="fe" id="e-d-city">{errs['d-city'] || ''}</div>
