@@ -71,7 +71,7 @@ function ProductForm({ kind: k, i, apiOk, onClose, onAdd, onSizes }) {
         <div className="im"><img id="pi" src={img(k, K.colors[color][1], i)} alt={DESIGNS[i].n} /></div>
         <div className="st">Сподели историята си ❤️</div>
         <input type="text" id="sy" maxLength={300} value={story} onChange={(e) => setStory(e.target.value)}
-          placeholder="Ще се радваме да знаем защо тази поръчка е специална за теб" aria-label="Историята ти" />
+          placeholder="Защо е специална тази поръчка?" aria-label="Историята ти" />
       </div>
       <div>
         <h2>{DESIGNS[i].n} – {K.one}</h2>

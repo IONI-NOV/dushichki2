@@ -219,7 +219,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
         <p className="hint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
         <div className="er" id="cer" role="alert">{cer}</div>
         <button className="btn add" id="pay" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>
-          {busy ? 'Пренасочваме към Stripe...' : 'Плати ' + eur(total)}
+          {busy ? (supabaseEnabled ? 'Изпращаме поръчката...' : 'Пренасочваме към Stripe...') : (supabaseEnabled ? 'Поръчай · ' : 'Плати ') + eur(total)}
         </button>
         <p style={{ textAlign: 'center', marginTop: 10 }}><button type="button" className="link" onClick={onBack}>← Обратно към количката</button></p>
       </form>
