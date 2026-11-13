@@ -174,7 +174,6 @@ dialog.sm,dialog.md{width:100vw}
 select,input[type=text],input[type=email],input[type=tel],input[type=password],textarea,.f2 input,.f2 select{font-size:16px}
 .rad{gap:28px}.rad label{font-size:1.1rem}
 footer .lk{padding:10px 8px;min-height:44px;display:inline-flex;align-items:center}
-.deco{opacity:.22}
 .pm .add,#ck #pay{position:sticky;bottom:8px;box-shadow:0 8px 20px rgba(220,10,30,.3);z-index:2}
 .ol{max-height:240px}
 .ci img{width:56px;height:56px}
@@ -203,10 +202,13 @@ dialog[open]{animation:dlgIn .22s ease-out}
 dialog[open]::backdrop{animation:bdIn .22s ease-out}
 @media(max-width:600px){dialog[open]{animation-name:dlgInMobile}}
 
-/* Без "скачане" на страницата при отваряне/затваряне на прозорец (скролбарът не изчезва/появява) и по-плавна анимация */
-html{scrollbar-gutter:stable}
+/* Подготовка на прозореца за плавна анимация при отваряне */
 dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
 
 /* Артикулите се появяват с лека fade-up анимация, когато влязат в екрана */
 .card.fu{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;transition-delay:calc(var(--i,0) * 70ms)}
 .card.fu.in{opacity:1;transform:none}
+
+/* Таблети: фоновите сърца не трябва да се наслагват върху текста; 3 артикула в един ред */
+@media(max-width:1100px){.deco{opacity:.2}}
+@media(min-width:700px) and (max-width:820px){.grid{grid-template-columns:repeat(3,1fr);gap:16px;padding:0 20px 90px}}
