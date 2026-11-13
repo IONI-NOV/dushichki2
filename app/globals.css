@@ -194,3 +194,11 @@ dialog{overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 /* подчертаване на количката след добавяне */
 .cartb.pulse{animation:cartpulse .6s ease 3}
 @keyframes cartpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+
+/* Лека анимация при отваряне на прозорец (пропуска се при "намалено движение", виж правилото по-горе) */
+@keyframes dlgIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes dlgInMobile{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes bdIn{from{opacity:0}to{opacity:1}}
+dialog[open]{animation:dlgIn .22s ease-out}
+dialog[open]::backdrop{animation:bdIn .22s ease-out}
+@media(max-width:600px){dialog[open]{animation-name:dlgInMobile}}
