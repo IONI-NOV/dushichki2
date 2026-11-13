@@ -1,4 +1,5 @@
 'use client';
+import { checkEmail } from '../lib/email';
 import { supabaseEnabled, signUp, signIn, signOut, myOrders } from '../lib/supabase';
 import { useEffect, useState } from 'react';
 import Dialog from './Dialog';
@@ -112,7 +113,7 @@ function Auth({ mode, toCheckout, apiOk, setView, onDone }) {
     if (!apiOk && !supabaseEnabled) return setErr('Акаунтите работят на качения сайт със сървъра (api.php). В този преглед не са свързани.');
     const em = email.trim();
     if (reg && name.trim().length < 2) return setErr('Въведи име.');
-    if (!/^\S+@\S+\.\S+$/.test(em)) return setErr('Невалиден имейл.');
+    { const bad = checkEmail(em); if (bad) return setErr(bad); }
     if (pw.length < (reg ? 8 : 1)) return setErr(reg ? 'Паролата трябва да е поне 8 символа.' : 'Въведи парола.');
     setBusy(true);
     try {
