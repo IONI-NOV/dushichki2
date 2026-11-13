@@ -1,0 +1,1 @@
+-- Applied as migration "dushichki_order_email_flag": orders."Писмо_изпратено" boolean (set by the order-email edge function).
