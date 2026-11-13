@@ -43,6 +43,7 @@ Deno.serve(async (req) => {
     ${it["История"] ? `<br>История: ${esc(it["История"])}` : ""}
     ${it["Бележки"] ? `<br>Бележки: ${esc(it["Бележки"])}` : ""}</li>`).join("");
   const total = (Number(o["Сума_евроцента"]) / 100).toFixed(2);
+  const ship = (Number((o.delivery as Record<string, unknown> | null)?.["shipping_cents"] ?? 0) / 100).toFixed(2);
 
   const body = (intro: string) => `<div style="font-family:Arial,sans-serif;color:#2b2323;max-width:560px">
     <h2 style="color:#DC0A1E">${intro}</h2>
@@ -50,7 +51,8 @@ Deno.serve(async (req) => {
     <ul style="padding-left:18px">${items}</ul>
     <p><b>Доставка:</b> ${esc(o["Куриер"])} (${esc(o["Доставка"])}): ${esc(o["Адрес"])}</p>
     <p><b>Получател:</b> ${esc(full)}, ${esc(o["Телефон"])}</p>
-    <p><b>Общо за артикулите: €${total}</b></p>
+    <p>Доставка: €${ship}</p>
+    <p><b>Общо с доставка: €${total}</b></p>
     ${o["Снимка"] ? `<p>Снимка: <a href="${esc(o["Снимка"])}">отвори</a></p>` : ""}</div>`;
 
   const user = Deno.env.get("SMTP_USER")!;

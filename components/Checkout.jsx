@@ -1,7 +1,7 @@
 'use client';
 import { supabaseEnabled, submitOrder, loadOffices } from '../lib/supabase';
 import { useEffect, useMemo, useState } from 'react';
-import { COURIER, eur } from '../lib/data';
+import { COURIER, SHIP, eur } from '../lib/data';
 import { api } from '../lib/api';
 
 // Поле с рамка и червено съобщение за грешка (извън Checkout, за да не губи фокус при писане)
@@ -72,7 +72,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
   };
   const pickCourier = (c) => { setCourier(c); setF((s) => ({ ...s, office: '', oq: '', ...(type === 'office' ? { 'd-city': '' } : {}) })); };
 
-  const shipCents = apiOk ? (type === 'office' ? cfg.ship_office : cfg.ship_address) : 0;
+  const shipCents = supabaseEnabled ? (type === 'office' ? SHIP.office : SHIP.address) : (apiOk ? (type === 'office' ? cfg.ship_office : cfg.ship_address) : 0);
   const total = subtotal + shipCents;
 
   async function pay(e) {

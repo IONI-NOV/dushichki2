@@ -3,7 +3,7 @@
 // Изисква PHP 7.4+ с PDO SQLite и cURL (има ги на GoDaddy cPanel хостинг).
 require __DIR__ . '/config.php';
 
-const PRICES = ['hoodie' => 4500, 'tee' => 3500];
+const PRICES = ['hoodie' => 4999, 'tee' => 3499];
 const TEXT_ADD = 100;
 const DESIGNS = ['Персонализирана бродерия по снимка', 'Персонализирана бродерия на домашен любимец', 'Персонализирана бродерия на починал близък'];
 const KINDS = [

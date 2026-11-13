@@ -85,9 +85,9 @@ export default function Shop() {
       try {
         const r = await api('confirm', null, '&order=' + encodeURIComponent(id) + '&session_id=' + encodeURIComponent(sid));
         if (r.paid) { setCart([]); setView({ name: 'thanks', order: r.order }); return; }
-        setView({ name: 'msg', text: 'Плащането още не е потвърдено. Ако е минало, ще получиш имейл. При въпрос пиши на dushichki@gmail.com.' });
+        setView({ name: 'msg', text: 'Плащането още не е потвърдено. Ако е минало, ще получиш имейл. При въпрос пиши на info@dushichki.com.' });
       } catch (e) {
-        setView({ name: 'msg', text: 'Не успяхме да потвърдим плащането автоматично. Ако е минало, поръчката ти е записана. Пиши ни на dushichki@gmail.com.' });
+        setView({ name: 'msg', text: 'Не успяхме да потвърдим плащането автоматично. Ако е минало, поръчката ти е записана. Пиши ни на info@dushichki.com.' });
       }
     }
   }
@@ -148,7 +148,7 @@ export default function Shop() {
         <footer>
           <button className="lk" onClick={() => setLegal('terms')}>Общи условия</button>
           <button className="lk" onClick={() => setLegal('priv')}>Политика за поверителност</button>
-          <a className="lk" href="mailto:dushichki@gmail.com">dushichki@gmail.com</a>
+          <a className="lk" href="mailto:info@dushichki.com">info@dushichki.com</a>
         </footer>
       </div>
 

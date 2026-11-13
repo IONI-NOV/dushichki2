@@ -11,7 +11,7 @@ const STRIPE_WEBHOOK_SECRET = '';
 const SITE_URL = '';
 
 // Къде да пристигат известията за нови поръчки
-const OWNER_EMAIL = 'dushichki@gmail.com';
+const OWNER_EMAIL = 'info@dushichki.com';
 
 // От кой адрес да излизат имейлите (трябва да е от твоя домейн, иначе отиват в спам)
 const MAIL_FROM = 'no-reply@dushichki.bg';

@@ -77,7 +77,7 @@ function CartView({ cart, subtotal, removeItem, startCheckout, goShop }) {
         </div>
       ))}
       <div className="sum" style={{ marginTop: 16 }}><span>Артикули</span><span>{eur(subtotal)}</span></div>
-      <div className="sum" style={{ color: '#666', fontSize: '.9rem' }}><span>Доставката се избира на следващата стъпка</span></div>
+      <div className="sum" style={{ color: '#666', fontSize: '.9rem' }}><span>Доставка: €2.69 до офис · €5.28 до адрес (избира се на следващата стъпка)</span></div>
       <button className="btn add" style={{ fontSize: '1.1rem' }} onClick={startCheckout}>Към плащане</button>
     </>
   );
