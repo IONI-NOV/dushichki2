@@ -5,6 +5,7 @@ import { COURIER, SHIP, KIND, DESIGNS, img, eur } from '../lib/data';
 import { HALO } from './Icons';
 import { api } from '../lib/api';
 import { checkEmail } from '../lib/email';
+import { checkPhone } from '../lib/phone';
 
 // Поле с рамка и червено съобщение за грешка (извън Checkout, за да не губи фокус при писане)
 function Field({ id, ph, value, onChange, err, type = 'text', ...rest }) {
@@ -84,7 +85,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
     if (v('c1').length < 2) er.c1 = 'Въведи име.';
     if (v('c1b').length < 2) er.c1b = 'Въведи фамилия.';
     { const em = checkEmail(v('c2')); if (em) er.c2 = em; }
-    if (v('c3').length < 5) er.c3 = 'Въведи телефон за куриера.';
+    { const ph = checkPhone(v('c3')); if (ph) er.c3 = ph; }
     const delivery = { courier, type };
     if (type === 'office') {
       if (R && R.manual) {
