@@ -1,6 +1,7 @@
 'use client';
 import { checkEmail } from '../lib/email';
-import { supabaseEnabled, signUp, signIn, signOut, myOrders } from '../lib/supabase';
+import { supabaseEnabled, signUp, signIn, signOut, myOrders, resetPassword, updatePassword } from '../lib/supabase';
+import MailButton from './MailButton';
 import { useEffect, useState } from 'react';
 import Dialog from './Dialog';
 import Checkout from './Checkout';
@@ -20,11 +21,15 @@ export default function CartDialog({ open, onClose, view, setView, cart, removeI
         {view.name === 'gate' && <Gate setView={setView} setGuestOK={setGuestOK} />}
         {view.name === 'checkout' && (
           <Checkout cart={cart} subtotal={subtotal} user={user} apiOk={apiOk} cfg={cfg} openLegal={openLegal} onBack={() => setView({ name: 'cart' })}
-            onSaved={(order) => { clearCart(); setView({ name: 'thanks', order, saved: true }); }} />
+            onSaved={(order, email) => { clearCart(); setView({ name: 'thanks', order, email, saved: true }); }} />
         )}
         {view.name === 'login' && (
           <Auth mode={view.mode} toCheckout={view.toCheckout} apiOk={apiOk} setView={setView}
             onDone={(u) => { setUser(u); toast('Здравей, ' + u.name.split(' ')[0] + ' ❤️'); setView(view.toCheckout ? { name: 'checkout' } : { name: 'account' }); }} />
+        )}
+        {view.name === 'forgot' && <Forgot email={view.email} setView={setView} />}
+        {view.name === 'newpw' && (
+          <NewPassword onDone={(u) => { if (u) setUser(u); toast('Паролата е сменена ❤️'); setView(u ? { name: 'account' } : { name: 'login', mode: 'login' }); }} />
         )}
         {view.name === 'account' && user && (
           <Account user={user} onLogout={async () => { try { if (supabaseEnabled) await signOut(); else await api('logout', {}); } catch (e) {} setUser(null); setGuestOK(false); onClose(); toast('Излезе от акаунта.'); }} />
@@ -35,15 +40,16 @@ export default function CartDialog({ open, onClose, view, setView, cart, removeI
             <Heart />
             <h2>Благодарим ти!</h2>
             {view.saved
-              ? <p>Поръчка <b>{String(view.order).slice(0, 8).toUpperCase()}</b> е приета. Ще се свържем с теб за плащането и потвърждение.</p>
+              ? <p>Поръчка <b>{String(view.order).slice(0, 8).toUpperCase()}</b> е приета. Изпратихме ти имейл с подробностите. Ще се свържем с теб за плащането и потвърждение.</p>
               : <p>Поръчка <b>{view.order}</b> е приета и платена. Ще получиш имейл с потвърждение.</p>}
             <p style={{ marginTop: 8 }}>Изработката отнема до 7 календарни дни, след което пратката тръгва с куриер.</p>
+            {view.email && <MailButton email={view.email} />}
             <p style={{ marginTop: 18 }}>
               <button className="btn add" style={{ fontSize: '1.1rem', width: 'auto', padding: '12px 28px' }} onClick={onClose}>Обратно към сайта</button>
             </p>
           </div>
         )}
-        {view.name === 'msg' && <div className="ok"><p>{view.text}</p></div>}
+        {view.name === 'msg' && <div className="ok"><p>{view.text}</p>{view.email && <MailButton email={view.email} />}</div>}
       </div>
     </Dialog>
   );
@@ -119,7 +125,7 @@ function Auth({ mode, toCheckout, apiOk, setView, onDone }) {
     try {
       if (supabaseEnabled) {
         const r = reg ? await signUp(name.trim(), em, pw) : await signIn(em, pw);
-        if (r.needsConfirm) { setErr(''); setView({ name: 'msg', text: 'Изпратихме ти имейл за потвърждение на регистрацията. Отвори линка в него и после влез.' }); return; }
+        if (r.needsConfirm) { setErr(''); setView({ name: 'msg', text: 'Изпратихме ти имейл за потвърждение на регистрацията. Отвори линка в него и после влез.', email: em }); return; }
         onDone(r.user);
       } else {
         const r = await api(reg ? 'register' : 'login', { name: reg ? name.trim() : undefined, email: em, password: pw });
@@ -139,6 +145,11 @@ function Auth({ mode, toCheckout, apiOk, setView, onDone }) {
         {reg && <div className="fld"><label htmlFor="a1">Име</label><input id="a1" type="text" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} /></div>}
         <div className="fld"><label htmlFor="a2">Имейл</label><input id="a2" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
         <div className="fld"><label htmlFor="a3">Парола{reg ? ' (поне 8 символа)' : ''}</label><input id="a3" type="password" autoComplete={reg ? 'new-password' : 'current-password'} value={pw} onChange={(e) => setPw(e.target.value)} /></div>
+        {!reg && supabaseEnabled && (
+          <p style={{ textAlign: 'right', margin: '-4px 0 8px', fontSize: '.95rem' }}>
+            <button type="button" className="link" onClick={() => setView({ name: 'forgot', email: email.trim() })}>Забравена парола?</button>
+          </p>
+        )}
         <div className="er" id="aer" role="alert">{err}</div>
         <button className="btn add" id="ab" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>{reg ? 'Създай акаунт' : 'Вход'}</button>
         <p style={{ textAlign: 'center', marginTop: 12, fontSize: '.95rem' }}>
@@ -146,6 +157,59 @@ function Auth({ mode, toCheckout, apiOk, setView, onDone }) {
           <button type="button" className="link" data-m={reg ? 'login' : 'register'} onClick={() => sw(reg ? 'login' : 'register')}>{reg ? 'Влез' : 'Регистрирай се'}</button>
         </p>
         {toCheckout && <p style={{ textAlign: 'center', marginTop: 6 }}><button type="button" className="link" id="bk" onClick={() => setView({ name: 'gate' })}>← Продължи като гост</button></p>}
+      </form>
+    </>
+  );
+}
+
+function Forgot({ email: initial, setView }) {
+  const [email, setEmail] = useState(initial || '');
+  const [err, setErr] = useState('');
+  const [busy, setBusy] = useState(false);
+  async function submit(e) {
+    e.preventDefault();
+    const em = email.trim();
+    { const bad = checkEmail(em); if (bad) return setErr(bad); }
+    setBusy(true);
+    try {
+      await resetPassword(em);
+      setView({ name: 'msg', text: 'Ако има акаунт с ' + em + ', изпратихме имейл с линк за нова парола. Отвори го от същото устройство.', email: em });
+    } catch (x) { setErr(x.message); setBusy(false); }
+  }
+  return (
+    <>
+      <h2>Забравена парола</h2>
+      <p>Въведи имейла на акаунта си и ще ти изпратим линк, с който да избереш нова парола.</p>
+      <form noValidate onSubmit={submit} style={{ marginTop: 14 }}>
+        <div className="fld"><label htmlFor="f1">Имейл</label><input id="f1" type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} /></div>
+        <div className="er" role="alert">{err}</div>
+        <button className="btn add" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>Изпрати линк</button>
+        <p style={{ textAlign: 'center', marginTop: 12 }}><button type="button" className="link" onClick={() => setView({ name: 'login', mode: 'login' })}>← Обратно към вход</button></p>
+      </form>
+    </>
+  );
+}
+
+function NewPassword({ onDone }) {
+  const [pw, setPw] = useState('');
+  const [pw2, setPw2] = useState('');
+  const [err, setErr] = useState('');
+  const [busy, setBusy] = useState(false);
+  async function submit(e) {
+    e.preventDefault();
+    if (pw.length < 8) return setErr('Паролата трябва да е поне 8 символа.');
+    if (pw !== pw2) return setErr('Паролите не съвпадат.');
+    setBusy(true);
+    try { onDone(await updatePassword(pw)); } catch (x) { setErr(x.message); setBusy(false); }
+  }
+  return (
+    <>
+      <h2>Нова парола</h2>
+      <form noValidate onSubmit={submit}>
+        <div className="fld"><label htmlFor="n1">Нова парола (поне 8 символа)</label><input id="n1" type="password" autoComplete="new-password" value={pw} onChange={(e) => setPw(e.target.value)} /></div>
+        <div className="fld"><label htmlFor="n2">Повтори паролата</label><input id="n2" type="password" autoComplete="new-password" value={pw2} onChange={(e) => setPw2(e.target.value)} /></div>
+        <div className="er" role="alert">{err}</div>
+        <button className="btn add" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>Запази паролата</button>
       </form>
     </>
   );

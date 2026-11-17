@@ -1,5 +1,5 @@
 'use client';
-import { supabaseEnabled, currentUser, onUserChange } from '../lib/supabase';
+import { supabaseEnabled, currentUser, onUserChange, onAuthEvent } from '../lib/supabase';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Deco, HeartSymbol, CartIcon } from './Icons';
 import ProductDialog from './ProductDialog';
@@ -57,8 +57,21 @@ export default function Shop() {
   // Supabase сесия (регистриран потребител)
   useEffect(() => {
     if (!supabaseEnabled) return;
+    // Линк от имейл „Нова парола“ (#…type=recovery) или изтекъл линк (#error=…)
+    const h = new URLSearchParams(location.hash.slice(1));
+    const openNewPw = () => { setView({ name: 'newpw' }); setCartOpen(true); };
+    const offEvt = onAuthEvent((e) => { if (e === 'PASSWORD_RECOVERY') openNewPw(); });
+    if (h.get('type') === 'recovery') openNewPw();
+    else if (h.get('error_code')) {
+      setView({ name: 'msg', text: h.get('error_code') === 'otp_expired'
+        ? 'Линкът от имейла е изтекъл или вече е използван. Поискай нов.'
+        : 'Линкът от имейла не е валиден. Поискай нов.' });
+      setCartOpen(true);
+    }
     currentUser().then(setUser).catch(() => {});
-    return onUserChange(setUser);
+    const offUser = onUserChange(setUser);
+    if (h.get('type') || h.get('error_code')) setTimeout(() => history.replaceState(null, '', location.pathname + location.search), 1500);
+    return () => { offEvt(); offUser(); };
   }, []);
 
   // връзка с PHP бекенда + връщане от Stripe

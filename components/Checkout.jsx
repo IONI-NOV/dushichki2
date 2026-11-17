@@ -117,7 +117,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
           customer: { first: v('c1'), last: v('c1b'), email: v('c2'), phone: v('c3') }, delivery, courier,
           items: cart.map((i) => ({ type: i.type, design: i.design, color: i.color, size: i.size, text: i.text, story: i.story, notes: i.notes, photo: i.photo, halo: i.halo, halo_who: i.halo_who, unit: i.unit })),
         });
-        onSaved(id);
+        onSaved(id, v('c2'));
       } catch (err) { setCer(err.message); setBusy(false); }
       return;
     }
