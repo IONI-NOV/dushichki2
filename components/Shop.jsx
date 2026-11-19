@@ -446,16 +446,6 @@ export default function Shop() {
         </div>
 
         <footer>
-          <button className="lk" onClick={() => setLegal('terms')}>Общи условия</button>
-          <button className="lk" onClick={() => setLegal('priv')}>Политика за поверителност</button>
-          <div className="fi">
-            <a href="https://www.instagram.com/dushichki/" target="_blank" rel="noopener noreferrer" aria-label="Инстаграм">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" /><circle cx="12" cy="12" r="4.1" /><circle cx="17.2" cy="6.8" r=".6" /></svg>
-            </a>
-            <a href="mailto:info@dushichki.com" aria-label="Имейл">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="3.4" /><path d="M4.2 7.6 12 13.2l7.8-5.6" /></svg>
-            </a>
-          </div>
           <nav className="fb" aria-label="Информация">
             <span className="yr">2026 <button className="brand" onClick={() => { window.location.href = window.location.pathname; }}>Душички</button></span>
             <i aria-hidden="true">·</i>
@@ -468,6 +458,13 @@ export default function Shop() {
             <button onClick={() => openLegalAt('terms', 'VI.')}>Политика за доставка</button>
             <i aria-hidden="true">·</i>
             <button onClick={() => openLegalAt('terms', 'XV.')}>Контакти</button>
+            <i aria-hidden="true">·</i>
+            <a className="ic" href="https://www.instagram.com/dushichki/" target="_blank" rel="noopener noreferrer" aria-label="Инстаграм">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5.2" /><circle cx="12" cy="12" r="4.1" /><circle cx="17.2" cy="6.8" r=".6" /></svg>
+            </a>
+            <a className="ic" href="mailto:info@dushichki.com" aria-label="Имейл">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="3.4" /><path d="M4.2 7.6 12 13.2l7.8-5.6" /></svg>
+            </a>
           </nav>
         </footer>
       </div>

@@ -825,3 +825,16 @@ body:after{display:none!important}
 .pg footer .fb .yr{cursor:default}
 @media(min-width:1100px){.pg footer .fb{width:calc(var(--u)*1500);align-self:center;font-size:max(12px,calc(var(--u)*20));gap:2px calc(var(--u)*22);margin-top:calc(var(--u)*50)}}
 #lgb h2,#lgb h3{scroll-margin-top:26px}
+/* v26: one-row footer – every gap is the same, scaled with the page */
+.pg footer{min-height:0!important;height:auto!important;padding:30px 20px calc(30px + env(safe-area-inset-bottom,0px))!important;display:block!important}
+.pg footer .fb{--g:14px;width:auto;margin:0;padding:0;border:0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px var(--g);font-size:13px}
+.pg footer .fb .brand{font-weight:400;color:inherit}
+.pg footer .fb i{line-height:1}
+.pg footer .fb a.ic{position:static!important;display:inline-flex;width:auto;height:auto;color:var(--cr)}
+.pg footer .fb a.ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.pg footer .fb a.ic svg circle:last-child{fill:currentColor}
+@media(min-width:1100px){
+.pg footer{padding:calc(var(--u)*46) 0 calc(var(--u)*46)!important}
+.pg footer .fb{--g:calc(var(--u)*26);width:auto;font-size:max(12px,calc(var(--u)*23));gap:0 var(--g)}
+.pg footer .fb a.ic svg{width:calc(var(--u)*38);height:calc(var(--u)*38)}
+}
