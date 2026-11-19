@@ -267,10 +267,10 @@ export default function Shop() {
           </div>
         </header>
 
-        <div className={"cv" + (scrollOpen ? " op" : "")}>
+        <div className={"cv" + (scrollOpen ? " op" : "") + (typed ? " tp" : "")}>
           <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
-          <img className="fx heart1" src={V + 'heart1.svg'} alt="" />
-          <img className="fx heart2" src={V + 'heart2.svg'} alt="" />
+          <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
           <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
             <defs><mask id="d1m" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="340">
               <path className="ln" pathLength="1" fill="none" stroke="#fff" strokeWidth="34" strokeLinecap="round" strokeLinejoin="round" d="M-5 299C60 308 130 316 200 316C290 316 350 300 381 262C395 230 380 190 345 155C320 132 292 140 288 170C292 215 330 255 385 263C470 270 570 220 640 150C670 120 683 95 688 70C692 62 692 52 691 40C676 40 678 20 692 18C708 20 708 48 692 60"/>
