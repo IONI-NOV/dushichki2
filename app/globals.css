@@ -723,10 +723,10 @@ body:after{display:none}
 
 /* --- v14: без уголемяване във футъра; свой курсор; елементите на хедъра падат в картата --- */
 .pg footer .lk,.pg footer a{transition:none!important;transform:none!important}
-html{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 1 0,auto}
-button,a,.btn,label,.card,.cl,[role=tab],[aria-expanded],summary,select,input[type=checkbox],input[type=radio],input[type=file]{cursor:image-set(url(/img/v2/cur-h.png) 1x,url(/img/v2/cur-h2.png) 2x) 12 3,pointer!important}
+html{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 3 1,auto}
+button,a,.btn,label,.card,.cl,[role=tab],[aria-expanded],summary,select,input[type=checkbox],input[type=radio],input[type=file]{cursor:image-set(url(/img/v2/cur-h.png) 1x,url(/img/v2/cur-h2.png) 2x) 12 4,pointer!important}
 input[type=text],input[type=email],input[type=password],input[type=tel],textarea{cursor:text!important}
-button:disabled{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 1 0,default!important}
+button:disabled{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 3 1,default!important}
 .hclip{position:absolute;inset:0;pointer-events:none}
 .hclip>*{pointer-events:auto}
 @keyframes fall{0%{translate:0 -120px}62%{translate:0 5px}80%{translate:0 -3px}100%{translate:0 0}}
