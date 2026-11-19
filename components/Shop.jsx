@@ -74,14 +74,9 @@ export default function Shop() {
     const lift = () => {
       const spl = splRef.current, lg = splLogoRef.current, hd = document.querySelector('.hd'), hl = document.querySelector('.hd .logo');
       if (!spl || !lg || !hd || !hl) { setIntro('done'); return; }
-      const r = hd.getBoundingClientRect(), y0 = r.top, W = r.width, H = r.height;
-      let pts;
-      if (window.innerWidth >= 1100) {
-        const u = W / 1920; // листът на компютър е леко завъртян, с ръб отстрани (като hdr.svg)
-        pts = [[30 * u, y0], [1892 * u, y0], [1895 * u, y0 + 117 * u], [34 * u, y0 + 167 * u]];
-      } else {
-        pts = [[0, y0], [W, y0], [W, y0 + H * 0.84], [0, y0 + H]];
-      }
+      // листът на хедъра е прав правоъгълник (на телефон – с отстъп отляво и отдясно)
+      const r = hd.getBoundingClientRect();
+      const pts = [[r.left, r.top], [r.right, r.top], [r.right, r.bottom], [r.left, r.bottom]];
       spl.style.clipPath = 'polygon(' + pts.map(([x, y]) => x.toFixed(1) + 'px ' + y.toFixed(1) + 'px').join(',') + ')';
       const a = lg.getBoundingClientRect(), b = hl.getBoundingClientRect();
       const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
@@ -110,7 +105,9 @@ export default function Shop() {
     let last = '';
     const upd = () => {
       const max = root.scrollHeight - window.innerHeight;
-      const c = window.scrollY > max / 2 ? '#2a1212' : '#FEF9E9';
+      // на телефон листът е по-тесен от екрана, затова отгоре отстрани трябва червеното на страницата
+      const top = window.innerWidth < 1100 ? '#C82028' : '#FEF9E9';
+      const c = window.scrollY > max / 2 ? '#2a1212' : top;
       if (c !== last) { root.style.backgroundColor = c; last = c; }
     };
     upd();
@@ -263,11 +260,11 @@ export default function Shop() {
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
-              <svg viewBox="3.6 3 16.8 18.6" aria-hidden="true"><circle cx="12" cy="7.6" r="4.3" fill="currentColor" /><path fill="currentColor" d="M12 13.4c-4.4 0-7.9 2.4-7.9 5.4v.6c0 1.1.9 2 2 2h11.8c1.1 0 2-.9 2-2v-.6c0-3-3.5-5.4-7.9-5.4z" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
               <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Влез'}</span>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="1 2.2 22 20" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" d="M2.4 3.6h1.9c.7 0 1.3.5 1.5 1.2l2 8.6c.2.8.9 1.3 1.7 1.3h8.2c.8 0 1.4-.5 1.6-1.2l1.6-5.8c.3-.9-.4-1.8-1.3-1.8H5.6" /><path fill="currentColor" d="M5.9 6.4h14.3c.4 0 .7.4.6.8l-1.6 5.8c-.1.4-.5.7-.9.7H8.8c-.4 0-.7-.3-.8-.7z" /><circle cx="9.4" cy="19.6" r="1.9" fill="currentColor" /><circle cx="17.6" cy="19.6" r="1.9" fill="currentColor" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.6 3.6h1.9c.7 0 1.2.4 1.4 1.1l2.2 9.5c.2.7.8 1.2 1.5 1.2h8.3c.7 0 1.3-.5 1.5-1.1l1.8-6.4c.2-.8-.4-1.5-1.2-1.5H5.6" /><path d="M10.2 10.4h7.2" /><circle cx="9.6" cy="19.7" r="1.6" /><circle cx="17.5" cy="19.7" r="1.6" /></svg>
               <span className="lb">Количка</span>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>

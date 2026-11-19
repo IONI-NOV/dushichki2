@@ -573,3 +573,25 @@ dialog{--m:11px}
 @media(min-width:1100px){.pg{--ls:calc(var(--u)*34);--mx:calc(var(--u)*100)}.hd{height:calc(var(--u)*190)}.hd:before{left:0;right:0}}
 .hp{clip-path:none!important;background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.45) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9;box-shadow:0 3px 10px rgba(60,0,10,.18)}
 @media(min-width:1100px){.fx.scrap{height:auto;aspect-ratio:200/650;-webkit-mask:url(/img/v2/scrap.svg) 0 0/100% 100% no-repeat;mask:url(/img/v2/scrap.svg) 0 0/100% 100% no-repeat;background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*45) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.45) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9}}
+
+/* хедър: редовете продължават и нагоре (при издърпване с пръст), иконите са центрирани */
+.hd:before{background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,linear-gradient(transparent calc(var(--ls) - 1.5px),rgba(198,170,120,.45) 0) left 0 bottom 2px/100% var(--ls) repeat-y,#FEF9E9}
+@media(min-width:1100px){
+.hd .logo{top:calc(var(--u)*58)}
+.login{top:calc(var(--u)*72)}
+.cartb{top:calc(var(--u)*67)}
+}
+@media(max-width:1099.98px){
+/* на телефон листът не е през целия екран */
+.hd{left:12px;right:12px}
+.hd .logo{top:15px}
+.login{left:18px;top:25px;width:28px}
+.cartb{right:14px;top:23px;width:32px}
+}
+@media(min-width:700px) and (max-width:1099.98px){
+.hd .logo{top:14px}
+.login{top:28px}
+.cartb{top:26px}
+}
+/* сянката на листа само отдолу и отстрани, за да няма шев с продължението нагоре */
+.hd .hp{clip-path:inset(0 -30px -30px -30px)!important}
