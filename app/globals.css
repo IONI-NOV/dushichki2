@@ -816,3 +816,12 @@ body:after{display:none!important}
 }
 /* v24: hovering the greeting/cart text also enlarges the whole button */
 .hd .lb{pointer-events:auto!important;cursor:inherit}
+/* v25: bottom strip of the footer */
+.pg footer .fb{align-self:stretch;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2px 12px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(254,249,233,.16);font-size:13px;color:rgba(254,249,233,.82)}
+.pg footer .fb i{font-style:normal;opacity:.6}
+.pg footer .fb button{background:none;border:0;color:inherit;font:inherit;padding:8px 0;cursor:inherit}
+.pg footer .fb .brand{padding:0;color:var(--cr);font-weight:500}
+.pg footer .fb button,.pg footer .fb .brand{transition:none!important;transform:none!important}
+.pg footer .fb .yr{cursor:default}
+@media(min-width:1100px){.pg footer .fb{width:calc(var(--u)*1500);align-self:center;font-size:max(12px,calc(var(--u)*20));gap:2px calc(var(--u)*22);margin-top:calc(var(--u)*50)}}
+#lgb h2,#lgb h3{scroll-margin-top:26px}

@@ -60,6 +60,8 @@ export default function Shop() {
   const [cartOpen, setCartOpen] = useState(false);
   const [view, setView] = useState({ name: 'cart' });
   const [legal, setLegal] = useState(null);
+  const [legalSec, setLegalSec] = useState(null);
+  const openLegalAt = (id, sec) => { setLegalSec(sec || null); setLegal(id); };
   const [toastMsg, setToastMsg] = useState('');
   const toastTimer = useRef(null);
 
@@ -454,6 +456,19 @@ export default function Shop() {
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.8" y="5" width="18.4" height="14" rx="3.4" /><path d="M4.2 7.6 12 13.2l7.8-5.6" /></svg>
             </a>
           </div>
+          <nav className="fb" aria-label="Информация">
+            <span className="yr">2026 <button className="brand" onClick={() => { window.location.href = window.location.pathname; }}>Душички</button></span>
+            <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('terms', 'IX.')}>Политика за връщане</button>
+            <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('priv')}>Политика за поверителност</button>
+            <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('terms')}>Общи условия</button>
+            <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('terms', 'VI.')}>Политика за доставка</button>
+            <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('terms', 'XV.')}>Контакти</button>
+          </nav>
         </footer>
       </div>
 
@@ -475,7 +490,7 @@ export default function Shop() {
         apiOk={apiOk} cfg={cfg} openLegal={setLegal} toast={toast} goShop={goShop} clearCart={() => setCart([])}
       />
       <SizeDialog kind={sizesFor} onClose={() => setSizesFor(null)} />
-      <LegalDialog id={legal} onClose={() => setLegal(null)} />
+      <LegalDialog id={legal} sec={legalSec} onClose={() => { setLegal(null); setLegalSec(null); }} />
       <div id="toast" role="status" className={toastMsg ? 'on' : ''}>{toastMsg}</div>
     </>
   );
