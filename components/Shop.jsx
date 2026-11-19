@@ -198,9 +198,10 @@ export default function Shop() {
   const soft = useMemo(() => seenKinds.current.has(kind), [kind]);
   const sw = useMemo(() => mounted.current, [kind]);
   useEffect(() => { mounted.current = true; }, []);
+  const hov = (k, i) => (i === 2 && k === 'tee' ? 'r' : i === 2 && k === 'hoodie' ? 'e' : 'w');
   const preImgs = useRef([]);
   useEffect(() => {
-    Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w'].forEach((v) => { const m = new Image(); m.decoding = 'sync'; m.src = img(k, v, i); preImgs.current.push(m); })));
+    Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w', hov(k, i)].forEach((v) => { const m = new Image(); m.decoding = 'sync'; m.src = img(k, v, i); preImgs.current.push(m); })));
   }, []);
   useEffect(() => { seenKinds.current.add(kind); }, [kind]);
   const noteRef = useRef(null);
@@ -409,7 +410,7 @@ export default function Shop() {
                   <div className="cf">
                     <div className="im">
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} decoding="sync" />
-                      <img className="b" src={img(kind, 'w', i)} alt="" decoding="sync" />
+                      <img className="b" src={img(kind, hov(kind, i), i)} alt="" decoding="sync" />
                     </div>
                     <h3>{d.n.replace(/ (по снимка|на домашен любимец|на починал близък)$/, (m) => '\u0000' + m).split('\u0000').map((x, j) => j ? <span key={j}>{x.slice(0, x.indexOf(' ', 1) + 1)}<b>{x.slice(x.indexOf(' ', 1) + 1)}</b></span> : x)}</h3>
                     <p className="pr">{eur(KIND[kind].price)}</p>
