@@ -264,9 +264,11 @@ export default function Shop() {
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
               <svg viewBox="3.6 3 16.8 18.6" aria-hidden="true"><circle cx="12" cy="7.6" r="4.3" fill="currentColor" /><path fill="currentColor" d="M12 13.4c-4.4 0-7.9 2.4-7.9 5.4v.6c0 1.1.9 2 2 2h11.8c1.1 0 2-.9 2-2v-.6c0-3-3.5-5.4-7.9-5.4z" /></svg>
+              <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Влез'}</span>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
               <svg viewBox="1 2.2 22 20" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" d="M2.4 3.6h1.9c.7 0 1.3.5 1.5 1.2l2 8.6c.2.8.9 1.3 1.7 1.3h8.2c.8 0 1.4-.5 1.6-1.2l1.6-5.8c.3-.9-.4-1.8-1.3-1.8H5.6" /><path fill="currentColor" d="M5.9 6.4h14.3c.4 0 .7.4.6.8l-1.6 5.8c-.1.4-.5.7-.9.7H8.8c-.4 0-.7-.3-.8-.7z" /><circle cx="9.4" cy="19.6" r="1.9" fill="currentColor" /><circle cx="17.6" cy="19.6" r="1.9" fill="currentColor" /></svg>
+              <span className="lb">Количка</span>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>
@@ -274,8 +276,8 @@ export default function Shop() {
 
         <div className={"cv" + (scrollOpen ? " op" : "") + (typed ? " tp" : "")}>
           <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
-          <img className="fx heart1" src={V + 'heart1-p.webp'} alt="" />
-          <img className="fx heart2" src={V + 'heart2-p.webp'} alt="" />
+          <img className="fx heart1" src={V + 'heart1-r.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2-r.webp'} alt="" />
           <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
             <defs><mask id="d1m" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="340">
               <path className="ln" pathLength="1" fill="none" stroke="#fff" strokeWidth="34" strokeLinecap="butt" strokeLinejoin="round" d="M-5 299C60 308 130 316 200 316C290 316 350 300 381 262C395 230 380 190 345 155C320 132 292 140 288 170C292 215 330 255 385 263C470 270 570 220 640 150C670 120 683 95 688 70C692 62 692 52 691 40C676 40 678 20 692 18C708 20 708 48 692 60"/>

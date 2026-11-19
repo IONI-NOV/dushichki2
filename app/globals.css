@@ -334,7 +334,7 @@ dialog[open]{will-change:transform,opacity;backface-visibility:hidden}
 /* ===== прозорци – в стила на новия дизайн ===== */
 .im{aspect-ratio:1188/1324;width:100%;position:relative;overflow:hidden;background:var(--ph);border:3px solid var(--red)}
 .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-dialog{background:var(--cream);border-radius:28px;color:var(--ink);outline:3px dashed #D3202C;outline-offset:-11px;box-shadow:0 24px 70px rgba(60,0,10,.45)}
+dialog{background:var(--cream);border-radius:28px;color:var(--ink);box-shadow:0 24px 70px rgba(60,0,10,.45)}
 dialog::backdrop{background:rgba(92,8,20,.62);backdrop-filter:blur(3px)}
 dialog .cl{top:20px;right:22px;width:42px;height:42px;border-radius:50%;background:var(--red);color:#fff;font-size:1.7rem;font-weight:400;display:grid;place-items:center;box-shadow:0 2px 8px rgba(120,0,15,.3);transition:transform .2s}
 dialog .cl:hover{transform:scale(1.08) rotate(90deg)}
@@ -342,8 +342,8 @@ dialog .cl:hover{transform:scale(1.08) rotate(90deg)}
 .in h2,.leg h2{color:var(--red2);font-weight:800}
 .in h3,.leg h3,.os h3{color:var(--red2);font-weight:700}
 .pm{padding:44px 44px 40px;gap:38px}
-.pm .im{background:none;border:3px dashed #D3202C;border-radius:30px;overflow:visible}
-.pm .im img{inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);border-radius:24px;background:var(--ph)}
+.pm .im{background:none;border:0;border-radius:24px;overflow:visible}
+.pm .im img{inset:0;width:100%;height:100%;border-radius:24px;background:var(--ph)}
 .pm h2{font-weight:600;color:var(--red2)}
 .pr2{color:var(--red2);font-weight:700}
 .uni b{color:var(--red2)}
@@ -361,7 +361,7 @@ dialog .btn:disabled{opacity:.5;box-shadow:none}
 .add{border-radius:16px!important}
 .tab2 button,.seg button{border:2px solid var(--red);border-radius:14px;color:var(--red2);background:transparent}
 .tab2 button[aria-selected=true],.seg button[aria-pressed=true]{background:var(--red);color:#fff}
-.drop{border:2.5px dashed rgba(202,38,49,.5);border-radius:20px;background:rgba(202,38,49,.03);color:#7a4a4a}
+.drop{border:2px solid rgba(202,38,49,.28);border-radius:20px;background:rgba(202,38,49,.03);color:#7a4a4a}
 .drop.on{background:rgba(202,38,49,.09);border-color:var(--red)}
 .drop label{background:var(--red);color:#fff;border-radius:12px;padding:8px 16px;font-weight:600}
 .drop label:hover{background:#b01c28}
@@ -560,3 +560,10 @@ dialog{--m:11px}
 @media(hover:hover){.card:hover .cf{transform:scale(1.014)}}
 /* по-леко удебеляване на табовете, без уголемяване */
 .tabs button[aria-selected=true] .t1{--b:.012em;transform:none}
+
+/* header labels */
+.hd .lb{position:absolute;top:50%;transform:translateY(-50%);white-space:nowrap;color:var(--red2);font-weight:500;font-size:max(13px,calc(var(--u)*21));pointer-events:none}
+.login .lb{left:calc(100% + .55em)}
+.cartb .lb{right:calc(100% + .55em)}
+.hd .gr{display:inline}
+@media(max-width:699px){.hd .gr{display:none}.hd .lb{font-size:13px}.cartb .lb{display:none}}
