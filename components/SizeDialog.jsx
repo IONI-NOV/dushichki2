@@ -9,7 +9,7 @@ export default function SizeDialog({ kind, onClose }) {
       {K && (
         <div className="in" id="scb">
           <h2>Размери – {K.one}</h2>
-          <p className="uni"><b>Унисекс</b> – {K.plural} са един и същ модел за жени и мъже.</p>
+          {K.note ? <p className="uni"><b>Мъжки модел</b> – {K.note}</p> : <p className="uni"><b>Унисекс</b> – {K.plural} са един и същ модел за жени и мъже.</p>}
           <div style={{ overflowX: 'auto' }}>
             <table>
               <tbody>

@@ -211,7 +211,7 @@ export default function Shop() {
   const tabsRef = useRef(null);
   useLayoutEffect(() => {
     const place = () => {
-      const b = document.getElementById(kind === 'tee' ? 't-tee' : 't-hoodie');
+      const b = document.getElementById('t-' + kind);
       if (b) setHeartX(b.offsetLeft + b.offsetWidth / 2);
     };
     place();
@@ -401,8 +401,8 @@ export default function Shop() {
                 <button role="tab" id="t-hoodie" aria-selected={kind === 'hoodie'} onClick={() => setKind('hoodie')}>
                   <span className="tw"><span className="t1">Худита</span><span className="t2" aria-hidden="true">Худита</span></span>
                 </button>
-                <button role="tab" id="t-top" disabled aria-disabled="true" title="Скоро">
-                  <span className="tw"><span className="t1">Блузи</span></span>
+                <button role="tab" id="t-sweat" aria-selected={kind === 'sweat'} onClick={() => setKind('sweat')}>
+                  <span className="tw"><span className="t1">Блузи</span><span className="t2" aria-hidden="true">Блузи</span></span>
                 </button>
               </div>
             </section>
@@ -413,7 +413,7 @@ export default function Shop() {
                   <div className="cf">
                     <div className="im">
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
-                      <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+                      <img className="b" src={img(kind, kind === 'tee' ? 'r' : 'w', i)} alt="" loading="lazy" />
                     </div>
                     <h3>{d.n}</h3>
                     <p className="pr">{eur(KIND[kind].price)}</p>
