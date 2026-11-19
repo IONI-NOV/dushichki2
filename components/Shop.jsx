@@ -10,7 +10,7 @@ import LegalDialog from './LegalDialog';
 import { DESIGNS, KIND, eur, img } from '../lib/data';
 import { api } from '../lib/api';
 
-function Type({ text, start = 0, onDone, run = true }) {
+function Type({ text, start = 0, onDone, run = true, hand = null }) {
   const [n, setN] = useState(0);
   const done = n >= text.length;
   useEffect(() => {
@@ -35,7 +35,13 @@ function Type({ text, start = 0, onDone, run = true }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, start, run]);
   // бялата черта (курсор) върви с текста, а накрая остава и мига
-  return (<><span>{text.slice(0, n)}</span><span className={'caret' + (done ? ' blink' : '')} aria-hidden="true" /><span style={{ visibility: 'hidden' }}>{text.slice(n)}</span></>);
+  // part: [начало, край) – тази част от текста е с ръкописния шрифт (класа .hw)
+  const seg = (a, b) => {
+    if (!hand || b <= hand[0] || a >= hand[1]) return text.slice(a, b);
+    const x = Math.max(a, hand[0]), y = Math.min(b, hand[1]);
+    return <>{text.slice(a, x)}<span className="hw">{text.slice(x, y)}</span>{text.slice(y, b)}</>;
+  };
+  return (<><span>{seg(0, n)}</span><span className={'caret' + (done ? ' blink' : '')} aria-hidden="true" /><span style={{ visibility: 'hidden' }}>{seg(n, text.length)}</span></>);
 }
 
 export default function Shop() {
@@ -287,7 +293,7 @@ export default function Shop() {
 
           <main>
             <section className={'hero' + (typed ? ' typed' : '')}>
-              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={250} onDone={() => setTyped(true)} run={introGo} /></h1>
+              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={250} hand={[33, 46]} onDone={() => setTyped(true)} run={introGo} /></h1>
               <p>Дай живот на спомените си.</p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
               <div className="hi" role="img" aria-label="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена">
