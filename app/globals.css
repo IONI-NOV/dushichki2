@@ -838,3 +838,6 @@ body:after{display:none!important}
 .pg footer .fb{--g:calc(var(--u)*26);width:auto;font-size:max(12px,calc(var(--u)*23));gap:0 var(--g)}
 .pg footer .fb a.ic svg{width:calc(var(--u)*38);height:calc(var(--u)*38)}
 }
+/* v27: highlight the section the footer link scrolled to */
+@keyframes hlx{0%,55%{background:#FFE29A;box-shadow:0 0 0 5px #FFE29A}100%{background:#FEF9E9;box-shadow:0 0 0 5px #FEF9E9}}
+#lgb .hlx{border-radius:6px;animation:hlx 2s ease-out both}
