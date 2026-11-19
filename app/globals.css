@@ -724,7 +724,7 @@ body:after{display:none}
 /* --- v14: без уголемяване във футъра; свой курсор; елементите на хедъра падат в картата --- */
 .pg footer .lk,.pg footer a{transition:none!important;transform:none!important}
 html{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.png) 2x) 2 1,auto}
-button,a,.btn,label,.card,.cl,[role=tab],[aria-expanded],summary,select,input[type=checkbox],input[type=radio],input[type=file]{cursor:image-set(url(/img/v2/curu-h.png) 1x,url(/img/v2/curu-h2.png) 2x) 12 1,pointer!important}
+button,a,.btn,.card,.cl,[role=tab],[aria-expanded],summary,.drop,.drop label,input[type=file]{cursor:image-set(url(/img/v2/curu-h.png) 1x,url(/img/v2/curu-h2.png) 2x) 12 1,pointer!important}
 input[type=text],input[type=email],input[type=password],input[type=tel],textarea{cursor:text!important}
 button:disabled{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.png) 2x) 2 1,default!important}
 .hclip{position:absolute;inset:0;pointer-events:none}
@@ -744,3 +744,9 @@ button:disabled{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.
 @media(max-width:699.98px){.hd{left:auto;right:auto;margin:0 12px -78px}}
 @media(min-width:700px) and (max-width:1099.98px){.hd{left:auto;right:auto;margin:0 12px -84px}}
 @media(min-width:1100px){.hd{margin-bottom:calc(var(--u)*-150)}}
+
+/* --- v16: текстът седи върху редовете; полета за избор с обикновен курсор --- */
+.pap{background:repeating-linear-gradient(transparent 0 30.5px,rgba(198,170,120,.5) 30.5px 32px) 0 var(--lo,0px),#FEF9E9}
+select,label,input[type=checkbox],input[type=radio],input[type=text],input[type=email],input[type=tel],input[type=password]{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.png) 2x) 2 1,default}
+input[type=text],input[type=email],input[type=tel],input[type=password],textarea{cursor:text!important}
+.drop label{cursor:image-set(url(/img/v2/curu-h.png) 1x,url(/img/v2/curu-h2.png) 2x) 12 1,pointer!important}

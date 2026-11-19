@@ -70,6 +70,22 @@ export default function Shop() {
   const [pre, setPre] = useState(false);
   const [hdHide, setHdHide] = useState(false);
   useEffect(() => {
+    // редовете на тетрадния лист се подравняват така, че текстът да седи върху тях
+    const pap = document.querySelector('.pap'), p1 = document.querySelector('.tx p');
+    if (!pap || !p1) return;
+    const fit = () => {
+      const fs = parseFloat(getComputedStyle(p1).fontSize) || 16.5, L = parseFloat(getComputedStyle(p1).lineHeight) || 32;
+      const y0 = p1.offsetTop + L / 2 + 0.35 * fs + 3;
+      pap.style.setProperty('--lo', (((y0 - 30.5) % 32) - 32) + 'px');
+    };
+    fit();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(fit) : null;
+    if (ro) { ro.observe(pap); const sch = pap.querySelector('.sch'); if (sch) ro.observe(sch); }
+    window.addEventListener('resize', fit); window.addEventListener('load', fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    return () => { if (ro) ro.disconnect(); window.removeEventListener('resize', fit); window.removeEventListener('load', fit); };
+  }, []);
+  useEffect(() => {
     let last = window.scrollY, hid = false;
     const on = () => {
       const y = window.scrollY, dy = y - last;
