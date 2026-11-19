@@ -68,7 +68,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .card.fu.vis{opacity:1;transform:none}
 .note .nd{display:none}
 .cap{color:var(--cr);font-weight:300;font-style:italic}
-.pg footer{background:#2e1313 url(/img/v2/foot.webp) center/100% 100% no-repeat;color:var(--cr)}
+.pg footer{background:#2a1212;color:var(--cr)}
 .lk{background:none;border:0;padding:0;color:var(--cr);font-weight:400;text-decoration:none;transition:transform .25s}
 .lk:hover,.lk:focus-visible{transform:scale(1.06)}
 
@@ -78,8 +78,8 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .hd:before{left:calc(var(--u)*30);right:calc(var(--u)*28)}
 .about{position:absolute;left:calc(var(--u)*170);top:calc(var(--u)*76);font-size:max(14px,calc(var(--u)*22))}
 .hd .logo{position:absolute;left:calc(var(--u)*906);top:calc(var(--u)*33);width:calc(var(--u)*86);height:auto}
-.login{left:calc(var(--u)*1677);top:calc(var(--u)*37);width:calc(var(--u)*48)}
-.cartb{left:calc(var(--u)*1781);top:calc(var(--u)*37);width:calc(var(--u)*55)}
+.login{left:calc(var(--u)*170);top:calc(var(--u)*40);width:calc(var(--u)*46)}
+.cartb{left:calc(var(--u)*1750);top:calc(var(--u)*38);width:calc(var(--u)*56)}
 .cv{height:calc(var(--u)*3412)}
 .heart1{left:calc(var(--u)*387);top:calc(var(--u)*259);width:calc(var(--u)*414)}
 .heart2{left:calc(var(--u)*324);top:calc(var(--u)*2169);width:calc(var(--u)*282)}
@@ -116,8 +116,8 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .hp{background:var(--cream);clip-path:polygon(0 0,100% 0,100% 84%,0 100%)}
 .about{position:absolute;left:18px;top:27px;font-size:15px}
 .hd .logo{position:absolute;left:50%;transform:translateX(-50%);top:9px;height:52px;width:auto}
-.login{right:64px;top:21px;width:27px}
-.cartb{right:18px;top:19px;width:33px}
+.login{left:20px;top:20px;width:27px}
+.cartb{right:18px;top:19px;width:34px}
 .cv{padding-top:104px;padding-bottom:56px}
 .fx{display:none}
 .fx.heart1{display:block;left:calc(50% - 100px);top:118px;width:200px;opacity:.9}
@@ -393,7 +393,7 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 @keyframes heartIn{from{transform:scale(.05);opacity:0}to{transform:none;opacity:1}}
 @keyframes drawD1{to{stroke-dashoffset:0}}
 @keyframes cur{50%{border-color:transparent}}
-.hd{animation:hdIn .7s cubic-bezier(.2,.8,.2,1) both}
+.hd{animation:hdIn 1.5s cubic-bezier(.22,1,.36,1) both}
 .fx.heart1{animation:heartIn .8s cubic-bezier(.2,.9,.3,1.1) .15s both;transform-origin:50% 50%}
 .d1w{position:absolute;pointer-events:none;overflow:visible}
 .d1w .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:drawD1 2.2s cubic-bezier(.45,.05,.3,1) .2s forwards}
@@ -412,16 +412,19 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 .caret:after{content:"";position:absolute;left:.04em;top:.06em;height:.92em;width:.085em;min-width:3px;border-radius:2px;background:var(--cr)}
 .caret.blink:after{animation:blink 1.05s steps(1,end) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero p,.hero .btn{opacity:0;translate:0 14px;transition:opacity .8s ease,translate .8s ease,transform .2s}
+.hero p,.hero .btn{opacity:0;translate:0 14px;transition:opacity 1.2s ease,translate 1.2s ease,transform .2s}
 .hero.typed p,.hero.typed .btn{opacity:1;translate:none}
-.hero.typed .btn{transition-delay:.4s,.4s,0s}
+.hero.typed .btn{transition-delay:.6s,.6s,0s}
 .hi{position:relative}
 .hl{display:block;width:100%;height:auto;transform-origin:var(--o,50% 50%);animation:chop .56s steps(1,end) var(--d,0s) both}
 .hl+.hl{position:absolute;left:0;top:0}
-.hl-b{--o:56% 17%;--d:.3s}
-.hl-s{--o:32% 60%;--d:.6s}
-.hl-t{--o:76% 54%;--d:.9s}
-.hl-r{--o:64% 80%;--d:1.2s;animation:chop .56s steps(1,end) 1.2s both,rosewob 1.8s steps(1,end) 1.9s infinite}
+.hl-b{--o:56% 17%;animation:chop .56s steps(1,end) .3s both,wobB 2.4s steps(1,end) 1s infinite}
+.hl-s{--o:32% 60%;animation:chop .56s steps(1,end) .6s both,wobS 2.1s steps(1,end) 1.3s infinite}
+.hl-t{--o:76% 54%;animation:chop .56s steps(1,end) .9s both,wobT 1.9s steps(1,end) 1.6s infinite}
+.hl-r{--o:64% 80%;animation:chop .56s steps(1,end) 1.2s both,rosewob 1.8s steps(1,end) 1.9s infinite}
+@keyframes wobB{0%{transform:rotate(-.8deg)}25%{transform:rotate(.4deg) translate(1px,-1px)}50%{transform:rotate(1deg)}75%{transform:rotate(0deg) translate(-1px,1px)}}
+@keyframes wobS{0%{transform:rotate(.7deg)}25%{transform:rotate(-.3deg) translate(-1px,1px)}50%{transform:rotate(-.9deg)}75%{transform:rotate(.2deg) translate(1px,0)}}
+@keyframes wobT{0%{transform:rotate(-1deg) translate(0,1px)}25%{transform:rotate(.5deg)}50%{transform:rotate(1.1deg) translate(1px,-1px)}75%{transform:rotate(-.2deg)}}
 @keyframes chop{0%{opacity:0;transform:scale(.6) rotate(-8deg)}25%{opacity:1;transform:scale(1.1) rotate(4deg)}50%{opacity:1;transform:scale(.95) rotate(-2deg)}75%{opacity:1;transform:scale(1.02) rotate(1deg)}100%{opacity:1;transform:none}}
 @keyframes rosewob{0%{transform:rotate(-3deg)}25%{transform:rotate(1deg) translate(1px,-2px)}50%{transform:rotate(4deg)}75%{transform:rotate(0deg) translate(-1px,1px)}}
 @media(prefers-reduced-motion:reduce){.hero p,.hero .btn{opacity:1;translate:none}.hl{animation:none}}

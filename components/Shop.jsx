@@ -17,7 +17,7 @@ function Type({ text, start = 0, onDone }) {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(text.length); onDone && onDone(); return; }
     setN(0);
     let i = 0, iv;
-    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) { clearInterval(iv); onDone && onDone(); } }, 22); }, start);
+    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) { clearInterval(iv); onDone && onDone(); } }, 34); }, start);
     return () => { clearTimeout(t); clearInterval(iv); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, start]);
@@ -173,12 +173,6 @@ export default function Shop() {
   const openCart = () => { setView({ name: 'cart' }); setCartOpen(true); };
   const openAccount = () => { setView(user ? { name: 'account' } : { name: 'login', mode: 'login', toCheckout: false }); setCartOpen(true); };
 
-  const toAbout = () => {
-    const el = [...document.querySelectorAll('#about .nd, #about .nm2')].find((e) => e.offsetParent);
-    scrollToEl(el || document.getElementById('about'), el && el.classList.contains('nm2') ? 'top' : 'center');
-    // на телефон свитъкът се разгъща, след като стигнем до него
-    if (el && el.classList.contains('nm2')) setTimeout(() => setScrollOpen(true), 650);
-  };
   const V = '/img/v2/';
 
   return (
@@ -187,14 +181,13 @@ export default function Shop() {
       <div className="pg">
         <header className="hd">
           <div className="hp" aria-hidden="true" />
-          <button className="about" onClick={toAbout}>За нас</button>
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
-              <svg viewBox="4 4 16 16" aria-hidden="true"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
+              <svg viewBox="3.6 3 16.8 18.6" aria-hidden="true"><circle cx="12" cy="7.6" r="4.3" fill="currentColor" /><path fill="currentColor" d="M12 13.4c-4.4 0-7.9 2.4-7.9 5.4v.6c0 1.1.9 2 2 2h11.8c1.1 0 2-.9 2-2v-.6c0-3-3.5-5.4-7.9-5.4z" /></svg>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="1 2 21.4 20.4" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.4 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" /></svg>
+              <svg viewBox="1 2.2 22 20" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" d="M2.4 3.6h1.9c.7 0 1.3.5 1.5 1.2l2 8.6c.2.8.9 1.3 1.7 1.3h8.2c.8 0 1.4-.5 1.6-1.2l1.6-5.8c.3-.9-.4-1.8-1.3-1.8H5.6" /><path fill="currentColor" d="M5.9 6.4h14.3c.4 0 .7.4.6.8l-1.6 5.8c-.1.4-.5.7-.9.7H8.8c-.4 0-.7-.3-.8-.7z" /><circle cx="9.4" cy="19.6" r="1.9" fill="currentColor" /><circle cx="17.6" cy="19.6" r="1.9" fill="currentColor" /></svg>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>
@@ -228,7 +221,7 @@ export default function Shop() {
 
             <section className="tabsec" id="shop">
               <div className="tabs" role="tablist" ref={tabsRef}>
-                <img className="th" src={V + 'hrt.svg'} alt="" style={heartX == null ? { left: '50%' } : { left: heartX }} />
+                <svg className="th" viewBox="0 0 30 27" aria-hidden="true" style={heartX == null ? { left: '50%' } : { left: heartX }}><path fill="#FEF9E9" d="M15 26.3C5.6 19.4.6 14.4.6 8.3.6 4.1 3.8.8 7.9.8c3 0 5.5 1.7 7.1 4.3C16.6 2.5 19.1.8 22.1.8c4.1 0 7.3 3.3 7.3 7.5 0 6.1-5 11.1-14.4 18z" /></svg>
                 <button role="tab" id="t-tee" aria-selected={kind === 'tee'} onClick={() => setKind('tee')}>
                   <span className="tw"><span className="t1">Тениски</span><span className="t2" aria-hidden="true">Тениски</span></span>
                 </button>
@@ -258,10 +251,10 @@ export default function Shop() {
 
             <section className="note rv" id="about" ref={noteRef} aria-label="Зад Душичките">
               <img className="nd" src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
-              <div className={'nm2' + (scrollOpen ? ' open' : '')}>
+              <div className={'nm2' + (scrollOpen ? ' open' : '')} onClick={() => setScrollOpen((o) => !o)}>
                 <span className="rl rt" aria-hidden="true" />
                 <div className="pap">
-                  <button type="button" className="sch" aria-expanded={scrollOpen} aria-controls="scb" onClick={() => setScrollOpen((o) => !o)}>
+                  <button type="button" className="sch" aria-expanded={scrollOpen} aria-controls="scb">
                     <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
                     <img className="nl" src={V + 'nlogo-cut.webp'} alt="" />
                     <span className="hint" aria-hidden="true">докосни, за да разгънеш ♡</span>
