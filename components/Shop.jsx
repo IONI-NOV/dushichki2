@@ -159,9 +159,9 @@ export default function Shop() {
     if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('vis')); return; }
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -12% 0px' });
     els.forEach((e) => { if (!e.classList.contains('scrap') && !e.classList.contains('d2')) io.observe(e); });
-    const d2 = document.querySelector('.d2.sv'), ab = document.querySelector('#about');
+    const d2 = document.querySelector('.d2.sv'), ab = document.querySelector('.d2s');
     let io3 = null;
-    if (d2 && ab) { io3 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { d2.classList.add('vis'); io3.disconnect(); } }), { threshold: 0, rootMargin: '0px 0px 25% 0px' }); io3.observe(ab); }
+    if (d2 && ab) { io3 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { d2.classList.add('vis'); io3.disconnect(); } }), { threshold: 0, rootMargin: '0px 0px -18% 0px' }); io3.observe(ab); }
     const tb = document.querySelector('.tabs'), sc = document.querySelector('.scrap');
     let io2 = null;
     if (tb && sc) { io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { sc.classList.add('vis'); io2.disconnect(); } }), { threshold: 0 }); io2.observe(tb); }
@@ -272,14 +272,15 @@ export default function Shop() {
 
         <div className={"cv" + (scrollOpen ? " op" : "") + (typed ? " tp" : "")}>
           <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
-          <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
-          <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
+          <img className="fx heart1" src={V + 'heart1-n.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2-n.webp'} alt="" />
           <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
             <defs><mask id="d1m" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="340">
               <path className="ln" pathLength="1" fill="none" stroke="#fff" strokeWidth="34" strokeLinecap="round" strokeLinejoin="round" d="M-5 299C60 308 130 316 200 316C290 316 350 300 381 262C395 230 380 190 345 155C320 132 292 140 288 170C292 215 330 255 385 263C470 270 570 220 640 150C670 120 683 95 688 70C692 62 692 52 691 40C676 40 678 20 692 18C708 20 708 48 692 60"/>
             </mask></defs>
             <g mask="url(#d1m)"><path d={D1} fill="#FEF9E9" opacity=".52" /></g>
           </svg>
+          <span className="d2s" aria-hidden="true" />
           <img className="fx d2 wp sv" src={V + 'd2.svg'} alt="" />
           <img className="fx d3 wp sv" src={V + 'd3.svg'} alt="" />
           <img className="fx scrap sv" src={V + 'scrap.svg'} alt="" />
