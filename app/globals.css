@@ -631,3 +631,10 @@ body:after{background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-r
 .hp{top:-100vh!important}
 .hd:before{display:none}
 @media(min-width:1100px){.hp{left:-40px!important;right:-40px!important}}
+
+/* --- v6: листът, който се вижда при издърпване, е със същия наклон и същата ос като хедъра --- */
+:root{--hh:78px}
+@media(min-width:700px) and (max-width:1099.98px){:root{--hh:84px}}
+@media(min-width:1100px){:root{--hh:calc(100vw*190/1920)}}
+body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pull,0px) + env(safe-area-inset-top,0px) + var(--hh) - 100vh - var(--hh));transform:rotate(-1.2deg);transform-origin:50% 100%}
+@media(min-width:1100px){body:after{left:-40px;right:-40px}}
