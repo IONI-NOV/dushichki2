@@ -261,10 +261,12 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
             <button type="button" className="link" onClick={() => openLegal('terms')}>Общите условия</button> и{' '}
             <button type="button" className="link" onClick={() => openLegal('priv')}>Политиката за поверителност</button>.</span>
         </label>
+        <p className="hint"><b>Важно:</b> всяка дреха се изработва по твоя снимка и избор, затова по закон нямаш право да се откажеш от поръчката след като я направиш (виж{' '}
+          <button type="button" className="link" onClick={() => openLegal('terms', 'VII.')}>раздел VII</button> от Общите условия). Законовата гаранция при дефект или грешка остава.</p>
         <p className="hint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
         <div className="er" id="cer" role="alert">{cer}</div>
         <button className="btn add" id="pay" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>
-          {busy ? (supabaseEnabled ? 'Изпращаме поръчката...' : 'Пренасочваме към Stripe...') : (supabaseEnabled ? 'Поръчай · ' : 'Плати ') + eur(total)}
+          {busy ? (supabaseEnabled ? 'Изпращаме поръчката...' : 'Пренасочваме към Stripe...') : 'Поръчка със задължение за плащане · ' + eur(total)}
         </button>
         <p style={{ textAlign: 'center', marginTop: 10 }}><button type="button" className="link" onClick={onBack}>← Обратно към количката</button></p>
       </form>

@@ -485,7 +485,7 @@ export default function Shop() {
         open={cartOpen} onClose={() => setCartOpen(false)} view={view} setView={setView}
         cart={cart} removeItem={(x) => setCart((c) => c.filter((_, j) => j !== x))}
         user={user} setUser={setUser} guestOK={guestOK} setGuestOK={setGuestOK}
-        apiOk={apiOk} cfg={cfg} openLegal={setLegal} toast={toast} goShop={goShop} clearCart={() => setCart([])}
+        apiOk={apiOk} cfg={cfg} openLegal={openLegalAt} toast={toast} goShop={goShop} clearCart={() => setCart([])}
       />
       <SizeDialog kind={sizesFor} onClose={() => setSizesFor(null)} />
       <LegalDialog id={legal} sec={legalSec} onClose={() => { setLegal(null); setLegalSec(null); }} />
