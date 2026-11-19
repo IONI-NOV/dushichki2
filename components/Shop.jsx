@@ -23,11 +23,11 @@ function Type({ text, start = 0, onDone, run = true }) {
       i += 1; setN(i);
       if (i >= text.length) { onDone && onDone(); return; }
       const ch = text[i - 1], r = Math.random();
-      let d = 24 + Math.random() * 34;
-      if (r < 0.15) d = 14 + Math.random() * 10;            // кратко „изстрелване“ на 2-3 букви
-      else if (r > 0.9) d += 70 + Math.random() * 110;      // малко колебание
-      if (ch === ' ') d += 20 + Math.random() * 40;
-      if (ch === ',' || ch === '.') d += 180 + Math.random() * 160;
+      let d = 13 + Math.random() * 20;
+      if (r < 0.15) d = 8 + Math.random() * 6;            // кратко „изстрелване“ на 2-3 букви
+      else if (r > 0.9) d += 35 + Math.random() * 55;      // малко колебание
+      if (ch === ' ') d += 10 + Math.random() * 20;
+      if (ch === ',' || ch === '.') d += 100 + Math.random() * 90;
       t = setTimeout(next, d);
     };
     t = setTimeout(next, start);
@@ -153,6 +153,15 @@ export default function Shop() {
     return () => io.disconnect();
   }, []);
 
+  // линиите и листът вдясно се появяват при скрол
+  useEffect(() => {
+    const els = document.querySelectorAll('.sv');
+    if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('vis')); return; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), { threshold: 0.15 });
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, []);
+
   // fade-up на артикулите, когато влязат в екрана
   useEffect(() => {
     const els = document.querySelectorAll('#grid .card');
@@ -255,7 +264,7 @@ export default function Shop() {
           </div>
         </header>
 
-        <div className="cv">
+        <div className={"cv" + (scrollOpen ? " op" : "")}>
           <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
           <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
           <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
@@ -265,9 +274,9 @@ export default function Shop() {
             </mask></defs>
             <g mask="url(#d1m)"><path d={D1} fill="#FEF9E9" opacity=".52" /></g>
           </svg>
-          <img className="fx d2" src={V + 'd2.svg'} alt="" />
-          <img className="fx d3" src={V + 'd3.svg'} alt="" />
-          <img className="fx scrap" src={V + 'scrap.svg'} alt="" />
+          <img className="fx d2 wp sv" src={V + 'd2.svg'} alt="" />
+          <img className="fx d3 wp sv" src={V + 'd3.svg'} alt="" />
+          <img className="fx scrap sv" src={V + 'scrap.svg'} alt="" />
 
           <main>
             <section className={'hero' + (typed ? ' typed' : '')}>
@@ -334,9 +343,6 @@ export default function Shop() {
                 </div>
                 <span className="rl rb" aria-hidden="true" />
               </div>
-              <img className="dp dp1" src={V + 'ph1.webp'} alt="" />
-              <img className="dp dp2" src={V + 'ph2.webp'} alt="" />
-              <p className="cap">Бродирано с нашата любов за вашата любов…</p>
             </section>
           </main>
         </div>
