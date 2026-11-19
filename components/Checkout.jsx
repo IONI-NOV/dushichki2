@@ -158,14 +158,14 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
         </div>
 
         <div id="dl">
-          {!R && <p className="cohint">Зареждаме офисите на {cr}...</p>}
+          {!R && <p className="hint">Зареждаме офисите на {cr}...</p>}
           {R && type === 'office' && manual && (
             <>
               <Field id="d-city" ph="Град *" value={f['d-city']} onChange={set('d-city')} err={errs['d-city']} autoComplete="address-level2" />
               {f['d-city'].trim().length >= 2 && (
                 <>
                   <Field id="d-office" ph="Кой е офисът? *" value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
-                  <p className="cohint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
+                  <p className="hint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
                 </>
               )}
             </>
@@ -223,7 +223,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
               <Field id="d-block" ph="Блок, вход, етаж" value={f['d-block']} onChange={set('d-block')} />
               <Field id="d-zip" ph="Пощенски код *" value={f['d-zip']} onChange={set('d-zip')} err={errs['d-zip']} inputMode="numeric" autoComplete="postal-code" />
               <Field id="d-note" ph={'Добавете офис на ' + cr + ' при нужда'} value={f['d-note']} onChange={set('d-note')} />
-              <p className="cohint">Ако куриерът не стига до адреса, пратката ще бъде оставена в посочения офис.</p>
+              <p className="hint">Ако куриерът не стига до адреса, пратката ще бъде оставена в посочения офис.</p>
             </>
           )}
         </div>
