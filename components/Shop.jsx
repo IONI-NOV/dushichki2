@@ -134,17 +134,17 @@ export default function Shop() {
 
         <div className="cv">
           <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
           <img className="fx d1" src={V + 'd1.webp'} alt="" />
           <img className="fx d2" src={V + 'd2.webp'} alt="" />
           <img className="fx d3" src={V + 'd3.webp'} alt="" />
-          <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
           <img className="fx scrap" src={V + 'scrap.webp'} alt="" />
 
           <main>
             <section className="hero">
               <h1>Подарък за твоята душичка, който топли сърцето с години.</h1>
               <p>Дай живот на спомените си.</p>
-              <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
+              <button className="btn" id="go" onClick={goShop}><span>И аз искам!</span></button>
               <img className="hi" src={V + 'hero.webp'} alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
             </section>
 
@@ -156,18 +156,21 @@ export default function Shop() {
                 <button role="tab" id="t-hoodie" aria-selected={kind === 'hoodie'} onClick={() => setKind('hoodie')}>
                   {kind === 'hoodie' && <img className="th" src={V + 'hrt.webp'} alt="" />}Худита
                 </button>
+                <button role="tab" id="t-top" disabled aria-disabled="true" title="Скоро">Блузи</button>
               </div>
             </section>
 
             <section className="grid" id="grid" aria-live="polite">
               {DESIGNS.map((d, i) => (
                 <button className="card fu" style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
-                  <div className="im">
-                    <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
-                    <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+                  <div className="cf">
+                    <div className="im">
+                      <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
+                      <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+                    </div>
+                    <h3>{d.n}</h3>
+                    <p className="pr">{eur(KIND[kind].price)}</p>
                   </div>
-                  <h3>{d.n}</h3>
-                  <p className="pr">{eur(KIND[kind].price)}</p>
                 </button>
               ))}
             </section>
