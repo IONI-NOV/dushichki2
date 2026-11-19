@@ -784,3 +784,7 @@ body:after{display:none!important}
 .cartb{right:28px;top:25px;width:34px}
 .login .lb{font-size:16px}
 }
+
+/* v18: repeat tab switches – gentle pop (first view keeps the strong one) */
+@keyframes cardSoft{0%{opacity:1;transform:scale(.985) rotate(-.3deg)}60%{transform:scale(1.003) rotate(.1deg)}100%{transform:none}}
+.card.fu.soft.vis{animation:cardSoft .4s ease-out calc(var(--i,0)*60ms) both}

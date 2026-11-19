@@ -1,7 +1,7 @@
 'use client';
 import { D1 } from '../lib/d1path';
 import { supabaseEnabled, currentUser, onUserChange, onAuthEvent } from '../lib/supabase';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { HeartSymbol } from './Icons';
 import ProductDialog from './ProductDialog';
 import CartDialog from './CartDialog';
@@ -207,6 +207,9 @@ export default function Shop() {
     window.addEventListener('resize', upd);
     return () => { window.removeEventListener('scroll', upd); window.removeEventListener('resize', upd); };
   }, []);
+  const seenKinds = useRef(new Set());
+  const soft = useMemo(() => seenKinds.current.has(kind), [kind]);
+  useEffect(() => { seenKinds.current.add(kind); }, [kind]);
   const noteRef = useRef(null);
   const tabsRef = useRef(null);
   useLayoutEffect(() => {
@@ -409,7 +412,7 @@ export default function Shop() {
 
             <section className="grid" id="grid" aria-live="polite">
               {DESIGNS.map((d, i) => (
-                <button className="card fu" style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
+                <button className={"card fu" + (soft ? " soft" : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
                   <div className="cf">
                     <div className="im">
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
