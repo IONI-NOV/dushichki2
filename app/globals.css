@@ -70,7 +70,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .cap{color:var(--cr);font-weight:300;font-style:italic}
 .pg footer{background:#2a1212;color:var(--cr)}
 .lk{background:none;border:0;padding:0;color:var(--cr);font-weight:400;text-decoration:none;transition:transform .25s}
-.lk:hover,.lk:focus-visible{transform:scale(1.06)}
+.lk:hover,.lk:focus-visible{transform:none}
 
 /* --- десктоп --- */
 @media(min-width:1100px){
@@ -708,12 +708,8 @@ body:after{display:none}
 }
 @keyframes iconPop{0%{transform:scale(0)}65%{transform:scale(1.18)}100%{transform:scale(1)}}
 @keyframes lbIn{from{opacity:0}to{opacity:1}}
-.pg:not(.go) .login svg,.pg:not(.go) .cartb svg{transform:scale(0)}
-.pg.go .login svg,.pg.go .cartb svg{animation:iconPop .5s cubic-bezier(.3,1.2,.5,1) .85s both}
-.pg.go .cartb svg{animation-delay:1s}
 .pg:not(.go) .hd .lb{opacity:0}
 .pg.go .hd .lb{animation:lbIn .7s ease 1.3s both}
-@media(prefers-reduced-motion:reduce){.pg:not(.go) .login svg,.pg:not(.go) .cartb svg{transform:none}.pg.go .login svg,.pg.go .cartb svg{animation:none}}
 
 /* --- v13: пунктирът е SVG (по-дълги чертички), същият в заставката и в хедъра; сърчице след „Зад Душички“ --- */
 .hring{display:none}
@@ -723,4 +719,21 @@ body:after{display:none}
 .hring{display:block;position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
 .hr-r{fill:none;stroke:#C42A31;stroke-width:calc(var(--u)*4);stroke-dasharray:calc(var(--u)*13) calc(var(--u)*8);x:calc(var(--u)*2);y:calc(var(--u)*2);width:calc(100% - var(--u)*4);height:calc(100% - var(--u)*4);rx:calc(var(--u)*20)}
 .hd .logo{top:calc(var(--u)*50)}
+}
+
+/* --- v14: без уголемяване във футъра; свой курсор; елементите на хедъра падат в картата --- */
+.pg footer .lk,.pg footer a{transition:none!important;transform:none!important}
+html{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 1 0,auto}
+button,a,.btn,label,.card,.cl,[role=tab],[aria-expanded],summary,select,input[type=checkbox],input[type=radio],input[type=file]{cursor:image-set(url(/img/v2/cur-h.png) 1x,url(/img/v2/cur-h2.png) 2x) 12 3,pointer!important}
+input[type=text],input[type=email],input[type=password],input[type=tel],textarea{cursor:text!important}
+button:disabled{cursor:image-set(url(/img/v2/cur-a.png) 1x,url(/img/v2/cur-a2.png) 2x) 1 0,default!important}
+.hclip{position:absolute;inset:0;pointer-events:none}
+.hclip>*{pointer-events:auto}
+@keyframes fall{0%{translate:0 -120px}62%{translate:0 5px}80%{translate:0 -3px}100%{translate:0 0}}
+@media(min-width:1100px){
+.hclip{clip-path:inset(calc(var(--u)*34) calc(var(--u)*58) calc(var(--u)*16) calc(var(--u)*58) round calc(var(--u)*22))}
+.pg:not(.go) .about,.pg:not(.go) .login,.pg:not(.go) .cartb{translate:0 -120px}
+.pg.go .about{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.25s both}
+.pg.go .login{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.38s both}
+.pg.go .cartb{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.5s both}
 }

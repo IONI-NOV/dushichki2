@@ -319,6 +319,7 @@ export default function Shop() {
       <div className={'pg' + (introGo ? ' go' : '')}>
         <header className="hd">
           <div className="hp" aria-hidden="true"><svg className="hring"><rect className="hr-r" /></svg></div>
+          <div className="hclip">
           <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b><svg className="hrt" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2S3.2 15.9 1.9 10.3C1.1 6.8 3.5 3.8 6.6 3.8c2.2 0 4 1.2 5.4 3.3 1.4-2.1 3.2-3.3 5.4-3.3 3.1 0 5.5 3 4.7 6.5C20.8 15.9 12 21.2 12 21.2z" /></svg></button>
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
@@ -330,6 +331,7 @@ export default function Shop() {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.34" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><g transform="translate(12 12) scale(1.045) translate(-12 -12)"><path d="M2.8 4.2h2.1c.5 0 .9.3 1 .8l.4 1.5" /><path d="M6.3 6.5H21l-1.7 6.8c-.2.8-.9 1.3-1.7 1.3H9.2c-.8 0-1.5-.5-1.7-1.3z" /><circle cx="9.6" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></g></svg>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
+          </div>
           </div>
         </header>
 
