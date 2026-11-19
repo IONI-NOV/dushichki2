@@ -286,7 +286,7 @@ export default function Shop() {
           </svg>
           <span className="d2s" aria-hidden="true" />
           <img className="fx d2 wp sv" src={V + 'd2.svg'} alt="" />
-          <img className="fx scrap sv" src={V + 'scrap.svg'} alt="" />
+          <div className="fx scrap sv" aria-hidden="true" />
 
           <main>
             <section className={'hero' + (typed ? ' typed' : '')}>

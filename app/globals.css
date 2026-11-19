@@ -567,3 +567,9 @@ dialog{--m:11px}
 .cartb .lb{right:calc(100% + .55em)}
 .hd .gr{display:inline}
 @media(max-width:699px){.hd .gr{display:none}.hd .lb{font-size:13px}.cartb .lb{display:none}}
+
+/* тетрадни листове: хедър (прав) и десен лист (с наклона си) */
+.pg{--ls:32px;--mx:11px}
+@media(min-width:1100px){.pg{--ls:calc(var(--u)*34);--mx:calc(var(--u)*100)}.hd{height:calc(var(--u)*190)}.hd:before{left:0;right:0}}
+.hp{clip-path:none!important;background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.45) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9;box-shadow:0 3px 10px rgba(60,0,10,.18)}
+@media(min-width:1100px){.fx.scrap{height:auto;aspect-ratio:200/650;-webkit-mask:url(/img/v2/scrap.svg) 0 0/100% 100% no-repeat;mask:url(/img/v2/scrap.svg) 0 0/100% 100% no-repeat;background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*45) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.45) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9}}
