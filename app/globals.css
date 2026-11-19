@@ -78,8 +78,8 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .cv{height:calc(var(--u)*3412)}
 .heart1{left:calc(var(--u)*387);top:calc(var(--u)*259);width:calc(var(--u)*414)}
 .heart2{left:calc(var(--u)*324);top:calc(var(--u)*2169);width:calc(var(--u)*282)}
-.d1{left:0;top:calc(var(--u)*955);width:calc(var(--u)*700)}
-.d2{left:calc(var(--u)*1503);top:calc(var(--u)*2095);width:calc(var(--u)*417)}
+.d1{left:0;top:calc(var(--u)*860);width:calc(var(--u)*760)}
+.d2{left:calc(var(--u)*1503);top:calc(var(--u)*2032);width:calc(var(--u)*417)}
 .d3{left:calc(var(--u)*140);top:calc(var(--u)*3262);width:calc(var(--u)*800)}
 .scrap{left:calc(var(--u)*1720);top:calc(var(--u)*1050);width:calc(var(--u)*200)}
 .hero h1{position:absolute;left:calc(var(--u)*147);top:calc(var(--u)*333);width:calc(var(--u)*660);font-size:calc(var(--u)*61);line-height:1.15}
