@@ -198,7 +198,7 @@ export default function Shop() {
   const soft = useMemo(() => seenKinds.current.has(kind), [kind]);
   const sw = useMemo(() => mounted.current, [kind]);
   useEffect(() => { mounted.current = true; }, []);
-  const hov = (k, i) => (i === 2 && k === 'tee' ? 'r' : i === 2 && k === 'hoodie' ? 'e' : 'w');
+  const hov = (k, i) => (i === 1 && k === 'tee' ? 'r' : i === 1 && k === 'hoodie' ? 'e' : 'w');
   const preImgs = useRef([]);
   useEffect(() => {
     Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w', hov(k, i)].forEach((v) => { const m = new Image(); m.decoding = 'sync'; m.src = img(k, v, i); preImgs.current.push(m); })));
