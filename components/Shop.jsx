@@ -425,7 +425,7 @@ export default function Shop() {
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
                       <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
                     </div>
-                    <h3>{d.n}</h3>
+                    <h3>{d.n.replace(/ (по снимка|на домашен любимец|на починал близък)$/, (m) => '\u0000' + m).split('\u0000').map((x, j) => j ? <span key={j}>{x.slice(0, x.indexOf(' ', 1) + 1)}<b>{x.slice(x.indexOf(' ', 1) + 1)}</b></span> : x)}</h3>
                     <p className="pr">{eur(KIND[kind].price)}</p>
                   </div>
                 </button>
