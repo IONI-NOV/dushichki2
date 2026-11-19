@@ -531,11 +531,11 @@ dialog{--m:11px}
 .tx p{font-size:21px}
 .ttl{width:min(46%,520px)}
 .cv{transition:height .9s cubic-bezier(.55,.05,.25,1)}
-.cv.op{height:calc(var(--u)*3040)}
-.cv:not(.op){height:calc(var(--u)*2740)}
-.cv.op .d3{top:calc(var(--u)*2730)}
+.cv.op{height:calc(var(--u)*2900)}
+.cv:not(.op){height:calc(var(--u)*2610)}
+.cv.op .d3{top:calc(var(--u)*2680)}
 .cv .d3{transition:top .9s cubic-bezier(.55,.05,.25,1),clip-path 3.4s cubic-bezier(.3,.1,.2,1),opacity 1s}
-.cv:not(.op) .d3{top:calc(var(--u)*2430)}
+.cv:not(.op) .d3{top:calc(var(--u)*2390)}
 }
 .nhint{display:none}
 

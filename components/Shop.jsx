@@ -158,11 +158,14 @@ export default function Shop() {
     const els = document.querySelectorAll('.sv');
     if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('vis')); return; }
     const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -12% 0px' });
-    els.forEach((e) => { if (!e.classList.contains('scrap')) io.observe(e); });
+    els.forEach((e) => { if (!e.classList.contains('scrap') && !e.classList.contains('d2')) io.observe(e); });
+    const d2 = document.querySelector('.d2.sv'), ab = document.querySelector('#about');
+    let io3 = null;
+    if (d2 && ab) { io3 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { d2.classList.add('vis'); io3.disconnect(); } }), { threshold: 0, rootMargin: '0px 0px 25% 0px' }); io3.observe(ab); }
     const tb = document.querySelector('.tabs'), sc = document.querySelector('.scrap');
     let io2 = null;
     if (tb && sc) { io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { sc.classList.add('vis'); io2.disconnect(); } }), { threshold: 0 }); io2.observe(tb); }
-    return () => { io.disconnect(); io2 && io2.disconnect(); };
+    return () => { io.disconnect(); io2 && io2.disconnect(); io3 && io3.disconnect(); };
   }, []);
 
   // fade-up на артикулите, когато влязат в екрана
