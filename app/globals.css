@@ -750,3 +750,37 @@ button:disabled{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.
 select,label,input[type=checkbox],input[type=radio],input[type=text],input[type=email],input[type=tel],input[type=password]{cursor:image-set(url(/img/v2/curt-a.png) 1x,url(/img/v2/curt-a2.png) 2x) 2 1,default}
 input[type=text],input[type=email],input[type=tel],input[type=password],textarea{cursor:text!important}
 .drop label{cursor:image-set(url(/img/v2/curu-h.png) 1x,url(/img/v2/curu-h2.png) 2x) 12 1,pointer!important}
+
+/* --- v17: нов хедър и за телефон и таблет (карта с пунктир, „Зад Душички“, падащи елементи) --- */
+.pg{--s:.727px}
+@media(min-width:700px){.pg{--s:.88px}}
+@media(min-width:1100px){.pg{--s:var(--u)}}
+.hring{display:block;position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.hr-r{fill:none;stroke:#C42A31;stroke-width:calc(var(--s)*4);stroke-dasharray:calc(var(--s)*13) calc(var(--s)*8);x:calc(var(--s)*2);y:calc(var(--s)*2);width:calc(100% - var(--s)*4);height:calc(100% - var(--s)*4);rx:calc(var(--s)*20)}
+@keyframes fall{0%{translate:0 -120px}62%{translate:0 5px}80%{translate:0 -3px}100%{translate:0 0}}
+.pg:not(.go) .about,.pg:not(.go) .login,.pg:not(.go) .cartb{translate:0 -120px}
+.pg.go .about{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.25s both}
+.pg.go .login{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.38s both}
+.pg.go .cartb{animation:fall .85s cubic-bezier(.45,0,.75,.6) 1.5s both}
+body:after{display:none!important}
+@media(max-width:1099.98px){
+.hp{top:10px!important;bottom:10px!important;height:auto!important;left:0!important;right:0!important;transform:none!important;clip-path:none!important;-webkit-mask:none!important;mask:none!important;background:#FEF9E9!important;border-radius:calc(var(--s)*22);box-shadow:0 3px 9px rgba(60,0,10,.22)}
+.hp:before,.hp:after{content:none!important}
+.hclip{clip-path:inset(10px 0 10px 0 round calc(var(--s)*22))}
+.about{display:block;left:22px;top:30px;font-size:15px;font-weight:400;line-height:1.2;font-family:inherit}
+.about b{font-weight:500}
+.about .hrt{width:.72em;height:.72em;margin-left:.35em}
+.hd .logo{top:17px;height:44px;width:auto}
+.login{left:auto;right:66px;top:25px;width:28px}
+.cartb{right:20px;top:25px;width:28px}
+.login .lb{left:auto;right:calc(100% + 6px);font-size:13px;font-weight:400}
+.login .lb b{font-weight:500}
+.hd .bd{top:-8px;right:-9px}
+}
+@media(min-width:700px) and (max-width:1099.98px){
+.about{left:30px;top:32px;font-size:18px}
+.hd .logo{top:16px;height:52px}
+.login{right:84px;top:25px;width:34px}
+.cartb{right:28px;top:25px;width:34px}
+.login .lb{font-size:16px}
+}

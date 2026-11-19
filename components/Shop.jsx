@@ -111,11 +111,12 @@ export default function Shop() {
       const spl = splRef.current, lg = splLogoRef.current, hd = document.querySelector('.hd'), hl = document.querySelector('.hd .logo');
       if (!spl || !lg || !hd || !hl) { setIntro('done'); return; }
       const hp = document.querySelector('.hd .hp');
-      const desk = window.innerWidth >= 1100 && hp;
+      const desk = !!hp;
       if (desk) {
         // заставката се превръща в листа с дупките: същата форма, наклон и дупки, анимирани с JS
         const W0 = window.innerWidth, H0 = window.innerHeight;
         const u = hd.getBoundingClientRect().width / 1920;
+        const sc = window.innerWidth >= 1100 ? u : (window.innerWidth >= 700 ? 0.88 : 0.727);
         const keep = hp.style.transform; hp.style.transform = 'none';
         const q = hp.getBoundingClientRect(); hp.style.transform = keep;
         const th = 0, cs = Math.cos(th), sn = Math.sin(th);
@@ -140,14 +141,14 @@ export default function Shop() {
         const ov = document.createElementNS(NS, 'svg'), rc = document.createElementNS(NS, 'rect');
         ov.setAttribute('style', 'position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none');
         rc.setAttribute('fill', 'none'); rc.setAttribute('stroke', '#C42A31');
-        rc.setAttribute('stroke-width', 4 * u); rc.setAttribute('stroke-dasharray', 13 * u + ' ' + 8 * u);
+        rc.setAttribute('stroke-width', 4 * sc); rc.setAttribute('stroke-dasharray', 13 * sc + ' ' + 8 * sc);
         ov.appendChild(rc); spl.appendChild(ov);
         const T0 = performance.now(), DUR = 1000;
         const f = (a, b, e) => a + (b - a) * e;
         const frame = (now) => {
           const k = Math.min(1, (now - T0) / DUR), e = ease(k);
           const C = S.map((p, i) => [f(p[0], E[i][0], e), f(p[1], E[i][1], e)]);
-          const rr = 22 * u * e, x0 = C[0][0], y0 = C[0][1], x1 = C[2][0], y1 = C[2][1];
+          const rr = 22 * sc * e, x0 = C[0][0], y0 = C[0][1], x1 = C[2][0], y1 = C[2][1];
           let d = 'M' + (x0 + rr) + ' ' + y0 + 'H' + (x1 - rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + x1 + ' ' + (y0 + rr) + 'V' + (y1 - rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + (x1 - rr) + ' ' + y1 + 'H' + (x0 + rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + x0 + ' ' + (y1 - rr) + 'V' + (y0 + rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + (x0 + rr) + ' ' + y0 + 'Z';
           const r = R * e;
           if (r > 0.01) holes.forEach((h) => {
@@ -156,9 +157,9 @@ export default function Shop() {
             d += 'M' + (x - r).toFixed(2) + ' ' + cyy.toFixed(2) + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (2 * r).toFixed(2) + ' 0a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (-2 * r).toFixed(2) + ' 0Z';
           });
           spl.style.clipPath = "path(evenodd,'" + d + "')";
-          rc.setAttribute('x', x0 + 2 * u); rc.setAttribute('y', y0 + 2 * u);
-          rc.setAttribute('width', Math.max(0, x1 - x0 - 4 * u)); rc.setAttribute('height', Math.max(0, y1 - y0 - 4 * u));
-          rc.setAttribute('rx', 20 * u * e); rc.setAttribute('opacity', Math.min(1, k * 6));
+          rc.setAttribute('x', x0 + 2 * sc); rc.setAttribute('y', y0 + 2 * sc);
+          rc.setAttribute('width', Math.max(0, x1 - x0 - 4 * sc)); rc.setAttribute('height', Math.max(0, y1 - y0 - 4 * sc));
+          rc.setAttribute('rx', 20 * sc * e); rc.setAttribute('opacity', Math.min(1, k * 6));
           if (k < 1) requestAnimationFrame(frame);
         };
         requestAnimationFrame(frame);
