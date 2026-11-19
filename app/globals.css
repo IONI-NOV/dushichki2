@@ -393,7 +393,9 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 @keyframes heartIn{from{transform:scale(.05);opacity:0}to{transform:none;opacity:1}}
 @keyframes drawD1{to{stroke-dashoffset:0}}
 @keyframes cur{50%{border-color:transparent}}
-.hd{animation:hdIn 1.5s cubic-bezier(.22,1,.36,1) both}
+.hd{transform:translateY(-115%);animation:hdFallback 0s 4s forwards}
+.hd.in{transform:none;animation:none;transition:transform 1.6s cubic-bezier(.3,.75,.3,1)}
+@keyframes hdFallback{to{transform:none}}
 .fx.heart1{animation:heartIn .8s cubic-bezier(.2,.9,.3,1.1) .15s both;transform-origin:50% 50%}
 .d1w{position:absolute;pointer-events:none;overflow:visible}
 .d1w .ln{stroke-dasharray:1;stroke-dashoffset:1;animation:drawD1 2.2s cubic-bezier(.45,.05,.3,1) .2s forwards}
@@ -405,7 +407,7 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 .note.rv.vis .nd,.note.rv.vis .nm2,.note.rv.vis .dp,.note.rv.vis .cap{opacity:1;transform:none}
 .note.rv.vis .nm2{transform:rotate(-1.2deg)}
 .note.rv.vis .dp2{transition-delay:.15s}.note.rv.vis .cap{transition-delay:.3s}
-@media(prefers-reduced-motion:reduce){.hd,.fx.heart1{animation:none}.d1w .ln{animation:none;stroke-dashoffset:0}.note.rv .nd,.note.rv .nm2,.note.rv .dp,.note.rv .cap{opacity:1;transform:none;transition:none}.note.rv .nm2{transform:rotate(-1.2deg)}}
+@media(prefers-reduced-motion:reduce){.hd,.fx.heart1{animation:none}.hd{transform:none}.d1w .ln{animation:none;stroke-dashoffset:0}.note.rv .nd,.note.rv .nm2,.note.rv .dp,.note.rv .cap{opacity:1;transform:none;transition:none}.note.rv .nm2{transform:rotate(-1.2deg)}}
 
 /* ===== начало: курсор, поява на текста, стоп-моушън снимки ===== */
 .caret{position:relative}

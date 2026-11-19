@@ -57,7 +57,16 @@ export default function Shop() {
 
   const [heartX, setHeartX] = useState(null);
   const [scrollOpen, setScrollOpen] = useState(false); // свитъкът „Зад Душички“ (телефон)
-  const [typed, setTyped] = useState(false); // заглавието е изписано -> показваме подзаглавието и бутона
+  const [typed, setTyped] = useState(false);
+  const [hdIn, setHdIn] = useState(false);
+  // Хедърът се спуска отгоре чак когато страницата е заредена и се вижда (иначе анимацията минава, докато телефонът още зарежда)
+  useEffect(() => {
+    let t;
+    const go = () => { t = setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(() => setHdIn(true))), 120); };
+    if (document.readyState === 'complete') go();
+    else { window.addEventListener('load', go, { once: true }); t = setTimeout(go, 1500); }
+    return () => { clearTimeout(t); window.removeEventListener('load', go); };
+  }, []); // заглавието е изписано -> показваме подзаглавието и бутона
 
   // При издърпване на страницата (overscroll) отгоре да се вижда кремавият лист, а отдолу – тъмният цвят на футъра.
   // iOS оцветява тази зона с фона на <html>, затова го сменяме според това в коя половина на страницата сме.
@@ -191,7 +200,7 @@ export default function Shop() {
     <>
       <HeartSymbol />
       <div className="pg">
-        <header className="hd">
+        <header className={'hd' + (hdIn ? ' in' : '')}>
           <div className="hp" aria-hidden="true" />
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
