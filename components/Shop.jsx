@@ -179,7 +179,7 @@ export default function Shop() {
     };
     const start = () => {
       if (started) return; started = true;
-      const wait = Math.max(0, 1200 - (performance.now() - t0)); // поне за миг да се види заставката
+      const wait = Math.max(0, 650 - (performance.now() - t0)); // поне за миг да се види заставката
       timers.push(setTimeout(() => setPre(true), Math.max(0, wait - 350)));
       timers.push(setTimeout(() => requestAnimationFrame(lift), wait));
     };
