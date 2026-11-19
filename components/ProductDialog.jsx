@@ -9,7 +9,7 @@ import { api, thumb } from '../lib/api';
 export default function ProductDialog({ kind, design, apiOk, onClose, onAdd, onSizes }) {
   const open = design !== null;
   return (
-    <Dialog open={open} onClose={onClose} label="Продукт">
+    <Dialog open={open} onClose={onClose} label="Продукт" xScrolls>
       {open && <ProductForm kind={kind} i={design} apiOk={apiOk} onClose={onClose} onAdd={onAdd} onSizes={onSizes} />}
     </Dialog>
   );
