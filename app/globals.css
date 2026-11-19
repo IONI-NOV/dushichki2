@@ -18,7 +18,7 @@ img{max-width:none}
 dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 
 /* ===== страница (дизайн 1920px; 1u = 1px от макета) ===== */
-.pg{container-type:inline-size;position:relative;--u:calc(100cqw / 1920);background:url(/img/v2/stripes.svg) 0 0/max(100%,700px) auto repeat-y,#C82028 url(/img/v2/bg.webp) 0 0/100% auto no-repeat;color:var(--cr);overflow-x:clip}
+.pg{container-type:inline-size;position:relative;--u:calc(100cqw / 1920);background:url(/img/v2/stripes-v3.svg) 0 0/max(100%,700px) auto repeat-y,#C82028 url(/img/v2/bg.webp) 0 0/100% auto no-repeat;color:var(--cr);overflow-x:clip}
 .hd{position:absolute;left:0;right:0;top:0;z-index:50;pointer-events:none}
 .hd>*{pointer-events:auto}
 /* листът на хедъра продължава нагоре при издърпване (overscroll) */
@@ -111,7 +111,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 /* --- таблет и телефон --- */
 @media(max-width:1099.98px){
 .dp{display:none}
-.pg{background-image:url(/img/v2/stripes.svg),linear-gradient(#C82028,#C81F27);background-size:max(100%,700px) auto,auto;background-repeat:repeat-y,no-repeat}
+.pg{background-image:url(/img/v2/stripes-v3.svg),linear-gradient(#C82028,#C81F27);background-size:max(100%,700px) auto,auto;background-repeat:repeat-y,no-repeat}
 .hd{height:78px}
 .hp{background:var(--cream);clip-path:polygon(0 0,100% 0,100% 84%,0 100%)}
 .about{position:absolute;left:18px;top:27px;font-size:15px}
@@ -527,15 +527,15 @@ dialog{--m:11px}
 .tx u{text-decoration-thickness:2px;text-underline-offset:5px}
 .tx .ov{border:2px solid var(--red2);border-radius:50%;padding:0 6px}
 .nd{display:none!important}
-.nm2{display:block;position:absolute;left:calc(var(--u)*260);top:calc(var(--u)*2330);width:calc(var(--u)*1400);max-width:none}
+.nm2{display:block;position:absolute;left:calc(var(--u)*260);top:calc(var(--u)*2270);width:calc(var(--u)*1400);max-width:none}
 .tx p{font-size:21px}
 .ttl{width:min(46%,520px)}
 .cv{transition:height .9s cubic-bezier(.55,.05,.25,1)}
-.cv.op{height:calc(var(--u)*3180)}
-.cv:not(.op){height:calc(var(--u)*2760)}
-.cv.op .d3{top:calc(var(--u)*2870)}
+.cv.op{height:calc(var(--u)*3040)}
+.cv:not(.op){height:calc(var(--u)*2740)}
+.cv.op .d3{top:calc(var(--u)*2730)}
 .cv .d3{transition:top .9s cubic-bezier(.55,.05,.25,1),clip-path 3.4s cubic-bezier(.3,.1,.2,1),opacity 1s}
-.cv:not(.op) .d3{top:calc(var(--u)*2470)}
+.cv:not(.op) .d3{top:calc(var(--u)*2430)}
 }
 .nhint{display:none}
 
