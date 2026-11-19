@@ -10,6 +10,7 @@ import LegalDialog from './LegalDialog';
 import { DESIGNS, KIND, eur, img } from '../lib/data';
 import { api } from '../lib/api';
 
+const K = (t) => String(t).split(/([А-ЯA-Z])/).map((x, i) => (i % 2 ? <span key={i} className="K">{x}</span> : x));
 function Type({ text, start = 0, onDone, run = true, hand = null }) {
   const [n, setN] = useState(0);
   const done = n >= text.length;
@@ -268,7 +269,7 @@ export default function Shop() {
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
-              <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Влез'}</span>
+              <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Профил'}</span>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.6 3.6h1.9c.7 0 1.2.4 1.4 1.1l2.2 9.5c.2.7.8 1.2 1.5 1.2h8.3c.7 0 1.3-.5 1.5-1.1l1.8-6.4c.2-.8-.4-1.5-1.2-1.5H5.6" /><path d="M10.2 10.4h7.2" /><circle cx="9.6" cy="19.7" r="1.6" /><circle cx="17.5" cy="19.7" r="1.6" /></svg>
@@ -349,9 +350,9 @@ export default function Shop() {
                   <div className="scb" id="scb">
                     <div className="sci">
                       <div className="tx">
-                        <p>Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да <u>пазиш с години.</u></p>
-                        <p>Вярвам, че хората не помнят предмети, а <span className="ov">моменти.</span> Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. ♡</p>
-                        <p>Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето. :)</p>
+                        <p>{K('Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да ')}<u>{K('пазиш с години.')}</u></p>
+                        <p>{K('Вярвам, че хората не помнят предмети, а ')}<span className="ov">{K('моменти.')}</span>{K(' Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. ♡')}</p>
+                        <p>{K('Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето. :)')}</p>
                       </div>
                     </div>
                   </div>

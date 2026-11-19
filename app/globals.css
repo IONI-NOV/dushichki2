@@ -636,3 +636,14 @@ body:after{background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-r
 @media(min-width:1100px){:root{--hh:calc(100vw*190/1920)}}
 body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pull,0px) + env(safe-area-inset-top,0px) + var(--hh) - 100vh - var(--hh));transform:rotate(-1.2deg);transform-origin:50% 100%}
 @media(min-width:1100px){body:after{left:-40px;right:-40px}}
+
+/* --- v7: хедърът като в макета: по-тесен лист с дупки, ръкописен шрифт; десният лист с наклонени редове и червена линия --- */
+.K{font-size:1.32em;font-weight:700;line-height:0}
+.hd .lb{font-family:var(--hand);font-weight:400}
+@media(min-width:1100px){
+.hp{left:calc(var(--u)*56)!important;right:calc(var(--u)*94)!important}
+.hd .lb{font-size:max(15px,calc(var(--u)*30))}
+.hp:after{content:"";position:absolute;left:0;right:0;bottom:calc(var(--u)*12);height:calc(var(--u)*16);background:radial-gradient(circle at 50% 50%,#BE2A30 calc(var(--u)*8),transparent calc(var(--u)*8.6)) calc(var(--u)*29) 0/calc(var(--u)*106) 100% repeat-x}
+.fx.scrap{background:none;overflow:visible}
+.fx.scrap:before{content:"";position:absolute;inset:-20%;transform:rotate(-1.2deg);background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*165) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.5) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9}
+}
