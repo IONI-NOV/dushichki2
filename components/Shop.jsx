@@ -1,7 +1,7 @@
 'use client';
 import { supabaseEnabled, currentUser, onUserChange, onAuthEvent } from '../lib/supabase';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Deco, HeartSymbol, CartIcon } from './Icons';
+import { HeartSymbol } from './Icons';
 import ProductDialog from './ProductDialog';
 import CartDialog from './CartDialog';
 import SizeDialog from './SizeDialog';
@@ -109,54 +109,86 @@ export default function Shop() {
   const openCart = () => { setView({ name: 'cart' }); setCartOpen(true); };
   const openAccount = () => { setView(user ? { name: 'account' } : { name: 'login', mode: 'login', toCheckout: false }); setCartOpen(true); };
 
+  const toAbout = () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const V = '/img/v2/';
+
   return (
     <>
       <HeartSymbol />
-      <div className="wrap">
-        <Deco style={{ left: -150, top: 1450, width: 290, transform: 'rotate(-12deg)' }} />
-        <Deco style={{ right: -160, top: 1330, width: 290, transform: 'rotate(14deg)' }} />
-
-        <header>
+      <div className="pg">
+        <header className="hd">
+          <div className="hp" aria-hidden="true" />
+          <button className="about" onClick={toAbout}>За нас</button>
           <img className="logo" src="/img/logo.png" alt="Душички" />
           <div className="hr">
-            <button className="login" id="acc" onClick={openAccount}>{user ? 'Здравей, ' + user.name.split(' ')[0] : 'Вход'}</button>
+            <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
+              <img src={V + 'ico-user.webp'} alt="" />
+              {user && <span className="nm">{user.name.split(' ')[0]}</span>}
+            </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <CartIcon />
+              <img src={V + 'ico-cart.webp'} alt="" />
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>
         </header>
 
-        <main>
-          <section className="hero">
-            <div>
-              <h1>Подарък за <b>твоята душичка</b>, който топли сърцето <b>с години.</b></h1>
+        <div className="cv">
+          <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
+          <img className="fx d1" src={V + 'd1.webp'} alt="" />
+          <img className="fx d2" src={V + 'd2.webp'} alt="" />
+          <img className="fx d3" src={V + 'd3.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
+          <img className="fx scrap" src={V + 'scrap.webp'} alt="" />
+
+          <main>
+            <section className="hero">
+              <h1>Подарък за твоята душичка, който топли сърцето с години.</h1>
               <p>Дай живот на спомените си.</p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
-            </div>
-            <img src="/img/hero.jpg" alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
-          </section>
+              <img className="hi" src={V + 'hero.webp'} alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
+            </section>
 
-          <section className="tabsec" id="shop">
-            <div className="tabs" role="tablist">
-              <button role="tab" id="t-hoodie" aria-selected={kind === 'hoodie'} onClick={() => setKind('hoodie')}>Худита</button>
-              <button role="tab" id="t-tee" aria-selected={kind === 'tee'} onClick={() => setKind('tee')}>Тениски</button>
-            </div>
-          </section>
+            <section className="tabsec" id="shop">
+              <div className="tabs" role="tablist">
+                <button role="tab" id="t-tee" aria-selected={kind === 'tee'} onClick={() => setKind('tee')}>
+                  {kind === 'tee' && <img className="th" src={V + 'hrt.webp'} alt="" />}Тениски
+                </button>
+                <button role="tab" id="t-hoodie" aria-selected={kind === 'hoodie'} onClick={() => setKind('hoodie')}>
+                  {kind === 'hoodie' && <img className="th" src={V + 'hrt.webp'} alt="" />}Худита
+                </button>
+              </div>
+            </section>
 
-          <section className="grid" id="grid" aria-live="polite">
-            {DESIGNS.map((d, i) => (
-              <button className="card fu" style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
-                <div className="im">
-                  <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
-                  <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+            <section className="grid" id="grid" aria-live="polite">
+              {DESIGNS.map((d, i) => (
+                <button className="card fu" style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
+                  <div className="im">
+                    <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
+                    <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+                  </div>
+                  <h3>{d.n}</h3>
+                  <p className="pr">{eur(KIND[kind].price)}</p>
+                </button>
+              ))}
+            </section>
+
+            <section className="note" id="about" aria-label="Зад Душичките">
+              <img className="nd" src={V + 'note.webp'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
+              <div className="nm2" aria-hidden="false">
+                <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
+                <img className="nl" src={V + 'nlogo.webp'} alt="" />
+                <div className="tx">
+                  <p>Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да <u>пазиш с години.</u></p>
+                  <p>Вярвам, че хората не помнят предмети, а <span className="ov">моменти.</span> Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. ♡</p>
+                  <p>Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето. :)</p>
                 </div>
-                <h3>{d.n}</h3>
-                <p className="pr">{eur(KIND[kind].price)}</p>
-              </button>
-            ))}
-          </section>
-        </main>
+                <img className="ph1" src={V + 'ph1.webp'} alt="" />
+                <img className="ph2" src={V + 'ph2.webp'} alt="" />
+              </div>
+              <p className="cap">Бродирано с нашата любов за вашата любов…</p>
+            </section>
+          </main>
+        </div>
 
         <footer>
           <button className="lk" onClick={() => setLegal('terms')}>Общи условия</button>

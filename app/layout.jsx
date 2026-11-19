@@ -27,19 +27,15 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#FFF9E8',
+  themeColor: '#CA2631',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="bg">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preload" href="/fonts/Rubik-Regular.woff" as="font" type="font/woff" crossOrigin="" />
+        <link rel="preload" href="/fonts/Rubik-ExtraBold.woff" as="font" type="font/woff" crossOrigin="" />
       </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
