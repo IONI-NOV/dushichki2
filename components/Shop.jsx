@@ -1,6 +1,6 @@
 'use client';
 import { supabaseEnabled, currentUser, onUserChange, onAuthEvent } from '../lib/supabase';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { HeartSymbol } from './Icons';
 import ProductDialog from './ProductDialog';
 import CartDialog from './CartDialog';
@@ -26,6 +26,18 @@ export default function Shop() {
   const [legal, setLegal] = useState(null);
   const [toastMsg, setToastMsg] = useState('');
   const toastTimer = useRef(null);
+
+  const [heartX, setHeartX] = useState(null);
+  const tabsRef = useRef(null);
+  useLayoutEffect(() => {
+    const place = () => {
+      const b = document.getElementById(kind === 'tee' ? 't-tee' : 't-hoodie');
+      if (b) setHeartX(b.offsetLeft + b.offsetWidth / 2);
+    };
+    place();
+    window.addEventListener('resize', place);
+    return () => window.removeEventListener('resize', place);
+  }, [kind]);
 
   const toast = useCallback((m) => {
     setToastMsg(m);
@@ -142,10 +154,10 @@ export default function Shop() {
         <div className="cv">
           <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
           <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
-          <img className="fx d1" src={V + 'd1.webp'} alt="" />
-          <img className="fx d2" src={V + 'd2.webp'} alt="" />
-          <img className="fx d3" src={V + 'd3.webp'} alt="" />
-          <img className="fx scrap" src={V + 'scrap.webp'} alt="" />
+          <img className="fx d1" src={V + 'd1.svg'} alt="" />
+          <img className="fx d2" src={V + 'd2.svg'} alt="" />
+          <img className="fx d3" src={V + 'd3.svg'} alt="" />
+          <img className="fx scrap" src={V + 'scrap.svg'} alt="" />
 
           <main>
             <section className="hero">
@@ -156,14 +168,17 @@ export default function Shop() {
             </section>
 
             <section className="tabsec" id="shop">
-              <div className="tabs" role="tablist">
+              <div className="tabs" role="tablist" ref={tabsRef}>
+                <img className="th" src={V + 'hrt.svg'} alt="" style={heartX == null ? { left: '50%' } : { left: heartX }} />
                 <button role="tab" id="t-tee" aria-selected={kind === 'tee'} onClick={() => setKind('tee')}>
-                  {kind === 'tee' && <img className="th" src={V + 'hrt.webp'} alt="" />}Тениски
+                  <span className="tw"><span className="t1">Тениски</span><span className="t2" aria-hidden="true">Тениски</span></span>
                 </button>
                 <button role="tab" id="t-hoodie" aria-selected={kind === 'hoodie'} onClick={() => setKind('hoodie')}>
-                  {kind === 'hoodie' && <img className="th" src={V + 'hrt.webp'} alt="" />}Худита
+                  <span className="tw"><span className="t1">Худита</span><span className="t2" aria-hidden="true">Худита</span></span>
                 </button>
-                <button role="tab" id="t-top" disabled aria-disabled="true" title="Скоро">Блузи</button>
+                <button role="tab" id="t-top" disabled aria-disabled="true" title="Скоро">
+                  <span className="tw"><span className="t1">Блузи</span></span>
+                </button>
               </div>
             </section>
 
