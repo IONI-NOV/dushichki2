@@ -259,11 +259,8 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
           <input type="checkbox" id="c7" checked={accepted} onChange={(e) => setAccepted(e.target.checked)} />
           <span>Прочетох и приемам{' '}
             <button type="button" className="link" onClick={() => openLegal('terms')}>Общите условия</button> и{' '}
-            <button type="button" className="link" onClick={() => openLegal('priv')}>Политиката за поверителност</button>.</span>
+            <button type="button" className="link" onClick={() => openLegal('priv')}>Политиката за поверителност</button>. Знам, че артикулите се изработват по моя снимка и <button type="button" className="link" onClick={() => openLegal('terms', 'VII.')}>нямам право на отказ</button> от поръчката.</span>
         </label>
-        <p className="cohint"><b>Важно:</b> всяка дреха се изработва по твоя снимка и избор, затова по закон нямаш право да се откажеш от поръчката след като я направиш (виж{' '}
-          <button type="button" className="link" onClick={() => openLegal('terms', 'VII.')}>раздел VII</button> от Общите условия). Законовата гаранция при дефект или грешка остава.</p>
-        <p className="cohint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
         <div className="er" id="cer" role="alert">{cer}</div>
         <button className="btn add" id="pay" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>
           {busy ? (supabaseEnabled ? 'Изпращаме поръчката...' : 'Пренасочваме към Stripe...') : 'Поръчка със задължение за плащане · ' + eur(total)}
