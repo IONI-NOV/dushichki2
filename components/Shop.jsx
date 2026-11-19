@@ -60,6 +60,7 @@ export default function Shop() {
   const [scrollOpen, setScrollOpen] = useState(false); // свитъкът „Зад Душички“ (телефон)
   const [typed, setTyped] = useState(false);
   // Заставка: кремав екран с логото и кръгче за зареждане -> вдига се и става листът на хедъра, логото отива на мястото си
+  const [pre, setPre] = useState(false);
   const [intro, setIntro] = useState('splash'); // splash | lift | fade | done
   const splRef = useRef(null);
   const splLogoRef = useRef(null);
@@ -92,13 +93,14 @@ export default function Shop() {
     const start = () => {
       if (started) return; started = true;
       const wait = Math.max(0, 1200 - (performance.now() - t0)); // поне за миг да се види заставката
+      timers.push(setTimeout(() => setPre(true), Math.max(0, wait - 350)));
       timers.push(setTimeout(() => requestAnimationFrame(lift), wait));
     };
     if (document.readyState === 'complete') start();
     else { window.addEventListener('load', start, { once: true }); timers.push(setTimeout(start, 3500)); }
     return () => { timers.forEach(clearTimeout); window.removeEventListener('load', start); };
   }, []);
-  const introGo = intro === 'fade' || intro === 'done';
+  const introGo = pre || intro === 'fade' || intro === 'done';
 // заглавието е изписано -> показваме подзаглавието и бутона
 
   // При издърпване на страницата (overscroll) отгоре да се вижда кремавият лист, а отдолу – тъмният цвят на футъра.
@@ -272,8 +274,8 @@ export default function Shop() {
 
         <div className={"cv" + (scrollOpen ? " op" : "") + (typed ? " tp" : "")}>
           <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
-          <img className="fx heart1" src={V + 'heart1-m.webp'} alt="" />
-          <img className="fx heart2" src={V + 'heart2-m.webp'} alt="" />
+          <img className="fx heart1" src={V + 'heart1-p.webp'} alt="" />
+          <img className="fx heart2" src={V + 'heart2-p.webp'} alt="" />
           <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
             <defs><mask id="d1m" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="340">
               <path className="ln" pathLength="1" fill="none" stroke="#fff" strokeWidth="34" strokeLinecap="butt" strokeLinejoin="round" d="M-5 299C60 308 130 316 200 316C290 316 350 300 381 262C395 230 380 190 345 155C320 132 292 140 288 170C292 215 330 255 385 263C470 270 570 220 640 150C670 120 683 95 688 70C692 62 692 52 691 40C676 40 678 20 692 18C708 20 708 48 692 60"/>
