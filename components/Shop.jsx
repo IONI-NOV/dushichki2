@@ -107,6 +107,12 @@ export default function Shop() {
         };
         const ease = bez(.65, 0, .25, 1);
         spl.style.transition = 'opacity .4s ease';
+        const NS = 'http://www.w3.org/2000/svg';
+        const ov = document.createElementNS(NS, 'svg'), rc = document.createElementNS(NS, 'rect');
+        ov.setAttribute('style', 'position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none');
+        rc.setAttribute('fill', 'none'); rc.setAttribute('stroke', '#C42A31');
+        rc.setAttribute('stroke-width', 4 * u); rc.setAttribute('stroke-dasharray', 13 * u + ' ' + 8 * u);
+        ov.appendChild(rc); spl.appendChild(ov);
         const T0 = performance.now(), DUR = 1000;
         const f = (a, b, e) => a + (b - a) * e;
         const frame = (now) => {
@@ -121,6 +127,9 @@ export default function Shop() {
             d += 'M' + (x - r).toFixed(2) + ' ' + cyy.toFixed(2) + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (2 * r).toFixed(2) + ' 0a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (-2 * r).toFixed(2) + ' 0Z';
           });
           spl.style.clipPath = "path(evenodd,'" + d + "')";
+          rc.setAttribute('x', x0 + 2 * u); rc.setAttribute('y', y0 + 2 * u);
+          rc.setAttribute('width', Math.max(0, x1 - x0 - 4 * u)); rc.setAttribute('height', Math.max(0, y1 - y0 - 4 * u));
+          rc.setAttribute('rx', 20 * u * e); rc.setAttribute('opacity', Math.min(1, k * 6));
           if (k < 1) requestAnimationFrame(frame);
         };
         requestAnimationFrame(frame);
@@ -309,8 +318,8 @@ export default function Shop() {
       )}
       <div className={'pg' + (introGo ? ' go' : '')}>
         <header className="hd">
-          <div className="hp" aria-hidden="true" />
-          <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b></button>
+          <div className="hp" aria-hidden="true"><svg className="hring"><rect className="hr-r" /></svg></div>
+          <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b><svg className="hrt" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2S3.2 15.9 1.9 10.3C1.1 6.8 3.5 3.8 6.6 3.8c2.2 0 4 1.2 5.4 3.3 1.4-2.1 3.2-3.3 5.4-3.3 3.1 0 5.5 3 4.7 6.5C20.8 15.9 12 21.2 12 21.2z" /></svg></button>
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
