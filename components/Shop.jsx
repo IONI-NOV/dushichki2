@@ -157,9 +157,12 @@ export default function Shop() {
   useEffect(() => {
     const els = document.querySelectorAll('.sv');
     if (!('IntersectionObserver' in window)) { els.forEach((e) => e.classList.add('vis')); return; }
-    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), { threshold: 0.15 });
-    els.forEach((e) => io.observe(e));
-    return () => io.disconnect();
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); } }), { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+    els.forEach((e) => { if (!e.classList.contains('scrap')) io.observe(e); });
+    const tb = document.querySelector('.tabs'), sc = document.querySelector('.scrap');
+    let io2 = null;
+    if (tb && sc) { io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { sc.classList.add('vis'); io2.disconnect(); } }), { threshold: 0 }); io2.observe(tb); }
+    return () => { io.disconnect(); io2 && io2.disconnect(); };
   }, []);
 
   // fade-up на артикулите, когато влязат в екрана
@@ -322,7 +325,8 @@ export default function Shop() {
             </section>
 
             <section className="note rv" id="about" ref={noteRef} aria-label="Зад Душичките">
-              <img className="nd" src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
+              <img className="nd" onClick={() => setScrollOpen((o) => !o)} src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
+              <button type="button" className="nhint" aria-expanded={scrollOpen} onClick={() => setScrollOpen((o) => !o)}>{scrollOpen ? 'затвори ▲' : 'докосни, за да прочетеш ♡'}</button>
               <div className={'nm2' + (scrollOpen ? ' open' : '')} onClick={() => setScrollOpen((o) => !o)}>
                 <span className="rl rt" aria-hidden="true" />
                 <div className="pap">
