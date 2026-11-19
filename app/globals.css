@@ -800,3 +800,17 @@ body:after{display:none!important}
 /* v22: lines sit under the text baseline (measured on the real handwriting font); strong pop only on first hoodie view */
 .pap{--lo:-27.5px}
 @media(min-width:700px){.pap{--lo:-23.65px}}
+/* v23: footer – stacked links, outline Instagram / e-mail icons, rounded top corners */
+.pg footer{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;height:auto;padding:46px 20px calc(46px + env(safe-area-inset-bottom,0px));border-radius:28px 28px 0 0}
+.pg footer .lk{position:static!important;left:auto!important;top:auto!important;font-size:16px}
+.pg footer .fi{display:flex;gap:26px;margin-top:22px}
+.pg footer .fi a{position:static!important;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:var(--cr)}
+.pg footer .fi svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.pg footer .fi circle:last-child{fill:currentColor}
+@media(min-width:1100px){
+.pg footer{min-height:calc(var(--u)*420);padding:calc(var(--u)*96) 0 calc(var(--u)*80);gap:calc(var(--u)*26);border-radius:calc(var(--u)*56) calc(var(--u)*56) 0 0}
+.pg footer .lk{font-size:max(15px,calc(var(--u)*26));padding:0}
+.pg footer .fi{gap:calc(var(--u)*34);margin-top:calc(var(--u)*36)}
+.pg footer .fi a{width:calc(var(--u)*64);height:calc(var(--u)*64)}
+.pg footer .fi svg{width:calc(var(--u)*52);height:calc(var(--u)*52)}
+}
