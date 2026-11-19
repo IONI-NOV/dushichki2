@@ -814,3 +814,5 @@ body:after{display:none!important}
 .pg footer .fi a{width:calc(var(--u)*64);height:calc(var(--u)*64)}
 .pg footer .fi svg{width:calc(var(--u)*52);height:calc(var(--u)*52)}
 }
+/* v24: hovering the greeting/cart text also enlarges the whole button */
+.hd .lb{pointer-events:auto!important;cursor:inherit}
