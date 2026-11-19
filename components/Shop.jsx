@@ -315,10 +315,10 @@ export default function Shop() {
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
-              {user && <span className="lb"><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</span>}
+              {user && <span className="lb"><span className="gr">Здравей, </span><b>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</b></span>}
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.8 4.2h2.1c.5 0 .9.3 1 .8l.4 1.5" /><path d="M6.3 6.5H21l-1.7 6.8c-.2.8-.9 1.3-1.7 1.3H9.2c-.8 0-1.5-.5-1.7-1.3z" /><circle cx="9.6" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.34" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><g transform="translate(12 12) scale(1.045) translate(-12 -12)"><path d="M2.8 4.2h2.1c.5 0 .9.3 1 .8l.4 1.5" /><path d="M6.3 6.5H21l-1.7 6.8c-.2.8-.9 1.3-1.7 1.3H9.2c-.8 0-1.5-.5-1.7-1.3z" /><circle cx="9.6" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></g></svg>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>
