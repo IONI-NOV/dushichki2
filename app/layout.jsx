@@ -11,8 +11,8 @@ export const metadata = {
   applicationName: 'Душички',
   alternates: { canonical: '/' },
   icons: { icon: [{ url: '/favicon.ico', sizes: 'any' }, { url: '/img/icon-48.png', sizes: '48x48', type: 'image/png' }, { url: '/img/icon-192.png', sizes: '192x192', type: 'image/png' }], apple: '/img/apple-touch-icon.png' },
-  openGraph: { type: 'website', url: SITE, siteName: 'Душички', title: TITLE, description: DESC, locale: 'bg_BG', images: [{ url: '/img/hero.jpg' }] },
-  twitter: { card: 'summary_large_image', title: TITLE, description: DESC, images: ['/img/hero.jpg'] },
+  openGraph: { type: 'website', url: SITE, siteName: 'Душички', title: TITLE, description: DESC, locale: 'bg_BG', images: [{ url: '/img/og.jpg?v=1', width: 1200, height: 630, alt: 'Душички – персонализирана бродерия' }] },
+  twitter: { card: 'summary_large_image', title: TITLE, description: DESC, images: ['/img/og.jpg?v=1'] },
 };
 
 const jsonLd = {
