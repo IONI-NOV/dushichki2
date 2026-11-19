@@ -59,7 +59,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .cf{position:relative;aspect-ratio:473/660;container-type:inline-size;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 473 660'%3E%3Crect width='473' height='660' rx='42' fill='%23FEF9E9'/%3E%3Crect x='2' y='2' width='469' height='656' rx='40' fill='none' stroke='%23C81F26' stroke-width='4' pathLength='1181' stroke-dasharray='6 4'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
 .card .im{position:absolute;left:5.92%;top:4.85%;width:88.37%;height:73.33%;aspect-ratio:auto;border:0;border-radius:0;overflow:visible;background:none}
 .card .im:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 418 484'%3E%3Crect x='2' y='2' width='414' height='480' rx='40' fill='none' stroke='%23C81F26' stroke-width='4' pathLength='941' stroke-dasharray='6 4'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
-.card .im img{position:absolute;left:.96%;top:.71%;width:98.08%;height:98.58%;object-fit:cover;border-radius:9.1% / 6.8%;transition:opacity .35s,transform .4s;background:#eef2f8}
+.card .im img{position:absolute;left:.96%;top:.71%;width:98.08%;height:98.58%;object-fit:cover;border-radius:9.1% / 6.8%;transition:opacity .35s,transform .4s;background:#f0f0f0}
 .card .im img.b{opacity:0}
 .card:hover .im img.b,.card:focus-visible .im img.b{opacity:1}
 .card h3{position:absolute;left:7.8%;top:81.7%;width:80%;font-weight:500;color:var(--red2);line-height:1.2;font-size:4.2cqw;margin:0}

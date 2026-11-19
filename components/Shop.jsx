@@ -212,9 +212,9 @@ export default function Shop() {
   const soft = useMemo(() => seenKinds.current.has(kind), [kind]);
   const sw = useMemo(() => mounted.current, [kind]);
   useEffect(() => { mounted.current = true; }, []);
+  const preImgs = useRef([]);
   useEffect(() => {
-    const t = setTimeout(() => { Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w'].forEach((v) => { const m = new Image(); m.src = img(k, v, i); }))); }, 1500);
-    return () => clearTimeout(t);
+    Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w'].forEach((v) => { const m = new Image(); m.decoding = 'sync'; m.src = img(k, v, i); preImgs.current.push(m); })));
   }, []);
   useEffect(() => { seenKinds.current.add(kind); }, [kind]);
   const noteRef = useRef(null);
@@ -422,8 +422,8 @@ export default function Shop() {
                 <button className={"card fu" + (sw ? (soft ? " soft" : " first") : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
                   <div className="cf">
                     <div className="im">
-                      <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
-                      <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
+                      <img className="a" src={img(kind, 'b', i)} alt={d.n} decoding="sync" />
+                      <img className="b" src={img(kind, 'w', i)} alt="" decoding="sync" />
                     </div>
                     <h3>{d.n.replace(/ (по снимка|на домашен любимец|на починал близък)$/, (m) => '\u0000' + m).split('\u0000').map((x, j) => j ? <span key={j}>{x.slice(0, x.indexOf(' ', 1) + 1)}<b>{x.slice(x.indexOf(' ', 1) + 1)}</b></span> : x)}</h3>
                     <p className="pr">{eur(KIND[kind].price)}</p>
