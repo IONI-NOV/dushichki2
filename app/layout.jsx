@@ -2,7 +2,7 @@ import './globals.css';
 
 const SITE = 'https://dushichki.com';
 const TITLE = 'Душички - Спомени, които обличаш.';
-const DESC = 'Душички – персонализирани худита и тениски с бродерия по твоя снимка. Спомени, които обличаш.';
+const DESC = 'Душички – персонализирани худита, тениски и блузи с бродерия по твоя снимка. Спомени, които обличаш.';
 
 export const metadata = {
   metadataBase: new URL(SITE),

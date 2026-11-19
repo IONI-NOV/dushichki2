@@ -60,7 +60,7 @@ function CartView({ cart, subtotal, removeItem, startCheckout, goShop }) {
     return (
       <>
         <h2>Количка</h2>
-        <p>Количката е празна. Избери худи или тениска.</p>
+        <p>Количката е празна. Избери худи, тениска или блуза.</p>
         <p style={{ marginTop: 16 }}>
           <button className="btn add" style={{ fontSize: '1.1rem' }} onClick={goShop}>Към продуктите</button>
         </p>
