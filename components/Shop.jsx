@@ -16,9 +16,21 @@ function Type({ text, start = 0, onDone }) {
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(text.length); onDone && onDone(); return; }
     setN(0);
-    let i = 0, iv;
-    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) { clearInterval(iv); onDone && onDone(); } }, 34); }, start);
-    return () => { clearTimeout(t); clearInterval(iv); };
+    // „човешко“ писане: скоростта леко се мени, понякога има колебание, след запетая/точка – пауза
+    let i = 0, t;
+    const next = () => {
+      i += 1; setN(i);
+      if (i >= text.length) { onDone && onDone(); return; }
+      const ch = text[i - 1], r = Math.random();
+      let d = 24 + Math.random() * 34;
+      if (r < 0.15) d = 14 + Math.random() * 10;            // кратко „изстрелване“ на 2-3 букви
+      else if (r > 0.9) d += 70 + Math.random() * 110;      // малко колебание
+      if (ch === ' ') d += 20 + Math.random() * 40;
+      if (ch === ',' || ch === '.') d += 180 + Math.random() * 160;
+      t = setTimeout(next, d);
+    };
+    t = setTimeout(next, start);
+    return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, start]);
   // бялата черта (курсор) върви с текста, а накрая остава и мига
@@ -194,6 +206,7 @@ export default function Shop() {
         </header>
 
         <div className="cv">
+          <div className="glow" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
           <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
           <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
           <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
