@@ -115,9 +115,9 @@ export default function Shop() {
           const C = S.map((p, i) => [f(p[0], E[i][0], e), f(p[1], E[i][1], e)]);
           let d = 'M' + C.map((p) => p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join('L') + 'Z';
           const r = R * e;
-          if (r > 0.25) holes.forEach((h) => {
+          if (r > 0.01) holes.forEach((h) => {
             const x = h.fin[0], ey = edgeY(C, x), fy = edgeFin(x);
-            const cyy = ey + (h.fin[1] - fy) * e;
+            const cyy = ey + (h.fin[1] - fy);
             d += 'M' + (x - r).toFixed(2) + ' ' + cyy.toFixed(2) + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (2 * r).toFixed(2) + ' 0a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (-2 * r).toFixed(2) + ' 0Z';
           });
           spl.style.clipPath = "path(evenodd,'" + d + "')";

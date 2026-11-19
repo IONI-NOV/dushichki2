@@ -659,3 +659,11 @@ body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pu
 }
 .hd .lb{font-family:inherit;font-weight:500}
 @media(min-width:1100px){.hd .lb{font-size:max(13px,calc(var(--u)*21))}}
+
+/* --- v9: листът е по-горе (иконите остават); сянка само отвън; десният лист с редове по наклона му --- */
+@media(min-width:1100px){
+.hp{bottom:calc(var(--u)*30)!important;filter:none!important}
+.hp:after{content:""!important;position:absolute;inset:0;z-index:-1;box-shadow:0 3px 7px rgba(60,0,10,.2)}
+.fx.scrap{background:#FEF9E9}
+.fx.scrap:before{inset:auto;left:28.7%;top:14.02%;width:calc(var(--u)*900);height:calc(var(--u)*1500);transform-origin:0 0;transform:rotate(-18.7deg);background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*58) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.5) calc(var(--ls) - 1.5px) var(--ls)) 0 calc(var(--ls)*.6),#FEF9E9}
+}
