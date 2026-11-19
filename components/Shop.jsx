@@ -10,16 +10,19 @@ import LegalDialog from './LegalDialog';
 import { DESIGNS, KIND, eur, img } from '../lib/data';
 import { api } from '../lib/api';
 
-function Type({ text, start = 0 }) {
-  const [n, setN] = useState(text.length);
+function Type({ text, start = 0, onDone }) {
+  const [n, setN] = useState(0);
+  const done = n >= text.length;
   useEffect(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(text.length); onDone && onDone(); return; }
     setN(0);
     let i = 0, iv;
-    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) clearInterval(iv); }, 22); }, start);
+    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) { clearInterval(iv); onDone && onDone(); } }, 22); }, start);
     return () => { clearTimeout(t); clearInterval(iv); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, start]);
-  return (<><span>{text.slice(0, n)}</span><span style={{ visibility: 'hidden' }}>{text.slice(n)}</span></>);
+  // бялата черта (курсор) върви с текста, а накрая остава и мига
+  return (<><span>{text.slice(0, n)}</span><span className={'caret' + (done ? ' blink' : '')} aria-hidden="true" /><span style={{ visibility: 'hidden' }}>{text.slice(n)}</span></>);
 }
 
 export default function Shop() {
@@ -42,6 +45,23 @@ export default function Shop() {
 
   const [heartX, setHeartX] = useState(null);
   const [scrollOpen, setScrollOpen] = useState(false); // свитъкът „Зад Душички“ (телефон)
+  const [typed, setTyped] = useState(false); // заглавието е изписано -> показваме подзаглавието и бутона
+
+  // При издърпване на страницата (overscroll) отгоре да се вижда кремавият лист, а отдолу – тъмният цвят на футъра.
+  // iOS оцветява тази зона с фона на <html>, затова го сменяме според това в коя половина на страницата сме.
+  useEffect(() => {
+    const root = document.documentElement;
+    let last = '';
+    const upd = () => {
+      const max = root.scrollHeight - window.innerHeight;
+      const c = window.scrollY > max / 2 ? '#2a1212' : '#FEF9E9';
+      if (c !== last) { root.style.backgroundColor = c; last = c; }
+    };
+    upd();
+    window.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    return () => { window.removeEventListener('scroll', upd); window.removeEventListener('resize', upd); };
+  }, []);
   const noteRef = useRef(null);
   const tabsRef = useRef(null);
   useLayoutEffect(() => {
@@ -194,11 +214,16 @@ export default function Shop() {
           <img className="fx scrap" src={V + 'scrap.svg'} alt="" />
 
           <main>
-            <section className="hero">
-              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={450} /></h1>
-              <p><Type text="Дай живот на спомените си." start={1500} /></p>
+            <section className={'hero' + (typed ? ' typed' : '')}>
+              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={450} onDone={() => setTyped(true)} /></h1>
+              <p>Дай живот на спомените си.</p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
-              <img className="hi" src={V + 'hero.webp'} alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
+              <div className="hi" role="img" aria-label="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена">
+                <img className="hl hl-b" src={V + 'hero-bouq.webp'} alt="" />
+                <img className="hl hl-s" src={V + 'hero-shirt.webp'} alt="" />
+                <img className="hl hl-t" src={V + 'hero-tab.webp'} alt="" />
+                <img className="hl hl-r" src={V + 'hero-rose.webp'} alt="" />
+              </div>
             </section>
 
             <section className="tabsec" id="shop">
@@ -238,7 +263,7 @@ export default function Shop() {
                 <div className="pap">
                   <button type="button" className="sch" aria-expanded={scrollOpen} aria-controls="scb" onClick={() => setScrollOpen((o) => !o)}>
                     <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
-                    <img className="nl" src={V + 'nlogo.webp'} alt="" />
+                    <img className="nl" src={V + 'nlogo-cut.webp'} alt="" />
                     <span className="hint" aria-hidden="true">докосни, за да разгънеш ♡</span>
                   </button>
                   <div className="scb" id="scb">

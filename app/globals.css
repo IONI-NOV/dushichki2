@@ -6,10 +6,10 @@
 @font-face{font-family:'Rubik';font-weight:700;font-style:normal;font-display:swap;src:url(/fonts/Rubik-Bold.woff) format('woff')}
 @font-face{font-family:'Rubik';font-weight:800;font-style:normal;font-display:swap;src:url(/fonts/Rubik-ExtraBold.woff) format('woff')}
 :root{--red:#C81F26;--red2:#C81F26;--cream:#FEF9E9;--cr:#FEF9E9;--ph:#F3EAD6;--ink:#2b2323;--hand:'Chalkboard SE','Chalkboard','Marker Felt','Segoe Print','Comic Sans MS',cursive;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;background:#2a1212}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%;background:#FEF9E9}
 *,*:before,*:after{box-sizing:inherit}
 *{font-family:'Rubik',system-ui,sans-serif}
-body{margin:0;min-height:100%;background:#C82028;color:var(--red2);font-weight:400;line-height:1.4;overflow-x:clip}
+body{margin:0;min-height:100%;background:transparent;color:var(--red2);font-weight:400;line-height:1.4;overflow-x:clip}
 h1,h2,h3,p{margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -118,7 +118,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .hd .logo{position:absolute;left:50%;transform:translateX(-50%);top:9px;height:52px;width:auto}
 .login{right:64px;top:21px;width:27px}
 .cartb{right:18px;top:19px;width:33px}
-.cv{padding-top:104px;padding-bottom:30px}
+.cv{padding-top:104px;padding-bottom:56px}
 .fx{display:none}
 .fx.heart1{display:block;left:calc(50% - 100px);top:118px;width:200px;opacity:.9}
 .hero{position:relative;padding:0 24px;max-width:640px;margin:0 auto}
@@ -133,16 +133,16 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .note{position:relative;margin:64px 0 0;padding:0 14px}
 /* „Зад Душички“ като свитък – разгъва се при докосване */
 .nm2{position:relative;max-width:560px;margin:0 auto;padding:0 8px;transform:rotate(-1.2deg)}
-.pap{position:relative;background:repeating-linear-gradient(transparent 0 31px,rgba(198,170,120,.45) 31px 32px),#FEF9E9;padding:16px 20px 0 40px;box-shadow:0 6px 18px rgba(60,0,10,.28)}
+.pap{position:relative;background:repeating-linear-gradient(transparent 0 31px,rgba(198,170,120,.45) 31px 32px),#FEF9E9;padding:16px 20px 0 40px;box-shadow:0 3px 10px rgba(60,0,10,.18)}
 .pap:before{content:"";position:absolute;left:24px;top:0;bottom:0;width:2px;background:#E86B73}
-.rl{display:block;position:relative;z-index:2;height:26px;border-radius:13px;background:linear-gradient(#cdb58a,#f6ead0 28%,#fffaf0 45%,#eadbb9 70%,#b99d6c);box-shadow:0 5px 10px rgba(60,0,10,.35)}
-.rl:before,.rl:after{content:"";position:absolute;top:2px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 50% 50%,#9c7e4f 0 3px,#e8d8b4 4px 6px,#b79a68 7px 8px,#f3e5c6 9px)}
-.rl:before{left:-4px}.rl:after{right:-4px}
-.rt{margin:0 -10px -8px}.rb{margin:-8px -10px 0}
+.rl{display:block;position:relative;z-index:2;height:22px;border-radius:11px;background:#EFE3C6;box-shadow:inset 0 -5px 0 rgba(160,125,70,.16),0 2px 5px rgba(60,0,10,.22)}
+.rl:before,.rl:after{content:"";position:absolute;top:0;width:22px;height:22px;border-radius:50%;background:#DCC79D}
+.rl:before{left:0}.rl:after{right:0}
+.rt{margin:0 -8px -6px}.rb{margin:-6px -8px 0}
 .sch{display:block;position:relative;width:100%;background:none;border:0;padding:6px 0 0;text-align:left;cursor:pointer;color:var(--red2);-webkit-tap-highlight-color:transparent}
 .sch:focus-visible{outline:3px solid var(--red);outline-offset:4px}
 .ttl{display:block;width:min(74%,300px);height:auto;margin:4px 0 6px}
-.nl{position:absolute;right:-8px;top:2px;width:54px;height:auto;mix-blend-mode:multiply;transition:transform .6s ease}
+.nl{position:absolute;right:-6px;top:0;width:54px;height:auto;transition:transform .6s ease}
 .hint{display:block;font-family:var(--hand);font-size:14px;line-height:32px;height:32px;opacity:.75;overflow:hidden;transition:opacity .35s,height .5s ease;animation:hintp 1.8s ease-in-out infinite}
 .scb{display:grid;grid-template-rows:0fr;transition:grid-template-rows 1s cubic-bezier(.55,.05,.25,1)}
 .sci{overflow:hidden;min-height:0}
@@ -158,8 +158,8 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .tx p *{font-family:inherit}
 .tx u{text-decoration-thickness:2px;text-underline-offset:5px}
 .tx .ov{border:2px solid var(--red2);border-radius:50%;padding:0 6px}
-.cap{text-align:center;margin:30px 20px 0;font-size:17px}
-.pg footer{padding:44px 20px calc(44px + env(safe-area-inset-bottom,0px));margin-top:36px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.cap{display:none}
+.pg footer{padding:44px 20px calc(44px + env(safe-area-inset-bottom,0px));margin-top:0;display:flex;flex-direction:column;align-items:center;gap:4px}
 .pg footer .lk{font-size:16px;padding:10px 12px;min-height:44px;display:inline-flex;align-items:center}
 }
 @media(min-width:700px) and (max-width:1099.98px){
@@ -406,3 +406,22 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 .note.rv.vis .nm2{transform:rotate(-1.2deg)}
 .note.rv.vis .dp2{transition-delay:.15s}.note.rv.vis .cap{transition-delay:.3s}
 @media(prefers-reduced-motion:reduce){.hd,.fx.heart1{animation:none}.d1w .ln{animation:none;stroke-dashoffset:0}.note.rv .nd,.note.rv .nm2,.note.rv .dp,.note.rv .cap{opacity:1;transform:none;transition:none}.note.rv .nm2{transform:rotate(-1.2deg)}}
+
+/* ===== начало: курсор, поява на текста, стоп-моушън снимки ===== */
+.caret{position:relative}
+.caret:after{content:"";position:absolute;left:.04em;top:.06em;height:.92em;width:.085em;min-width:3px;border-radius:2px;background:var(--cr)}
+.caret.blink:after{animation:blink 1.05s steps(1,end) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p,.hero .btn{opacity:0;translate:0 14px;transition:opacity .8s ease,translate .8s ease,transform .2s}
+.hero.typed p,.hero.typed .btn{opacity:1;translate:none}
+.hero.typed .btn{transition-delay:.4s,.4s,0s}
+.hi{position:relative}
+.hl{display:block;width:100%;height:auto;transform-origin:var(--o,50% 50%);animation:chop .56s steps(1,end) var(--d,0s) both}
+.hl+.hl{position:absolute;left:0;top:0}
+.hl-b{--o:56% 17%;--d:.3s}
+.hl-s{--o:32% 60%;--d:.6s}
+.hl-t{--o:76% 54%;--d:.9s}
+.hl-r{--o:64% 80%;--d:1.2s;animation:chop .56s steps(1,end) 1.2s both,rosewob 1.8s steps(1,end) 1.9s infinite}
+@keyframes chop{0%{opacity:0;transform:scale(.6) rotate(-8deg)}25%{opacity:1;transform:scale(1.1) rotate(4deg)}50%{opacity:1;transform:scale(.95) rotate(-2deg)}75%{opacity:1;transform:scale(1.02) rotate(1deg)}100%{opacity:1;transform:none}}
+@keyframes rosewob{0%{transform:rotate(-3deg)}25%{transform:rotate(1deg) translate(1px,-2px)}50%{transform:rotate(4deg)}75%{transform:rotate(0deg) translate(-1px,1px)}}
+@media(prefers-reduced-motion:reduce){.hero p,.hero .btn{opacity:1;translate:none}.hl{animation:none}}
