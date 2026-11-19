@@ -68,6 +68,19 @@ export default function Shop() {
   const [typed, setTyped] = useState(false);
   // Заставка: кремав екран с логото и кръгче за зареждане -> вдига се и става листът на хедъра, логото отива на мястото си
   const [pre, setPre] = useState(false);
+  const [hdHide, setHdHide] = useState(false);
+  useEffect(() => {
+    let last = window.scrollY, hid = false;
+    const on = () => {
+      const y = window.scrollY, dy = y - last;
+      if (y < 60) { if (hid) { hid = false; setHdHide(false); } }
+      else if (dy > 4 && !hid) { hid = true; setHdHide(true); }
+      else if (dy < -4 && hid) { hid = false; setHdHide(false); }
+      last = y;
+    };
+    window.addEventListener('scroll', on, { passive: true });
+    return () => window.removeEventListener('scroll', on);
+  }, []);
   const [intro, setIntro] = useState('splash'); // splash | lift | fade | done
   const splRef = useRef(null);
   const splLogoRef = useRef(null);
@@ -317,7 +330,7 @@ export default function Shop() {
         </div>
       )}
       <div className={'pg' + (introGo ? ' go' : '')}>
-        <header className="hd">
+        <header className={"hd" + (hdHide ? " hid" : "")}>
           <div className="hp" aria-hidden="true"><svg className="hring"><rect className="hr-r" /></svg></div>
           <div className="hclip">
           <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b><svg className="hrt" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2S3.2 15.9 1.9 10.3C1.1 6.8 3.5 3.8 6.6 3.8c2.2 0 4 1.2 5.4 3.3 1.4-2.1 3.2-3.3 5.4-3.3 3.1 0 5.5 3 4.7 6.5C20.8 15.9 12 21.2 12 21.2z" /></svg></button>
