@@ -843,3 +843,7 @@ body:after{display:none!important}
 #lgb .hlx{border-radius:6px;animation:hlx 2s ease-out both}
 /* v28: footer icons share the text colour */
 .pg footer .fb a.ic{color:inherit!important}
+/* v29 – бележки при плащане: Rubik, без ограничение на височината */
+.cohint{display:block;height:auto!important;overflow:visible!important;animation:none!important;opacity:1!important;font-family:'Rubik',sans-serif!important;font-size:.85rem;line-height:1.5;color:#6b4a4a;margin:10px 0 0}
+.cohint b{font-weight:600}
+.cohint .link{font-family:'Rubik',sans-serif;font-size:inherit}

@@ -158,14 +158,14 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
         </div>
 
         <div id="dl">
-          {!R && <p className="hint">Зареждаме офисите на {cr}...</p>}
+          {!R && <p className="cohint">Зареждаме офисите на {cr}...</p>}
           {R && type === 'office' && manual && (
             <>
               <Field id="d-city" ph="Град *" value={f['d-city']} onChange={set('d-city')} err={errs['d-city']} autoComplete="address-level2" />
               {f['d-city'].trim().length >= 2 && (
                 <>
                   <Field id="d-office" ph="Кой е офисът? *" value={f['d-office']} onChange={set('d-office')} err={errs['d-office']} />
-                  <p className="hint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
+                  <p className="cohint">Напиши офиса на {cr}, в който искаш да получиш пратката (име или адрес).</p>
                 </>
               )}
             </>
@@ -223,7 +223,7 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
               <Field id="d-block" ph="Блок, вход, етаж" value={f['d-block']} onChange={set('d-block')} />
               <Field id="d-zip" ph="Пощенски код *" value={f['d-zip']} onChange={set('d-zip')} err={errs['d-zip']} inputMode="numeric" autoComplete="postal-code" />
               <Field id="d-note" ph={'Добавете офис на ' + cr + ' при нужда'} value={f['d-note']} onChange={set('d-note')} />
-              <p className="hint">Ако куриерът не стига до адреса, пратката ще бъде оставена в посочения офис.</p>
+              <p className="cohint">Ако куриерът не стига до адреса, пратката ще бъде оставена в посочения офис.</p>
             </>
           )}
         </div>
@@ -261,9 +261,9 @@ export default function Checkout({ cart, subtotal, user, apiOk, cfg, openLegal, 
             <button type="button" className="link" onClick={() => openLegal('terms')}>Общите условия</button> и{' '}
             <button type="button" className="link" onClick={() => openLegal('priv')}>Политиката за поверителност</button>.</span>
         </label>
-        <p className="hint"><b>Важно:</b> всяка дреха се изработва по твоя снимка и избор, затова по закон нямаш право да се откажеш от поръчката след като я направиш (виж{' '}
+        <p className="cohint"><b>Важно:</b> всяка дреха се изработва по твоя снимка и избор, затова по закон нямаш право да се откажеш от поръчката след като я направиш (виж{' '}
           <button type="button" className="link" onClick={() => openLegal('terms', 'VII.')}>раздел VII</button> от Общите условия). Законовата гаранция при дефект или грешка остава.</p>
-        <p className="hint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
+        <p className="cohint">Картата се въвежда на защитената страница на Stripe. Ние не виждаме и не пазим данните ѝ.</p>
         <div className="er" id="cer" role="alert">{cer}</div>
         <button className="btn add" id="pay" style={{ fontSize: '1.1rem' }} type="submit" disabled={busy}>
           {busy ? (supabaseEnabled ? 'Изпращаме поръчката...' : 'Пренасочваме към Stripe...') : 'Поръчка със задължение за плащане · ' + eur(total)}
