@@ -792,5 +792,8 @@ body:after{display:none!important}
 .card.fu.first{opacity:1;animation:cardChop .6s steps(1,end) calc(var(--i,0)*140ms) both}
 @media(prefers-reduced-motion:reduce){.card.fu.soft,.card.fu.first{animation:none}}
 .card h3 b{font-weight:700}
-/* v20: heart hops between tabs in few frames */
-.th{transition:left .32s steps(4,end)!important}
+
+/* v21: heart jumps straight over the chosen tab; notebook lines are fixed in CSS (no JS fix-up after load) */
+.th{transition:none!important}
+.pap{--lo:-35.725px}
+@media(min-width:700px){.pap{--lo:-34.15px}}
