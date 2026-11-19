@@ -84,7 +84,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .heart1{left:calc(var(--u)*387);top:calc(var(--u)*259);width:calc(var(--u)*414)}
 .heart2{left:calc(var(--u)*324);top:calc(var(--u)*2169);width:calc(var(--u)*282)}
 .d1{left:0;top:calc(var(--u)*860);width:calc(var(--u)*760)}
-.d2{left:calc(var(--u)*1503);top:calc(var(--u)*2032);width:calc(var(--u)*746)}
+.d2{left:calc(var(--u)*1503);top:calc(var(--u)*1985);width:calc(var(--u)*746)}
 .d3{left:calc(var(--u)*1000);top:calc(var(--u)*3259);width:calc(var(--u)*695)}
 .scrap{left:calc(var(--u)*1720);top:calc(var(--u)*1050);width:calc(var(--u)*200)}
 .hero h1{position:absolute;left:calc(var(--u)*147);top:calc(var(--u)*333);width:calc(var(--u)*660);font-size:calc(var(--u)*61);line-height:1.15}
@@ -395,8 +395,8 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 @keyframes cur{50%{border-color:transparent}}
 .fx.heart1{animation:heartIn 1.1s cubic-bezier(.25,.7,.3,1) .15s both;transform-origin:50% 50%}
 .d1w{position:absolute;pointer-events:none;overflow:visible}
-.d1w .ln{stroke-dasharray:1;stroke-dashoffset:1}
-.cv.tp .d1w .ln{animation:drawD1 5s cubic-bezier(.4,.05,.3,1) 1.7s forwards}
+.d1w .ln{stroke-dasharray:1 2;stroke-dashoffset:1.03}
+.cv.tp .d1w .ln{animation:drawD1 2.6s cubic-bezier(.4,.05,.3,1) 1.2s forwards}
 .hero h1 .tc,.hero p .tc{visibility:hidden}
 .hero h1 .tc.on,.hero p .tc.on{visibility:visible}
 /* scroll reveal на секцията „Зад Душичките“ */
