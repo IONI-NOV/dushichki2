@@ -792,3 +792,5 @@ body:after{display:none!important}
 .card.fu.first{opacity:1;animation:cardChop .6s steps(1,end) calc(var(--i,0)*140ms) both}
 @media(prefers-reduced-motion:reduce){.card.fu.soft,.card.fu.first{animation:none}}
 .card h3 b{font-weight:700}
+/* v20: heart hops between tabs in few frames */
+.th{transition:left .32s steps(4,end)!important}
