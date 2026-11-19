@@ -112,7 +112,8 @@ export default function Shop() {
         const frame = (now) => {
           const k = Math.min(1, (now - T0) / DUR), e = ease(k);
           const C = S.map((p, i) => [f(p[0], E[i][0], e), f(p[1], E[i][1], e)]);
-          let d = 'M' + C.map((p) => p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join('L') + 'Z';
+          const rr = 22 * u * e, x0 = C[0][0], y0 = C[0][1], x1 = C[2][0], y1 = C[2][1];
+          let d = 'M' + (x0 + rr) + ' ' + y0 + 'H' + (x1 - rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + x1 + ' ' + (y0 + rr) + 'V' + (y1 - rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + (x1 - rr) + ' ' + y1 + 'H' + (x0 + rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + x0 + ' ' + (y1 - rr) + 'V' + (y0 + rr) + 'A' + rr + ' ' + rr + ' 0 0 1 ' + (x0 + rr) + ' ' + y0 + 'Z';
           const r = R * e;
           if (r > 0.01) holes.forEach((h) => {
             const x = h.fin[0], ey = edgeY(C, x), fy = edgeFin(x);
@@ -309,16 +310,15 @@ export default function Shop() {
       <div className={'pg' + (introGo ? ' go' : '')}>
         <header className="hd">
           <div className="hp" aria-hidden="true" />
-          <button className="about" onClick={() => { const e = document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>За нас</button>
+          <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b></button>
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
-              <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Профил'}</span>
+              {user && <span className="lb"><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</span>}
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="50 48 360 340" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" d="M72 70H112Q132 70 138 96L152 118L178 244Q182 266 206 266H334Q352 266 356 244L386 134M152 118H386" /><circle cx="190" cy="340" r="28" fill="none" stroke="currentColor" strokeWidth="22" /><circle cx="326" cy="340" r="28" fill="none" stroke="currentColor" strokeWidth="22" /></svg>
-              <span className="lb">Количка</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.8 4.2h2.1c.5 0 .9.3 1 .8l.4 1.5" /><path d="M6.3 6.5H21l-1.7 6.8c-.2.8-.9 1.3-1.7 1.3H9.2c-.8 0-1.5-.5-1.7-1.3z" /><circle cx="9.6" cy="19" r="1.5" /><circle cx="17" cy="19" r="1.5" /></svg>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>

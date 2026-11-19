@@ -669,7 +669,6 @@ body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pu
 }
 
 /* --- v10: прав лист с отстъп (като макета), без дупки; без надписи до иконите; десният лист едноцветен --- */
-.hd .lb{display:none!important}
 .fx.scrap:before{content:none!important}
 @media(min-width:1100px){
 :root{--hh:calc(100vw*130/1920)}
@@ -684,3 +683,17 @@ body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pu
 body:after{transform:none;left:calc(100vw*70/1920);right:calc(100vw*70/1920)}
 }
 @media(max-width:1099.98px){.about{display:none}}
+
+/* --- v11: хедър като карта с пунктирен контур (макет), иконите еднакви, поздрав само при влязъл потребител --- */
+@media(min-width:1100px){
+.hd{height:calc(var(--u)*150)}
+.hp{top:calc(var(--u)*34)!important;bottom:auto!important;height:calc(var(--u)*100);left:calc(var(--u)*58)!important;right:calc(var(--u)*58)!important;border-radius:calc(var(--u)*22);box-shadow:0 4px 12px rgba(60,0,10,.22)}
+.hp:after{content:""!important;position:absolute;top:calc(var(--u)*9);left:calc(var(--u)*9);right:calc(var(--u)*9);bottom:calc(var(--u)*9);height:auto;background:none;z-index:auto;box-shadow:none;border:calc(var(--u)*3.5) dashed #C42A31;border-radius:calc(var(--u)*15)}
+body:after{display:none}
+.hd .logo{left:calc(var(--u)*923);top:calc(var(--u)*45);width:calc(var(--u)*74)}
+.about{left:calc(var(--u)*138);top:calc(var(--u)*70);font-size:max(15px,calc(var(--u)*25));line-height:1.2}
+.about b{font-weight:700}
+.login{left:calc(var(--u)*1664);top:calc(var(--u)*61);width:calc(var(--u)*46)}
+.cartb{left:calc(var(--u)*1736);top:calc(var(--u)*61);width:calc(var(--u)*46)}
+.login .lb{left:auto;right:calc(100% + .6em)}
+}
