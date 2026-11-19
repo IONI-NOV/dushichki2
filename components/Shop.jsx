@@ -82,7 +82,8 @@ export default function Shop() {
       if (!spl || !lg || !hd || !hl) { setIntro('done'); return; }
       // листът на хедъра е прав правоъгълник (на телефон – с отстъп отляво и отдясно)
       const r = hd.getBoundingClientRect();
-      const pts = [[r.left, r.top], [r.right, r.top], [r.right, r.bottom], [r.left, r.bottom]];
+      const d = (r.width / 2) * Math.tan(1.2 * Math.PI / 180); // листът е завъртян на -1.2° (като .hp)
+      const pts = [[r.left, r.top], [r.right, r.top], [r.right, r.bottom - d], [r.left, r.bottom + d]];
       spl.style.clipPath = 'polygon(' + pts.map(([x, y]) => x.toFixed(1) + 'px ' + y.toFixed(1) + 'px').join(',') + ')';
       const a = lg.getBoundingClientRect(), b = hl.getBoundingClientRect();
       const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
