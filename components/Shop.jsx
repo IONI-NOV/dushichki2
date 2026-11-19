@@ -89,7 +89,7 @@ export default function Shop() {
         const u = hd.getBoundingClientRect().width / 1920;
         const keep = hp.style.transform; hp.style.transform = 'none';
         const q = hp.getBoundingClientRect(); hp.style.transform = keep;
-        const th = -1.2 * Math.PI / 180, cs = Math.cos(th), sn = Math.sin(th);
+        const th = 0, cs = Math.cos(th), sn = Math.sin(th);
         const cx = (q.left + q.right) / 2, by = q.bottom;
         const rot = (x, y) => [cx + x * cs - y * sn, by + x * sn + y * cs];
         const hw = q.width / 2, top = q.top - by;
@@ -98,7 +98,6 @@ export default function Shop() {
         const tile = 106 * u, n = Math.max(2, Math.floor(q.width / tile)), gap = (q.width - n * tile) / (n - 1);
         const R = 8 * u, up = 20 * u;
         const holes = [];
-        for (let i = 0; i < n; i++) { const xr = -hw + tile / 2 + i * (tile + gap); holes.push({ fin: rot(xr, -up) }); }
         const edgeY = (c, x) => c[3][1] + (c[2][1] - c[3][1]) * ((x - c[3][0]) / (c[2][0] - c[3][0]));
         const edgeFin = (x) => edgeY(E, x);
         const bez = (x1, y1, x2, y2) => (x) => {
@@ -310,6 +309,7 @@ export default function Shop() {
       <div className={'pg' + (introGo ? ' go' : '')}>
         <header className="hd">
           <div className="hp" aria-hidden="true" />
+          <button className="about" onClick={() => { const e = document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>За нас</button>
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
@@ -317,7 +317,7 @@ export default function Shop() {
               <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Профил'}</span>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.6 3.6h1.9c.7 0 1.2.4 1.4 1.1l2.2 9.5c.2.7.8 1.2 1.5 1.2h8.3c.7 0 1.3-.5 1.5-1.1l1.8-6.4c.2-.8-.4-1.5-1.2-1.5H5.6" /><path d="M10.2 10.4h7.2" /><circle cx="9.6" cy="19.7" r="1.6" /><circle cx="17.5" cy="19.7" r="1.6" /></svg>
+              <svg viewBox="50 48 360 340" aria-hidden="true"><path fill="none" stroke="currentColor" strokeWidth="24" strokeLinecap="round" strokeLinejoin="round" d="M72 70H112Q132 70 138 96L152 118L178 244Q182 266 206 266H334Q352 266 356 244L386 134M152 118H386" /><circle cx="190" cy="340" r="28" fill="none" stroke="currentColor" strokeWidth="22" /><circle cx="326" cy="340" r="28" fill="none" stroke="currentColor" strokeWidth="22" /></svg>
               <span className="lb">Количка</span>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>

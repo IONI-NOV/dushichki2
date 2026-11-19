@@ -667,3 +667,20 @@ body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pu
 .fx.scrap{background:#FEF9E9}
 .fx.scrap:before{inset:auto;left:28.7%;top:14.02%;width:calc(var(--u)*900);height:calc(var(--u)*1500);transform-origin:0 0;transform:rotate(-18.7deg);background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*58) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.5) calc(var(--ls) - 1.5px) var(--ls)) 0 calc(var(--ls)*.6),#FEF9E9}
 }
+
+/* --- v10: прав лист с отстъп (като макета), без дупки; без надписи до иконите; десният лист едноцветен --- */
+.hd .lb{display:none!important}
+.fx.scrap:before{content:none!important}
+@media(min-width:1100px){
+:root{--hh:calc(100vw*130/1920)}
+.hd{height:calc(var(--u)*130)}
+.hp{left:calc(var(--u)*70)!important;right:calc(var(--u)*70)!important;bottom:0!important;transform:none!important;-webkit-mask:none!important;mask:none!important;background:#FEF9E9!important}
+.hp:before{content:none!important}
+.hp:after{box-shadow:0 3px 8px rgba(60,0,10,.2)}
+.hd .logo{top:calc(var(--u)*24)}
+.about{display:block;left:calc(var(--u)*170);top:calc(var(--u)*52);font-size:max(14px,calc(var(--u)*22));font-weight:400;font-family:inherit}
+.login{left:calc(var(--u)*1610);top:calc(var(--u)*40);width:calc(var(--u)*46)}
+.cartb{left:calc(var(--u)*1694);top:calc(var(--u)*40);width:calc(var(--u)*56)}
+body:after{transform:none;left:calc(100vw*70/1920);right:calc(100vw*70/1920)}
+}
+@media(max-width:1099.98px){.about{display:none}}
