@@ -453,3 +453,21 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 .tabs button .t1{opacity:1!important;font-weight:400;display:inline-block;--b:0em;text-shadow:var(--b) 0 0 currentColor,calc(var(--b)*-1) 0 0 currentColor,0 var(--b) 0 currentColor,0 calc(var(--b)*-1) 0 currentColor,calc(var(--b)*.7) calc(var(--b)*.7) 0 currentColor,calc(var(--b)*-.7) calc(var(--b)*.7) 0 currentColor,calc(var(--b)*.7) calc(var(--b)*-.7) 0 currentColor,calc(var(--b)*-.7) calc(var(--b)*-.7) 0 currentColor;transition:--b .45s cubic-bezier(.4,0,.2,1),transform .45s cubic-bezier(.4,0,.2,1)}
 @property --b{syntax:'<length>';inherits:true;initial-value:0px}
 .tabs button[aria-selected=true] .t1{--b:.028em;transform:scale(1.05)}
+
+/* ===== прозорци: скролът е вътре в пунктира (текстът не минава през контура), × винаги видим ===== */
+dialog{--m:15px;overflow:hidden;overscroll-behavior:none}
+dialog[open]{display:flex;flex-direction:column}
+.dsc{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;margin:var(--m);border-radius:16px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  -webkit-mask-image:linear-gradient(transparent,#000 12px,#000 calc(100% - 12px),transparent);mask-image:linear-gradient(transparent,#000 12px,#000 calc(100% - 12px),transparent)}
+dialog .cl{z-index:5}
+.dsc .in{padding:29px 29px 25px}
+.dsc .pm{padding:29px 29px 25px}
+.dsc .leg{padding:31px 29px}
+@media(max-width:820px){.dsc .pm{padding:22px 14px}}
+@media(max-width:600px){
+dialog{--m:11px}
+.dsc{border-radius:14px 14px 0 0}
+.dsc .in{padding:23px 11px calc(17px + env(safe-area-inset-bottom,0px))}
+.dsc .pm{padding:19px 11px calc(13px + env(safe-area-inset-bottom,0px))}
+.dsc .leg{padding:23px 11px}
+}
