@@ -841,3 +841,5 @@ body:after{display:none!important}
 /* v27: highlight the section the footer link scrolled to */
 @keyframes hlx{0%,55%{background:#FFE29A;box-shadow:0 0 0 5px #FFE29A}100%{background:#FEF9E9;box-shadow:0 0 0 5px #FEF9E9}}
 #lgb .hlx{border-radius:6px;animation:hlx 2s ease-out both}
+/* v28: footer icons share the text colour */
+.pg footer .fb a.ic{color:inherit!important}

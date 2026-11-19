@@ -450,11 +450,11 @@ export default function Shop() {
           <nav className="fb" aria-label="Информация">
             <span className="yr">2026 <button className="brand" onClick={() => { window.location.href = window.location.pathname; }}>Душички</button></span>
             <i aria-hidden="true">·</i>
+            <button onClick={() => openLegalAt('terms')}>Общи условия</button>
+            <i aria-hidden="true">·</i>
             <button onClick={() => openLegalAt('terms', 'IX.')}>Политика за връщане</button>
             <i aria-hidden="true">·</i>
             <button onClick={() => openLegalAt('priv')}>Политика за поверителност</button>
-            <i aria-hidden="true">·</i>
-            <button onClick={() => openLegalAt('terms')}>Общи условия</button>
             <i aria-hidden="true">·</i>
             <button onClick={() => openLegalAt('terms', 'VI.')}>Политика за доставка</button>
             <i aria-hidden="true">·</i>
