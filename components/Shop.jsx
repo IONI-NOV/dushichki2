@@ -208,7 +208,14 @@ export default function Shop() {
     return () => { window.removeEventListener('scroll', upd); window.removeEventListener('resize', upd); };
   }, []);
   const seenKinds = useRef(new Set());
+  const mounted = useRef(false);
   const soft = useMemo(() => seenKinds.current.has(kind), [kind]);
+  const sw = useMemo(() => mounted.current, [kind]);
+  useEffect(() => { mounted.current = true; }, []);
+  useEffect(() => {
+    const t = setTimeout(() => { Object.keys(KIND).forEach((k) => DESIGNS.forEach((_, i) => ['b', 'w'].forEach((v) => { const m = new Image(); m.src = img(k, v, i); }))); }, 1500);
+    return () => clearTimeout(t);
+  }, []);
   useEffect(() => { seenKinds.current.add(kind); }, [kind]);
   const noteRef = useRef(null);
   const tabsRef = useRef(null);
@@ -412,11 +419,11 @@ export default function Shop() {
 
             <section className="grid" id="grid" aria-live="polite">
               {DESIGNS.map((d, i) => (
-                <button className={"card fu" + (soft ? " soft" : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
+                <button className={"card fu" + (sw ? (soft ? " soft" : " first") : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
                   <div className="cf">
                     <div className="im">
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} loading="lazy" />
-                      <img className="b" src={img(kind, kind === 'tee' ? 'r' : 'w', i)} alt="" loading="lazy" />
+                      <img className="b" src={img(kind, 'w', i)} alt="" loading="lazy" />
                     </div>
                     <h3>{d.n}</h3>
                     <p className="pr">{eur(KIND[kind].price)}</p>

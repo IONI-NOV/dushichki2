@@ -786,5 +786,8 @@ body:after{display:none!important}
 }
 
 /* v18: repeat tab switches – gentle pop (first view keeps the strong one) */
-@keyframes cardSoft{0%{opacity:1;transform:scale(.985) rotate(-.3deg)}60%{transform:scale(1.003) rotate(.1deg)}100%{transform:none}}
-.card.fu.soft.vis{animation:cardSoft .4s ease-out calc(var(--i,0)*60ms) both}
+@keyframes cardSoft{0%{opacity:1;transform:scale(.985) rotate(-.4deg)}34%{transform:scale(1.006) rotate(.2deg)}67%{transform:scale(.998) rotate(-.1deg)}100%{transform:none}}
+/* v19: tab switch – no empty frame; cards are visible from the first frame */
+.card.fu.soft{opacity:1;animation:cardSoft .42s steps(1,end) calc(var(--i,0)*60ms) both}
+.card.fu.first{opacity:1;animation:cardChop .6s steps(1,end) calc(var(--i,0)*140ms) both}
+@media(prefers-reduced-motion:reduce){.card.fu.soft,.card.fu.first{animation:none}}
