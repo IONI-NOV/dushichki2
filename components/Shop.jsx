@@ -105,11 +105,19 @@ export default function Shop() {
     }
   }
 
-  const goShop = () => { setCartOpen(false); document.getElementById('shop')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  const scrollToEl = (el, where) => {
+    if (!el) return;
+    const hd = document.querySelector('.hd');
+    const hh = hd ? hd.getBoundingClientRect().height * 0.7 : 80;
+    const r = el.getBoundingClientRect();
+    const y = where === 'center' ? r.top + window.scrollY - Math.max(hh, (window.innerHeight - r.height) / 2) : r.top + window.scrollY - hh - 10;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  };
+  const goShop = () => { setCartOpen(false); scrollToEl(document.querySelector('.tabs'), 'top'); };
   const openCart = () => { setView({ name: 'cart' }); setCartOpen(true); };
   const openAccount = () => { setView(user ? { name: 'account' } : { name: 'login', mode: 'login', toCheckout: false }); setCartOpen(true); };
 
-  const toAbout = () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const toAbout = () => { const el = [...document.querySelectorAll('#about .nd, #about .nm2')].find((e) => e.offsetParent); scrollToEl(el || document.getElementById('about'), 'center'); };
   const V = '/img/v2/';
 
   return (
@@ -119,14 +127,13 @@ export default function Shop() {
         <header className="hd">
           <div className="hp" aria-hidden="true" />
           <button className="about" onClick={toAbout}>За нас</button>
-          <img className="logo" src="/img/logo.png" alt="Душички" />
+          <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
-              <img src={V + 'ico-user.webp'} alt="" />
-              {user && <span className="nm">{user.name.split(' ')[0]}</span>}
+              <svg viewBox="4 4 16 16" aria-hidden="true"><path fill="currentColor" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <img src={V + 'ico-cart.webp'} alt="" />
+              <svg viewBox="1 2 21.4 20.4" aria-hidden="true"><path fill="currentColor" d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 21.4 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" /></svg>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>
           </div>
@@ -144,7 +151,7 @@ export default function Shop() {
             <section className="hero">
               <h1>Подарък за твоята душичка, който топли сърцето с години.</h1>
               <p>Дай живот на спомените си.</p>
-              <button className="btn" id="go" onClick={goShop}><span>И аз искам!</span></button>
+              <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
               <img className="hi" src={V + 'hero.webp'} alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
             </section>
 
@@ -176,7 +183,7 @@ export default function Shop() {
             </section>
 
             <section className="note" id="about" aria-label="Зад Душичките">
-              <img className="nd" src={V + 'note.webp'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
+              <img className="nd" src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
               <div className="nm2" aria-hidden="false">
                 <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
                 <img className="nl" src={V + 'nlogo.webp'} alt="" />
@@ -188,6 +195,8 @@ export default function Shop() {
                 <img className="ph1" src={V + 'ph1.webp'} alt="" />
                 <img className="ph2" src={V + 'ph2.webp'} alt="" />
               </div>
+              <img className="dp dp1" src={V + 'ph1.webp'} alt="" />
+              <img className="dp dp2" src={V + 'ph2.webp'} alt="" />
               <p className="cap">Бродирано с нашата любов за вашата любов…</p>
             </section>
           </main>
