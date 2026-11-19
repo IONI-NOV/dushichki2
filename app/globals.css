@@ -797,3 +797,6 @@ body:after{display:none!important}
 .th{transition:none!important}
 .pap{--lo:-35.725px}
 @media(min-width:700px){.pap{--lo:-34.15px}}
+/* v22: lines sit under the text baseline (measured on the real handwriting font); strong pop only on first hoodie view */
+.pap{--lo:-27.5px}
+@media(min-width:700px){.pap{--lo:-23.65px}}

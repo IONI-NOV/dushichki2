@@ -403,7 +403,7 @@ export default function Shop() {
 
             <section className="grid" id="grid" aria-live="polite">
               {DESIGNS.map((d, i) => (
-                <button className={"card fu" + (sw ? (soft ? " soft" : " first") : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
+                <button className={"card fu" + (sw ? " soft" : "")} style={{ '--i': i }} key={kind + d.k} onClick={() => setProduct(i)}>
                   <div className="cf">
                     <div className="im">
                       <img className="a" src={img(kind, 'b', i)} alt={d.n} decoding="sync" />
