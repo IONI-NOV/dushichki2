@@ -41,6 +41,7 @@ export default function Shop() {
   const toastTimer = useRef(null);
 
   const [heartX, setHeartX] = useState(null);
+  const [scrollOpen, setScrollOpen] = useState(false); // свитъкът „Зад Душички“ (телефон)
   const noteRef = useRef(null);
   const tabsRef = useRef(null);
   useLayoutEffect(() => {
@@ -152,7 +153,12 @@ export default function Shop() {
   const openCart = () => { setView({ name: 'cart' }); setCartOpen(true); };
   const openAccount = () => { setView(user ? { name: 'account' } : { name: 'login', mode: 'login', toCheckout: false }); setCartOpen(true); };
 
-  const toAbout = () => { const el = [...document.querySelectorAll('#about .nd, #about .nm2')].find((e) => e.offsetParent); scrollToEl(el || document.getElementById('about'), 'center'); };
+  const toAbout = () => {
+    const el = [...document.querySelectorAll('#about .nd, #about .nm2')].find((e) => e.offsetParent);
+    scrollToEl(el || document.getElementById('about'), el && el.classList.contains('nm2') ? 'top' : 'center');
+    // на телефон свитъкът се разгъща, след като стигнем до него
+    if (el && el.classList.contains('nm2')) setTimeout(() => setScrollOpen(true), 650);
+  };
   const V = '/img/v2/';
 
   return (
@@ -227,16 +233,25 @@ export default function Shop() {
 
             <section className="note rv" id="about" ref={noteRef} aria-label="Зад Душичките">
               <img className="nd" src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
-              <div className="nm2" aria-hidden="false">
-                <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
-                <img className="nl" src={V + 'nlogo.webp'} alt="" />
-                <div className="tx">
-                  <p>Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да <u>пазиш с години.</u></p>
-                  <p>Вярвам, че хората не помнят предмети, а <span className="ov">моменти.</span> Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. ♡</p>
-                  <p>Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето. :)</p>
+              <div className={'nm2' + (scrollOpen ? ' open' : '')}>
+                <span className="rl rt" aria-hidden="true" />
+                <div className="pap">
+                  <button type="button" className="sch" aria-expanded={scrollOpen} aria-controls="scb" onClick={() => setScrollOpen((o) => !o)}>
+                    <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
+                    <img className="nl" src={V + 'nlogo.webp'} alt="" />
+                    <span className="hint" aria-hidden="true">докосни, за да разгънеш ♡</span>
+                  </button>
+                  <div className="scb" id="scb">
+                    <div className="sci">
+                      <div className="tx">
+                        <p>Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да <u>пазиш с години.</u></p>
+                        <p>Вярвам, че хората не помнят предмети, а <span className="ov">моменти.</span> Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. ♡</p>
+                        <p>Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето. :)</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <img className="ph1" src={V + 'ph1.webp'} alt="" />
-                <img className="ph2" src={V + 'ph2.webp'} alt="" />
+                <span className="rl rb" aria-hidden="true" />
               </div>
               <img className="dp dp1" src={V + 'ph1.webp'} alt="" />
               <img className="dp dp2" src={V + 'ph2.webp'} alt="" />
