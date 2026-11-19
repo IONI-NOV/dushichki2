@@ -1,4 +1,5 @@
 'use client';
+import { D1 } from '../lib/d1path';
 import { supabaseEnabled, currentUser, onUserChange, onAuthEvent } from '../lib/supabase';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { HeartSymbol } from './Icons';
@@ -8,6 +9,18 @@ import SizeDialog from './SizeDialog';
 import LegalDialog from './LegalDialog';
 import { DESIGNS, KIND, eur, img } from '../lib/data';
 import { api } from '../lib/api';
+
+function Type({ text, start = 0 }) {
+  const [n, setN] = useState(text.length);
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setN(0);
+    let i = 0, iv;
+    const t = setTimeout(() => { iv = setInterval(() => { i += 1; setN(i); if (i >= text.length) clearInterval(iv); }, 22); }, start);
+    return () => { clearTimeout(t); clearInterval(iv); };
+  }, [text, start]);
+  return (<><span>{text.slice(0, n)}</span><span style={{ visibility: 'hidden' }}>{text.slice(n)}</span></>);
+}
 
 export default function Shop() {
   const [kind, setKind] = useState('hoodie');
@@ -28,6 +41,7 @@ export default function Shop() {
   const toastTimer = useRef(null);
 
   const [heartX, setHeartX] = useState(null);
+  const noteRef = useRef(null);
   const tabsRef = useRef(null);
   useLayoutEffect(() => {
     const place = () => {
@@ -54,6 +68,15 @@ export default function Shop() {
     if (!cartReady) return;
     try { localStorage.setItem('dsh_cart', JSON.stringify(cart)); } catch (e) {}
   }, [cart, cartReady]);
+
+  // появяване на „Зад Душичките“ при скрол
+  useEffect(() => {
+    const el = noteRef.current; if (!el) return;
+    if (!('IntersectionObserver' in window)) { el.classList.add('vis'); return; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { el.classList.add('vis'); io.disconnect(); } }), { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // fade-up на артикулите, когато влязат в екрана
   useEffect(() => {
@@ -154,15 +177,20 @@ export default function Shop() {
         <div className="cv">
           <img className="fx heart1" src={V + 'heart1.webp'} alt="" />
           <img className="fx heart2" src={V + 'heart2.webp'} alt="" />
-          <img className="fx d1" src={V + 'd1.svg'} alt="" />
+          <svg className="fx d1 d1w" viewBox="0 0 760 340" aria-hidden="true">
+            <defs><mask id="d1m" maskUnits="userSpaceOnUse" x="0" y="0" width="760" height="340">
+              <path className="ln" pathLength="1" fill="none" stroke="#fff" strokeWidth="34" strokeLinecap="round" strokeLinejoin="round" d="M-5 299C60 308 130 316 200 316C290 316 350 300 381 262C395 230 380 190 345 155C320 132 292 140 288 170C292 215 330 255 385 263C470 270 570 220 640 150C670 120 683 95 688 70C692 62 692 52 691 40C676 40 678 20 692 18C708 20 708 48 692 60"/>
+            </mask></defs>
+            <g mask="url(#d1m)"><path d={D1} fill="#FEF9E9" opacity=".52" /></g>
+          </svg>
           <img className="fx d2" src={V + 'd2.svg'} alt="" />
           <img className="fx d3" src={V + 'd3.svg'} alt="" />
           <img className="fx scrap" src={V + 'scrap.svg'} alt="" />
 
           <main>
             <section className="hero">
-              <h1>Подарък за твоята душичка, който топли сърцето с години.</h1>
-              <p>Дай живот на спомените си.</p>
+              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={450} /></h1>
+              <p><Type text="Дай живот на спомените си." start={1500} /></p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
               <img className="hi" src={V + 'hero.webp'} alt="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена" />
             </section>
@@ -197,7 +225,7 @@ export default function Shop() {
               ))}
             </section>
 
-            <section className="note" id="about" aria-label="Зад Душичките">
+            <section className="note rv" id="about" ref={noteRef} aria-label="Зад Душичките">
               <img className="nd" src={V + 'note.svg'} alt="Зад Душички? Казвам се Йоан и винаги съм искал да създам продукт, който да изпълва сърцата на хората. Нещо, което можеш да пазиш с години. Вярвам, че хората не помнят предмети, а моменти. Танца с любим човек. Развълнувания поглед на кученцето ти. Усмивката на близък, който вече не е до нас. Независимо по каква причина. Затова в Душички превръщаме тези мигове в изкуство, което можеш да носиш всеки ден. Защото споменът е най-хубав, когато е близо до сърцето." />
               <div className="nm2" aria-hidden="false">
                 <img className="ttl" src={V + 'ttl.webp'} alt="Зад Душички?" />
