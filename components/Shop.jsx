@@ -105,9 +105,9 @@ export default function Shop() {
     let last = '';
     const upd = () => {
       const max = root.scrollHeight - window.innerHeight;
-      // на телефон листът е по-тесен от екрана, затова отгоре отстрани трябва червеното на страницата
-      const top = window.innerWidth < 1100 ? '#C82028' : '#FEF9E9';
-      const c = window.scrollY > max / 2 ? '#2a1212' : top;
+      // при издърпване (scrollY < 0 на iOS) редовете на листа отзад се движат заедно с хедъра
+      root.style.setProperty('--pull', Math.max(0, -window.scrollY) + 'px');
+      const c = window.scrollY > max / 2 ? '#2a1212' : '#FEF9E9';
       if (c !== last) { root.style.backgroundColor = c; last = c; }
     };
     upd();
@@ -260,11 +260,11 @@ export default function Shop() {
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>
               <span className="lb">{user ? <><span className="gr">Здравей, </span>{String(user.name || user.email || '').trim().split(/\s+/)[0]}</> : 'Влез'}</span>
             </button>
             <button className={'cartb' + (pulse ? ' pulse' : '')} id="cartb" aria-label="Количка" onClick={openCart}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.6 3.6h1.9c.7 0 1.2.4 1.4 1.1l2.2 9.5c.2.7.8 1.2 1.5 1.2h8.3c.7 0 1.3-.5 1.5-1.1l1.8-6.4c.2-.8-.4-1.5-1.2-1.5H5.6" /><path d="M10.2 10.4h7.2" /><circle cx="9.6" cy="19.7" r="1.6" /><circle cx="17.5" cy="19.7" r="1.6" /></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.6 3.6h1.9c.7 0 1.2.4 1.4 1.1l2.2 9.5c.2.7.8 1.2 1.5 1.2h8.3c.7 0 1.3-.5 1.5-1.1l1.8-6.4c.2-.8-.4-1.5-1.2-1.5H5.6" /><path d="M10.2 10.4h7.2" /><circle cx="9.6" cy="19.7" r="1.6" /><circle cx="17.5" cy="19.7" r="1.6" /></svg>
               <span className="lb">Количка</span>
               {cart.length > 0 && <span className="bd" id="cnt">{cart.length}</span>}
             </button>

@@ -595,3 +595,19 @@ dialog{--m:11px}
 }
 /* сянката на листа само отдолу и отстрани, за да няма шев с продължението нагоре */
 .hd .hp{clip-path:inset(0 -30px -30px -30px)!important}
+
+/* --- v3: по-гъсти редове; листът се вижда и при издърпване с пръст; заставката е с редове --- */
+:root{--ls:30px;--mx:11px;--sx:12px}
+.pg{--ls:30px}
+@media(min-width:1100px){:root{--ls:calc(100vw*32/1920);--mx:calc(100vw*100/1920);--sx:0px}.pg{--ls:calc(var(--u)*32)}}
+/* фиксиран фон зад страницата: показва се само в зоната при издърпване (iOS рисува там само един цвят, а фиксираните елементи остават) */
+body:before,body:after{content:"";position:fixed;z-index:-1;pointer-events:none}
+body:before{inset:0;background:linear-gradient(#C82028 50%,#2a1212 50%)}
+body:after{top:0;left:var(--sx);right:var(--sx);height:50vh;background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,linear-gradient(transparent calc(var(--ls) - 1.5px),rgba(198,170,120,.45) 0) left 0 top var(--pull,0px)/100% var(--ls) repeat-y,#FEF9E9}
+@media(min-width:1100px){body:before{background:linear-gradient(#FEF9E9 50%,#2a1212 50%)}}
+/* заставката: тетрадни редове, подравнени с хедъра */
+.spl{background:linear-gradient(#E86B73,#E86B73) calc(var(--sx) + var(--mx)) 0/2px 100% no-repeat,linear-gradient(transparent calc(var(--ls) - 1.5px),rgba(198,170,120,.45) 0) 0 0/100% var(--ls) repeat-y,#FEF9E9}
+/* пунктирният контур на панелите се връща; без него са само снимките на дрехите в панела на продукта */
+dialog{outline:3px dashed #D3202C;outline-offset:-11px}
+.drop{border:2.5px dashed rgba(202,38,49,.5)}
+.pm .im{border:0}
