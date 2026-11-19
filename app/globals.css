@@ -647,3 +647,15 @@ body:after{top:auto;height:calc(100vh + var(--hh));bottom:auto;top:calc(var(--pu
 .fx.scrap{background:none;overflow:visible}
 .fx.scrap:before{content:"";position:absolute;inset:-20%;transform:rotate(-1.2deg);background:linear-gradient(#E86B73,#E86B73) calc(var(--u)*165) 0/2px 100% no-repeat,repeating-linear-gradient(transparent 0 calc(var(--ls) - 1.5px),rgba(198,170,120,.5) calc(var(--ls) - 1.5px) var(--ls)),#FEF9E9}
 }
+
+/* --- v8: дупките са истински отвори (маска), равномерно подредени; позиции на иконите --- */
+@media(min-width:1100px){
+.hp:after{content:none!important}
+.hp{background:none!important;box-shadow:none!important;filter:drop-shadow(0 3px 7px rgba(60,0,10,.2))}
+.hp:before{content:"";position:absolute;inset:0;background:#FEF9E9;-webkit-mask:radial-gradient(circle at 50% 50%,#000 calc(var(--u)*8),transparent calc(var(--u)*8.6)) 0 calc(100% - var(--u)*12)/calc(var(--u)*106) calc(var(--u)*16) space no-repeat,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:radial-gradient(circle at 50% 50%,#000 calc(var(--u)*8),transparent calc(var(--u)*8.6)) 0 calc(100% - var(--u)*12)/calc(var(--u)*106) calc(var(--u)*16) space no-repeat,linear-gradient(#000 0 0);mask-composite:exclude}
+.hd .logo{top:calc(var(--u)*40)}
+.login{left:calc(var(--u)*166)}
+.cartb{left:calc(var(--u)*1660);top:calc(var(--u)*46)}
+}
+.hd .lb{font-family:inherit;font-weight:500}
+@media(min-width:1100px){.hd .lb{font-size:max(13px,calc(var(--u)*21))}}

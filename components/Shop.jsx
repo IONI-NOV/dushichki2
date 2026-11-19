@@ -81,11 +81,56 @@ export default function Shop() {
     const lift = () => {
       const spl = splRef.current, lg = splLogoRef.current, hd = document.querySelector('.hd'), hl = document.querySelector('.hd .logo');
       if (!spl || !lg || !hd || !hl) { setIntro('done'); return; }
+      const hp = document.querySelector('.hd .hp');
+      const desk = window.innerWidth >= 1100 && hp;
+      if (desk) {
+        // заставката се превръща в листа с дупките: същата форма, наклон и дупки, анимирани с JS
+        const W0 = window.innerWidth, H0 = window.innerHeight;
+        const u = hd.getBoundingClientRect().width / 1920;
+        const keep = hp.style.transform; hp.style.transform = 'none';
+        const q = hp.getBoundingClientRect(); hp.style.transform = keep;
+        const th = -1.2 * Math.PI / 180, cs = Math.cos(th), sn = Math.sin(th);
+        const cx = (q.left + q.right) / 2, by = q.bottom;
+        const rot = (x, y) => [cx + x * cs - y * sn, by + x * sn + y * cs];
+        const hw = q.width / 2, top = q.top - by;
+        const S = [[0, 0], [W0, 0], [W0, H0], [0, H0]];
+        const E = [rot(-hw, top), rot(hw, top), rot(hw, 0), rot(-hw, 0)];
+        const tile = 106 * u, n = Math.max(2, Math.floor(q.width / tile)), gap = (q.width - n * tile) / (n - 1);
+        const R = 8 * u, up = 20 * u;
+        const holes = [];
+        for (let i = 0; i < n; i++) { const xr = -hw + tile / 2 + i * (tile + gap); holes.push({ fin: rot(xr, -up) }); }
+        const edgeY = (c, x) => c[3][1] + (c[2][1] - c[3][1]) * ((x - c[3][0]) / (c[2][0] - c[3][0]));
+        const edgeFin = (x) => edgeY(E, x);
+        const bez = (x1, y1, x2, y2) => (x) => {
+          let lo = 0, hi = 1, t = x;
+          for (let k = 0; k < 24; k++) { t = (lo + hi) / 2; const cx_ = 3 * x1 * t * (1 - t) ** 2 + 3 * x2 * t * t * (1 - t) + t ** 3; if (cx_ < x) lo = t; else hi = t; }
+          return 3 * y1 * t * (1 - t) ** 2 + 3 * y2 * t * t * (1 - t) + t ** 3;
+        };
+        const ease = bez(.65, 0, .25, 1);
+        spl.style.transition = 'opacity .4s ease';
+        const T0 = performance.now(), DUR = 1000;
+        const f = (a, b, e) => a + (b - a) * e;
+        const frame = (now) => {
+          const k = Math.min(1, (now - T0) / DUR), e = ease(k);
+          const C = S.map((p, i) => [f(p[0], E[i][0], e), f(p[1], E[i][1], e)]);
+          let d = 'M' + C.map((p) => p[0].toFixed(2) + ' ' + p[1].toFixed(2)).join('L') + 'Z';
+          const r = R * e;
+          if (r > 0.25) holes.forEach((h) => {
+            const x = h.fin[0], ey = edgeY(C, x), fy = edgeFin(x);
+            const cyy = ey + (h.fin[1] - fy) * e;
+            d += 'M' + (x - r).toFixed(2) + ' ' + cyy.toFixed(2) + 'a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (2 * r).toFixed(2) + ' 0a' + r.toFixed(2) + ' ' + r.toFixed(2) + ' 0 1 0 ' + (-2 * r).toFixed(2) + ' 0Z';
+          });
+          spl.style.clipPath = "path(evenodd,'" + d + "')";
+          if (k < 1) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+      } else {
       // листът на хедъра е прав правоъгълник (на телефон – с отстъп отляво и отдясно)
       const r = hd.getBoundingClientRect();
       const d = (r.width / 2) * Math.tan(1.2 * Math.PI / 180); // листът е завъртян на -1.2° (като .hp)
       const pts = [[r.left, r.top], [r.right, r.top], [r.right, r.bottom - d], [r.left, r.bottom + d]];
       spl.style.clipPath = 'polygon(' + pts.map(([x, y]) => x.toFixed(1) + 'px ' + y.toFixed(1) + 'px').join(',') + ')';
+      }
       const a = lg.getBoundingClientRect(), b = hl.getBoundingClientRect();
       const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
       lg.style.transform = `translate(${dx}px,${dy}px) scale(${b.width / a.width})`;
