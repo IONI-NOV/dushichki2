@@ -10,11 +10,12 @@ import LegalDialog from './LegalDialog';
 import { DESIGNS, KIND, eur, img } from '../lib/data';
 import { api } from '../lib/api';
 
-function Type({ text, start = 0, onDone }) {
+function Type({ text, start = 0, onDone, run = true }) {
   const [n, setN] = useState(0);
   const done = n >= text.length;
   useEffect(() => {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setN(text.length); onDone && onDone(); return; }
+    if (!run) return;
     setN(0);
     // „човешко“ писане: скоростта леко се мени, понякога има колебание, след запетая/точка – пауза
     let i = 0, t;
@@ -32,7 +33,7 @@ function Type({ text, start = 0, onDone }) {
     t = setTimeout(next, start);
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [text, start]);
+  }, [text, start, run]);
   // бялата черта (курсор) върви с текста, а накрая остава и мига
   return (<><span>{text.slice(0, n)}</span><span className={'caret' + (done ? ' blink' : '')} aria-hidden="true" /><span style={{ visibility: 'hidden' }}>{text.slice(n)}</span></>);
 }
@@ -58,15 +59,47 @@ export default function Shop() {
   const [heartX, setHeartX] = useState(null);
   const [scrollOpen, setScrollOpen] = useState(false); // свитъкът „Зад Душички“ (телефон)
   const [typed, setTyped] = useState(false);
-  const [hdIn, setHdIn] = useState(false);
-  // Хедърът се спуска отгоре чак когато страницата е заредена и се вижда (иначе анимацията минава, докато телефонът още зарежда)
+  // Заставка: кремав екран с логото и кръгче за зареждане -> вдига се и става листът на хедъра, логото отива на мястото си
+  const [intro, setIntro] = useState('splash'); // splash | lift | fade | done
+  const splRef = useRef(null);
+  const splLogoRef = useRef(null);
   useEffect(() => {
-    let t;
-    const go = () => { t = setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(() => setHdIn(true))), 120); };
-    if (document.readyState === 'complete') go();
-    else { window.addEventListener('load', go, { once: true }); t = setTimeout(go, 1500); }
-    return () => { clearTimeout(t); window.removeEventListener('load', go); };
-  }, []); // заглавието е изписано -> показваме подзаглавието и бутона
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setIntro('done'); return; }
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+    window.scrollTo(0, 0);
+    const t0 = performance.now();
+    const timers = [];
+    let started = false;
+    const lift = () => {
+      const spl = splRef.current, lg = splLogoRef.current, hd = document.querySelector('.hd'), hl = document.querySelector('.hd .logo');
+      if (!spl || !lg || !hd || !hl) { setIntro('done'); return; }
+      const r = hd.getBoundingClientRect(), y0 = r.top, W = r.width, H = r.height;
+      let pts;
+      if (window.innerWidth >= 1100) {
+        const u = W / 1920; // листът на компютър е леко завъртян, с ръб отстрани (като hdr.svg)
+        pts = [[30 * u, y0], [1892 * u, y0], [1895 * u, y0 + 117 * u], [34 * u, y0 + 167 * u]];
+      } else {
+        pts = [[0, y0], [W, y0], [W, y0 + H * 0.84], [0, y0 + H]];
+      }
+      spl.style.clipPath = 'polygon(' + pts.map(([x, y]) => x.toFixed(1) + 'px ' + y.toFixed(1) + 'px').join(',') + ')';
+      const a = lg.getBoundingClientRect(), b = hl.getBoundingClientRect();
+      const dx = (b.left + b.width / 2) - (a.left + a.width / 2), dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+      lg.style.transform = `translate(${dx}px,${dy}px) scale(${b.width / a.width})`;
+      setIntro('lift');
+      timers.push(setTimeout(() => setIntro('fade'), 1050));
+      timers.push(setTimeout(() => setIntro('done'), 1450));
+    };
+    const start = () => {
+      if (started) return; started = true;
+      const wait = Math.max(0, 1200 - (performance.now() - t0)); // поне за миг да се види заставката
+      timers.push(setTimeout(() => requestAnimationFrame(lift), wait));
+    };
+    if (document.readyState === 'complete') start();
+    else { window.addEventListener('load', start, { once: true }); timers.push(setTimeout(start, 3500)); }
+    return () => { timers.forEach(clearTimeout); window.removeEventListener('load', start); };
+  }, []);
+  const introGo = intro === 'fade' || intro === 'done';
+// заглавието е изписано -> показваме подзаглавието и бутона
 
   // При издърпване на страницата (overscroll) отгоре да се вижда кремавият лист, а отдолу – тъмният цвят на футъра.
   // iOS оцветява тази зона с фона на <html>, затова го сменяме според това в коя половина на страницата сме.
@@ -199,8 +232,16 @@ export default function Shop() {
   return (
     <>
       <HeartSymbol />
-      <div className="pg">
-        <header className={'hd' + (hdIn ? ' in' : '')}>
+      {intro !== 'done' && (
+        <div className={'spl ' + intro} ref={splRef} aria-hidden="true">
+          <div className="spl-lg" ref={splLogoRef}>
+            <svg className="spl-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" /></svg>
+            <img src={V + 'logo.png'} alt="" />
+          </div>
+        </div>
+      )}
+      <div className={'pg' + (introGo ? ' go' : '')}>
+        <header className="hd">
           <div className="hp" aria-hidden="true" />
           <img className="logo" src={V + 'logo.png'} alt="Душички" />
           <div className="hr">
@@ -230,7 +271,7 @@ export default function Shop() {
 
           <main>
             <section className={'hero' + (typed ? ' typed' : '')}>
-              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={450} onDone={() => setTyped(true)} /></h1>
+              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={250} onDone={() => setTyped(true)} run={introGo} /></h1>
               <p>Дай живот на спомените си.</p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
               <div className="hi" role="img" aria-label="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена">
