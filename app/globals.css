@@ -617,8 +617,6 @@ dialog{outline:3px dashed #D3202C;outline-offset:-11px}
 .hd:before{background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,#FEF9E9}
 body:after{background:linear-gradient(#E86B73,#E86B73) var(--mx) 0/2px 100% no-repeat,#FEF9E9}
 .spl{background:linear-gradient(#E86B73,#E86B73) calc(var(--sx) + var(--mx)) 0/2px 100% no-repeat,#FEF9E9}
-/* „топли сърцето“ в заглавието – с ръкописния шрифт от „Зад Душички“ */
-.hero h1 .hw{font-family:var(--hand);font-weight:700;letter-spacing:0}
 /* надписът „Количка“ се вижда и на телефон; числото е в червено кръгче */
 @media(max-width:699px){.cartb .lb{display:block}}
 .hd .bd{top:-7px;right:-9px;min-width:19px;height:19px;padding:0 5px;background:var(--red2);color:var(--cr);font-size:11.5px;font-weight:700;line-height:1;box-shadow:0 0 0 2px var(--cr)}

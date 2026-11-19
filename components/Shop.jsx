@@ -294,7 +294,7 @@ export default function Shop() {
 
           <main>
             <section className={'hero' + (typed ? ' typed' : '')}>
-              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={250} hand={[33, 46]} onDone={() => setTyped(true)} run={introGo} /></h1>
+              <h1><Type text="Подарък за твоята душичка, който топли сърцето с години." start={250} onDone={() => setTyped(true)} run={introGo} /></h1>
               <p>Дай живот на спомените си.</p>
               <button className="btn" id="go" onClick={goShop}>И аз искам!</button>
               <div className="hi" role="img" aria-label="Черна блуза с бродерия на танцуваща двойка, а до нея снимката, по която е направена">
