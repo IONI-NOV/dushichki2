@@ -27,7 +27,7 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .hd button{background:none;border:0;padding:0}
 .about{color:var(--red2);font-weight:400;letter-spacing:.01em;transition:transform .2s}
 .about:hover,.about:focus-visible{transform:scale(1.07)}
-.hd .logo{display:block}
+.hd .logo{display:block;cursor:pointer}
 .hd button svg{width:100%;height:auto;display:block;color:var(--red2)}
 .login,.cartb{position:absolute;transition:transform .2s}
 .login:hover,.cartb:hover,.login:focus-visible,.cartb:focus-visible{transform:scale(1.1)}
