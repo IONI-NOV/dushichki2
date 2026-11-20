@@ -848,3 +848,5 @@ body:after{display:none!important}
 .cohint b{font-weight:600}
 .cohint .link{font-family:'Rubik',sans-serif;font-size:inherit}
 .hd .logo{cursor:image-set(url(/img/v2/curu-h.png) 1x,url(/img/v2/curu-h2.png) 2x) 12 1,pointer!important;-webkit-tap-highlight-color:transparent}
+/* v30 – тънка бяла линия около пунктираната рамка на хедъра: рамката излиза 0.8px навън */
+.hr-r{stroke-width:calc(var(--s)*4 + 1.6px);x:calc(var(--s)*2 - .8px);y:calc(var(--s)*2 - .8px);width:calc(100% - var(--s)*4 + 1.6px);height:calc(100% - var(--s)*4 + 1.6px);rx:calc(var(--s)*20 + .8px)}
