@@ -92,7 +92,7 @@ function ProductForm({ kind: k, i, apiOk, onClose, onAdd, onSizes }) {
 
         <div className="st">Качи своята снимка <span style={{ color: 'var(--red)' }}>*</span></div>
         <div
-          className={'drop' + (drag ? ' on' : '')} id="dz"
+          className={'drop' + (drag ? ' on' : '') + (prev ? ' has' : '')} id="dz"
           onDragEnter={(e) => { e.preventDefault(); setDrag(true); }}
           onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
           onDragLeave={(e) => { e.preventDefault(); setDrag(false); }}

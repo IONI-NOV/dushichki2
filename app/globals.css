@@ -852,3 +852,9 @@ body:after{display:none!important}
 .hr-r{stroke-width:calc(var(--s)*4 + 1.6px);x:calc(var(--s)*2 - .8px);y:calc(var(--s)*2 - .8px);width:calc(100% - var(--s)*4 + 1.6px);height:calc(100% - var(--s)*4 + 1.6px);rx:calc(var(--s)*20 + .8px)}
 /* v31 – прегледът на качената снимка показва цялата снимка */
 .drop #pv img{display:block;margin:0 auto 12px;width:auto;height:auto;max-width:100%;max-height:260px;object-fit:contain;border-radius:12px;box-shadow:0 2px 8px rgba(60,0,10,.15)}
+/* v32 – кутията за снимка запазва размера си: снимката е вътре вляво, бутонът вдясно */
+.drop.has{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"pv lb" "pv fn";align-items:center;column-gap:14px;padding:12px 14px}
+.drop.has #pv{grid-area:pv;grid-row:1 / span 2;display:flex;align-items:center;justify-content:center;height:88px;min-width:0}
+.drop.has #pv img{margin:0;width:auto;height:auto;max-width:100%;max-height:88px;object-fit:contain;border-radius:10px;box-shadow:0 1px 5px rgba(60,0,10,.18)}
+.drop.has label{grid-area:lb;justify-self:center;align-self:end;margin:0 0 6px}
+.drop.has #fn{grid-area:fn;align-self:start;justify-self:center;word-break:break-word;min-width:0}
