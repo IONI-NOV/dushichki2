@@ -348,7 +348,7 @@ export default function Shop() {
           <div className="hp" aria-hidden="true"><svg className="hring"><rect className="hr-r" /></svg></div>
           <div className="hclip">
           <button className="about" onClick={() => { const e = document.querySelector('.nm2') || document.getElementById('about'); if (e) e.scrollIntoView({ behavior: 'smooth', block: 'center' }); }}>Зад <b>Душички</b><svg className="hrt" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.2S3.2 15.9 1.9 10.3C1.1 6.8 3.5 3.8 6.6 3.8c2.2 0 4 1.2 5.4 3.3 1.4-2.1 3.2-3.3 5.4-3.3 3.1 0 5.5 3 4.7 6.5C20.8 15.9 12 21.2 12 21.2z" /></svg></button>
-          <img className="logo" src={V + 'logo.png'} alt="Душички" />
+          <img className="logo" src={V + 'logo.png'} alt="Душички" role="button" tabIndex={0} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} />
           <div className="hr">
             <button className="login" id="acc" onClick={openAccount} aria-label={user ? 'Профил' : 'Вход'} title={user ? 'Профил' : 'Вход'}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4.1" /><path d="M4.6 19.9c.4-3.7 3.4-6.1 7.4-6.1s7 2.4 7.4 6.1c.1.6-.4 1.1-1 1.1H5.6c-.6 0-1.1-.5-1-1.1z" /></svg>

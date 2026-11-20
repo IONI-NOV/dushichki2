@@ -847,3 +847,4 @@ body:after{display:none!important}
 .cohint{display:block;height:auto!important;overflow:visible!important;animation:none!important;opacity:1!important;font-family:'Rubik',sans-serif!important;font-size:.85rem;line-height:1.5;color:#6b4a4a;margin:10px 0 0}
 .cohint b{font-weight:600}
 .cohint .link{font-family:'Rubik',sans-serif;font-size:inherit}
+.hd .logo{cursor:pointer;-webkit-tap-highlight-color:transparent}
