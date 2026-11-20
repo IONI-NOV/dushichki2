@@ -36,8 +36,8 @@ function ProductForm({ kind: k, i, apiOk, onClose, onAdd, onSizes }) {
 
   async function pick(f) {
     setFile(f || null);
-    setPrev('');
-    if (f) { setErr(''); const t = await thumb(f); if (t) setPrev(t); }
+    setPrev((old) => { if (old && old.startsWith('blob:')) URL.revokeObjectURL(old); return ''; });
+    if (f) { setErr(''); setPrev(URL.createObjectURL(f)); }
   }
 
   async function add() {
