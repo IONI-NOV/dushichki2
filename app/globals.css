@@ -410,8 +410,6 @@ dialog .cl{top:12px;right:12px;width:40px;height:40px}
 /* ===== начало: курсор, поява на текста, стоп-моушън снимки ===== */
 .caret{position:relative}
 .caret:after{content:"";position:absolute;left:.04em;top:.06em;height:.92em;width:.085em;min-width:3px;border-radius:2px;background:var(--cr)}
-.caret.blink:after{animation:blink 1.05s steps(1,end) infinite}
-@keyframes blink{50%{opacity:0}}
 .hero p,.hero .btn{opacity:0;translate:0 14px;transition:opacity 1.2s ease,translate 1.2s ease,transform .2s}
 .hero.typed p,.hero.typed .btn{opacity:1;translate:none}
 .hero.typed .btn{transition-delay:.6s,.6s,0s}

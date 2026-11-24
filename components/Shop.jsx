@@ -35,14 +35,14 @@ function Type({ text, start = 0, onDone, run = true, hand = null }) {
     return () => clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text, start, run]);
-  // бялата черта (курсор) върви с текста, а накрая остава и мига
+  // бялата черта (курсор) върви с текста и изчезва, щом текстът се изпише
   // part: [начало, край) – тази част от текста е с ръкописния шрифт (класа .hw)
   const seg = (a, b) => {
     if (!hand || b <= hand[0] || a >= hand[1]) return text.slice(a, b);
     const x = Math.max(a, hand[0]), y = Math.min(b, hand[1]);
     return <>{text.slice(a, x)}<span className="hw">{text.slice(x, y)}</span>{text.slice(y, b)}</>;
   };
-  return (<><span>{seg(0, n)}</span><span className={'caret' + (done ? ' blink' : '')} aria-hidden="true" /><span style={{ visibility: 'hidden' }}>{seg(n, text.length)}</span></>);
+  return (<><span>{seg(0, n)}</span>{!done && <span className="caret" aria-hidden="true" />}<span style={{ visibility: 'hidden' }}>{seg(n, text.length)}</span></>);
 }
 
 export default function Shop() {
