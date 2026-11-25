@@ -88,8 +88,8 @@ dialog :focus-visible,.cv .card:focus-visible{outline-color:var(--red)}
 .d3{left:calc(var(--u)*1000);top:calc(var(--u)*3259);width:calc(var(--u)*695)}
 .scrap{left:calc(var(--u)*1720);top:calc(var(--u)*1050);width:calc(var(--u)*200)}
 .hero h1{position:absolute;left:calc(var(--u)*147);top:calc(var(--u)*333);width:calc(var(--u)*660);font-size:calc(var(--u)*61);line-height:1.15}
-.hero p{position:absolute;left:calc(var(--u)*150);top:calc(var(--u)*684);font-size:calc(var(--u)*37);white-space:nowrap}
-.hero .btn{position:absolute;left:calc(var(--u)*143);top:calc(var(--u)*748);width:calc(var(--u)*268);height:calc(var(--u)*61);border-radius:calc(var(--u)*16);font-size:calc(var(--u)*36)}
+.hero p{position:absolute;left:calc(var(--u)*150);top:calc(var(--u)*640);font-size:calc(var(--u)*37);white-space:nowrap}
+.hero .btn{position:absolute;left:calc(var(--u)*143);top:calc(var(--u)*704);width:calc(var(--u)*268);height:calc(var(--u)*61);border-radius:calc(var(--u)*16);font-size:calc(var(--u)*36)}
 .dp{position:absolute;height:auto}
 .dp1{left:calc(var(--u)*1479);top:calc(var(--u)*2417);width:calc(var(--u)*302)}
 .dp2{left:calc(var(--u)*1472);top:calc(var(--u)*2825);width:calc(var(--u)*292)}
