@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /poruchki
+Disallow: /api.php
+Disallow: /admin.php
+
+Sitemap: https://dushichki.com/sitemap.xml
